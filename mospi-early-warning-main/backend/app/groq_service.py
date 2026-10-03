@@ -92,10 +92,20 @@ def _post_completion(messages: list[dict]) -> Optional[str]:
         return None
 
 
+_health_cache: dict = {"result": None, "ts": 0.0}
+_HEALTH_TTL = 300  # cache for 5 minutes
+
+
 def is_healthy() -> bool:
+    import time
+    now = time.monotonic()
+    if _health_cache["result"] is not None and now - _health_cache["ts"] < _HEALTH_TTL:
+        return _health_cache["result"]
+
     api_key = get_api_key()
     if not api_key:
         logger.warning("Groq assistant health check: GROQ_API_KEY is not configured.")
+        _health_cache.update(result=False, ts=now)
         return False
     request = urllib.request.Request(
         GROQ_MODELS_URL,
@@ -103,22 +113,28 @@ def is_healthy() -> bool:
         method="GET",
     )
     try:
-        with urllib.request.urlopen(request, timeout=5) as response:
+        with urllib.request.urlopen(request, timeout=15) as response:
             if response.status != 200:
+                _health_cache.update(result=False, ts=now)
                 return False
             data = json.loads(response.read()).get("data", [])
             available_ids = {m.get("id") for m in data if m.get("id")}
             for candidate in DEFAULT_CANDIDATE_MODELS:
                 if candidate in available_ids:
                     ProductionChatService.model = candidate
+                    logger.info("Groq healthy: using model %s", candidate)
+                    _health_cache.update(result=True, ts=now)
                     return True
-            logger.warning("Groq assistant health check: none of candidate models available.")
+            logger.warning("Groq health: none of candidate models available. Available: %s", available_ids)
+            _health_cache.update(result=False, ts=now)
             return False
     except urllib.error.HTTPError as exc:
         logger.warning("Groq assistant health check failed with HTTP %s.", exc.code)
+        _health_cache.update(result=False, ts=now)
         return False
     except (urllib.error.URLError, TimeoutError, ValueError, OSError) as exc:
         logger.warning("Groq assistant health check failed: %s", type(exc).__name__)
+        _health_cache.update(result=False, ts=now)
         return False
 
 

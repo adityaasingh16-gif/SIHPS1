@@ -81,3 +81,13 @@ def chat_health():
         model=getattr(production_chat, "model", GROQ_CHAT_MODEL) or "openai/gpt-oss-120b",
         project_context_loaded=True,
     )
+
+
+@router.get("/version")
+def chat_version():
+    import subprocess, os
+    try:
+        sha = subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], stderr=subprocess.DEVNULL).decode().strip()
+    except Exception:
+        sha = "unknown"
+    return {"version": sha, "key_configured": bool(is_healthy.__module__)}
