@@ -5,6 +5,7 @@ import "./index.css";
 import App from "./App.jsx";
 import { AuthProvider } from "./AuthContext.jsx";
 import { PreferencesProvider } from "./hooks/usePreferences.jsx";
+import { ToastProvider } from "./components/ui/Toasts.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -13,7 +14,9 @@ createRoot(document.getElementById("root")).render(
         {/* The router sits above the session gate so anonymous visitors can
             reach the read-only feature routes, not just the portal home. */}
         <BrowserRouter>
-          <App />
+          <ToastProvider>
+            <App />
+          </ToastProvider>
         </BrowserRouter>
       </AuthProvider>
     </PreferencesProvider>

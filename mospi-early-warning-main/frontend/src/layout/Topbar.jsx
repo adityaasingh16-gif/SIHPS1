@@ -136,7 +136,7 @@ function Topbar({
    onClick={onOpenMobile}
     aria-label={t("shell.openNavMenu")}
     title={t("shell.openNavMenu")}
-   className="rounded-xl border border-line p-2.5 text-fg-2 transition hover:bg-page md:hidden"
+   className="rounded-xl border border-line p-2.5 text-fg-2 transition hover:bg-page md:hidden pressable"
    >
    <Menu size={18} />
    </button>
@@ -165,7 +165,7 @@ function Topbar({
  <span
  className={`h-2.5 w-2.5 rounded-full ${
  backendStatus.online
- ?"bg-risk-low shadow-sm shadow-risk-low/50 animate-pulse"
+ ?"bg-risk-low shadow-sm shadow-risk-low/50 motion-safe:animate-pulse"
  :"bg-risk-medium"
  }`}
  />
@@ -216,7 +216,7 @@ function Topbar({
  onClick={onToggleDark}
   aria-label={dark ?t("shell.lightMode") :t("shell.darkMode")}
   title={dark ?t("shell.lightMode") :t("shell.darkMode")}
-  className="shrink-0 rounded-xl border border-line p-3 text-fg-2 transition hover:bg-page hover:text-brand :bg-fg md:p-2.5"
+  className="pressable shrink-0 rounded-xl border border-line p-3 text-fg-2 transition hover:bg-page hover:text-brand :bg-fg md:p-2.5"
  >
  {dark ? <Sun size={18} /> : <Moon size={18} />}
  </button>
@@ -266,13 +266,13 @@ function Topbar({
  {showSearchDropdown && search.trim() && (
  <>
  <div
- className="fixed inset-0 z-40"
+ className="backdrop-enter fixed inset-0 z-40"
  onClick={() => setShowSearchDropdown(false)}
  />
  <div
  id="search-results"
  role="listbox"
- className="absolute left-0 top-12 z-50 w-96 rounded-2xl border border-line bg-overlay p-3 shadow-pop"
+ className="popover-enter absolute left-0 top-12 z-50 w-96 rounded-2xl border border-line bg-overlay p-3 shadow-pop"
  >
  <div className="mb-2 flex items-center justify-between border-b border-line px-2 pb-2 text-[11px] font-semibold uppercase text-fg-3">
  <span>{t("shell.matchingProjects", { q: search })}</span>
@@ -336,7 +336,7 @@ function Topbar({
   }`}
  aria-expanded={showNotifications}
  aria-haspopup="dialog"
-  className={`relative shrink-0 rounded-xl border p-2.5 transition md:p-3 ${
+  className={`pressable relative shrink-0 rounded-xl border p-2.5 transition md:p-3 ${
  showNotifications
  ?"border-brand bg-brand-subtle text-brand-subtle-fg"
  :"border-line text-fg-2 hover:bg-hover"
@@ -353,13 +353,13 @@ function Topbar({
  {showNotifications && (
  <>
  <div
- className="fixed inset-0 z-40"
+ className="backdrop-enter fixed inset-0 z-40"
  onClick={() => setShowNotifications(false)}
  />
  <div
  role="dialog"
    aria-label={t("shell.riskAlerts")}
- className="absolute right-0 top-14 z-50 max-w-[92vw] w-[420px] rounded-2xl border border-line bg-overlay p-5 shadow-pop"
+ className="popover-enter absolute right-0 top-14 z-50 max-w-[92vw] w-[420px] rounded-2xl border border-line bg-overlay p-5 shadow-pop"
  >
  <div className="flex items-center justify-between border-b border-line pb-3">
  <div className="flex items-center gap-2">

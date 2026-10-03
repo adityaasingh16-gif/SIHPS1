@@ -779,6 +779,211 @@ button {
 }
 
 /* ------------------------------------------------------------------ */
+/* Motion system — DHRISHTI v2 second-pass refinement.                   */
+/* One easing, four durations. GPU-friendly properties only (transform,  */
+/* opacity). Everything below is disabled under prefers-reduced-motion.  */
+/* ------------------------------------------------------------------ */
+:root {
+  --motion-micro: 150ms;
+  --motion-std: 240ms;
+  --motion-complex: 380ms;
+  --motion-page: 480ms;
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Route change: barely-there fade + rise so navigation never flashes. */
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.page-enter {
+  animation: page-in var(--motion-std) var(--ease-out) both;
+}
+
+/* Popovers: dropdowns, search results, notification panels. */
+@keyframes popover-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.popover-enter {
+  animation: popover-in var(--motion-micro) var(--ease-out) both;
+  transform-origin: top right;
+}
+
+/* Backdrop fade shared by modals, palette and drawers. */
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.backdrop-enter {
+  animation: backdrop-in 180ms ease-out both;
+}
+
+/* Modal / palette panel: scale 98% -> 100% with a slight lift. */
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.modal-enter {
+  animation: modal-in 220ms var(--ease-out) both;
+}
+
+/* Toasts: slide in, progress bar drains, manual dismiss supported. */
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.toast-enter {
+  animation: toast-in var(--motion-std) var(--ease-out) both;
+}
+@keyframes toast-drain {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+.toast-bar {
+  animation: toast-drain 4.6s linear both;
+}
+
+/* Sidebar rows: icon nudges 2px on hover, label fades in on expand,
+   active row gets a soft inner edge instead of a colour swap. */
+.nav-row .nav-ic {
+  transition: transform var(--motion-micro) var(--ease-out);
+}
+.nav-row:hover .nav-ic {
+  transform: translateX(2px);
+}
+.nav-row[aria-current="page"] {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+@keyframes nav-label-in {
+  from {
+    opacity: 0;
+    transform: translateX(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.nav-label {
+  animation: nav-label-in 200ms var(--ease-out) both;
+}
+
+/* Press feedback for buttons that carry the .btn primitive. */
+.btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+.pressable:active:not(:disabled) {
+  transform: scale(0.97);
+}
+.pressable {
+  transition:
+    transform var(--motion-micro) var(--ease-out),
+    background-color var(--motion-micro) ease,
+    color var(--motion-micro) ease,
+    border-color var(--motion-micro) ease;
+}
+
+/* Table rows: calm hover, no flash on pagination. */
+tbody tr {
+  transition: background-color var(--motion-micro) ease;
+}
+
+/* Sticky table headers for scrollable data tables. */
+.thead-sticky thead th {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--surface-raised);
+}
+
+/* Contribution / SHAP bars grow from zero when data arrives. */
+@keyframes bar-grow {
+  from {
+    width: 0;
+  }
+  to {
+    width: var(--w, 50%);
+  }
+}
+.bar-enter {
+  animation: bar-grow 500ms var(--ease-out) both;
+}
+
+/* Calm status pulse for the live-data dot (motion-safe only). */
+@keyframes dot-breathe {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+.dot-live {
+  animation: dot-breathe 2.4s ease-in-out infinite;
+}
+
+/* Coarse pointers get 44px minimum tap targets on key controls. */
+@media (pointer: coarse) {
+  .btn {
+    min-height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter,
+  .popover-enter,
+  .backdrop-enter,
+  .modal-enter,
+  .toast-enter,
+  .toast-bar,
+  .nav-label,
+  .bar-enter,
+  .dot-live {
+    animation: none;
+  }
+  .btn:active:not(:disabled),
+  .pressable:active:not(:disabled),
+  .nav-row:hover .nav-ic {
+    transform: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
 /* Theming                                                              */
 /* There is no per-class dark-mode remap any more. `.dark` on <html>    */
 /* only re-points the semantic tokens defined above, so every component */

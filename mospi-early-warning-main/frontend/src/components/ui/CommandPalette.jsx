@@ -4,7 +4,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   Activity,
   Bell,
-  Brain,
   Building2,
   CircleDollarSign,
   Clock3,
@@ -72,6 +71,24 @@ function fuzzy(haystack, needle) {
     i += 1;
   }
   return true;
+}
+
+/** Substring highlight for the matched portion of a result label. Fuzzy
+ *  matches that are not contiguous substrings render untouched. */
+function Highlighted({ text, query }) {
+  const q = query.trim();
+  if (!q) return <>{text}</>;
+  const i = text.toLowerCase().indexOf(q.toLowerCase());
+  if (i === -1) return <>{text}</>;
+  return (
+    <>
+      {text.slice(0, i)}
+      <mark className="bg-transparent font-bold text-inherit">
+        {text.slice(i, i + q.length)}
+      </mark>
+      {text.slice(i + q.length)}
+    </>
+  );
 }
 
 function CommandPalette({
@@ -215,6 +232,19 @@ function CommandPalette({
   // syncing that with setState-in-effect causes a second render pass.
   const safeCursor = results.length ? Math.min(cursor, results.length - 1) : 0;
 
+  // Keep the keyboard cursor visible: results render in a capped scroll
+  // region, and without this the cursor walks off-screen. Read-only DOM
+  // scroll, so no render loop risk.
+  useEffect(() => {
+    if (!open) return;
+    const current = results[safeCursor];
+    if (current) {
+      document
+        .getElementById(`cmd-${CSS.escape(String(current.id))}`)
+        ?.scrollIntoView({ block: "nearest" });
+    }
+  });
+
   const runAt = useCallback(
     (item) => {
       if (!item) return;
@@ -281,7 +311,7 @@ function CommandPalette({
       role="presentation"
     >
       <div
-        className="absolute inset-0 bg-scrim/50 backdrop-blur-sm"
+        className="backdrop-enter absolute inset-0 bg-scrim/50 backdrop-blur-sm"
         onClick={close}
         aria-hidden="true"
       />
@@ -291,7 +321,7 @@ function CommandPalette({
         aria-modal="true"
         aria-label={t("cmd.title")}
         onKeyDown={onKeyDown}
-        className="relative w-full max-w-xl overflow-hidden rounded-2xl border border-line bg-overlay shadow-pop"
+        className="modal-enter relative w-full max-w-xl overflow-hidden rounded-2xl border border-line bg-overlay shadow-pop"
       >
         <div className="flex items-center gap-3 border-b border-line px-4">
           <Search size={17} className="shrink-0 text-fg-3" aria-hidden="true" />
@@ -364,7 +394,7 @@ function CommandPalette({
                         <Icon size={16} className="shrink-0" aria-hidden="true" />
                       )}
                       <span className="min-w-0 flex-1 truncate">
-                        {item.label}
+                        <Highlighted text={item.label} query={query} />
                       </span>
                       {item.sub && (
                         <span className="shrink-0 truncate text-[11px] text-fg-4">

@@ -171,7 +171,7 @@ function Sidebar({ active, setActive, collapsed, setCollapsed, mobileOpen, onClo
   onClick={() => setActive(item.id)}
   aria-current={selected ?"page" : undefined}
   title={collapsed ? item.label : undefined}
-  className={`group relative flex w-full items-center gap-3 rounded-lg border-l-2 py-2 pl-2.5 pr-3 text-left text-sm transition ${
+  className={`nav-row group relative flex w-full items-center gap-3 rounded-lg border-l-2 py-2 pl-2.5 pr-3 text-left text-sm transition ${
   selected
   ? "border-l-white bg-white/10 font-semibold text-white"
   : "border-l-transparent text-slate-300 hover:bg-white/10 hover:text-white"
@@ -179,12 +179,12 @@ function Sidebar({ active, setActive, collapsed, setCollapsed, mobileOpen, onClo
   >
   <Icon
   size={17}
-  className={`shrink-0 ${selected ? "text-cyan-300" : "text-slate-400"}`}
+  className={`nav-ic shrink-0 ${selected ? "text-cyan-300" : "text-slate-400"}`}
   />
 
   {!collapsed && (
   <>
-  <span className="flex-1 truncate">{item.label}</span>
+  <span className="nav-label min-w-0 flex-1 truncate">{item.label}</span>
 
   {item.badge && (
   <span

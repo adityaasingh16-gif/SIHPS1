@@ -13,6 +13,8 @@ import { ProjectModal } from "../features/projects/ProjectModal";
 import { Sidebar } from "./Sidebar";
 import { Topbar } from "./Topbar";
 import { CommandPalette } from "../components/ui/CommandPalette";
+import { RouteErrorBoundary } from "../components/ui/ErrorBoundary";
+import { useToasts } from "../components/ui/Toasts";
 import ChatWidget from "../ChatWidget";
 import JarvisPopup from "../JarvisPopup";
 
@@ -90,10 +92,22 @@ export function AppShell({ readOnly = false, bare = false }) {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
   const [paletteOpen, setPaletteOpen] = useState(false);
+  const notify = useToasts();
 
   const closeProject = useCallback(() => setSelectedProject(null), []);
   const openPalette = useCallback(() => setPaletteOpen(true), []);
   const closePalette = useCallback(() => setPaletteOpen(false), []);
+
+  // Data refresh confirms itself with a calm toast instead of leaving the
+  // officer wondering whether the button did anything.
+  const handleRefresh = useCallback(async () => {
+    try {
+      await refreshAll();
+      notify("Dashboard refreshed with the latest signals.", "success");
+    } catch {
+      notify("Refresh failed — showing the last synced data.", "error");
+    }
+  }, [refreshAll, notify]);
 
   // `active` used to be a single piece of state that every nav item wrote to.
   // Navigation now goes through the router, and the active item is derived
@@ -224,7 +238,7 @@ export function AppShell({ readOnly = false, bare = false }) {
                 <p className="flex shrink-0 items-center gap-2">
                   <span
                     className={`inline-block h-1.5 w-1.5 rounded-full ${
-                      backendStatus.online ? "animate-pulse bg-emerald-400" : "bg-amber-400"
+                      backendStatus.online ? "dot-live bg-emerald-400" : "bg-amber-400"
                     }`}
                     aria-hidden="true"
                   />
@@ -240,7 +254,7 @@ export function AppShell({ readOnly = false, bare = false }) {
                 search={search}
                 setSearch={setSearch}
                 backendStatus={backendStatus}
-                onRefresh={refreshAll}
+                onRefresh={handleRefresh}
                 isRefreshing={isRefreshing}
                 projectsList={projectsList}
                 setSelectedProject={setSelectedProject}
@@ -276,7 +290,11 @@ export function AppShell({ readOnly = false, bare = false }) {
           )}
 
           <div className="mx-auto max-w-[1700px] p-4 md:p-6">
-            <Outlet />
+            <RouteErrorBoundary locationKey={location.pathname}>
+              <div key={location.pathname} className="page-enter">
+                <Outlet />
+              </div>
+            </RouteErrorBoundary>
 
             {!bare && (
               <footer className="mt-10 border-t border-line py-6 text-center text-xs text-fg-3">

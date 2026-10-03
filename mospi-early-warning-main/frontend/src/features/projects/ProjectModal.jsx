@@ -104,7 +104,7 @@ function ProjectModal({ project, onClose, readOnly = false }) {
 
  return (
  <div
-  className="fixed inset-0 z-50 flex items-end justify-center bg-scrim/60 backdrop-blur-sm sm:items-center sm:p-4"
+  className="backdrop-enter fixed inset-0 z-50 flex items-end justify-center bg-scrim/60 backdrop-blur-sm sm:items-center sm:p-4"
  onClick={onClose}
  role="dialog"
  aria-modal="true"
@@ -112,7 +112,7 @@ function ProjectModal({ project, onClose, readOnly = false }) {
  >
  <div
  onClick={(e) => e.stopPropagation()}
- className="flex max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-t-3xl bg-raised shadow-2xl sm:max-h-[90vh] sm:rounded-3xl"
+ className="modal-enter flex max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-t-3xl bg-raised shadow-2xl sm:max-h-[90vh] sm:rounded-3xl"
  >
  <div className="flex items-start justify-between border-b border-line bg-raised p-5 md:p-6">
  <div className="min-w-0">
@@ -136,8 +136,9 @@ function ProjectModal({ project, onClose, readOnly = false }) {
 
   <button
   onClick={onClose}
+  autoFocus
   aria-label={t("modal.close")}
-  className="shrink-0 rounded-xl p-2 text-fg-3 transition hover:bg-sunken"
+  className="pressable shrink-0 rounded-xl p-2 text-fg-3 transition hover:bg-sunken"
   >
   <X />
   </button>
@@ -224,8 +225,8 @@ function ProjectModal({ project, onClose, readOnly = false }) {
  </div>
  <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-risk-critical-subtle">
  <div
- className="h-full rounded-full bg-risk-critical transition-all duration-300"
- style={{ width: `${info.widthPct}%` }}
+ className="bar-enter h-full rounded-full bg-risk-critical"
+ style={{ "--w": `${info.widthPct}%`, width: `${info.widthPct}%` }}
  />
  </div>
  </div>
@@ -245,8 +246,8 @@ function ProjectModal({ project, onClose, readOnly = false }) {
  </div>
  <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-risk-low-subtle">
  <div
- className="h-full rounded-full bg-risk-low transition-all duration-300"
- style={{ width: `${info.widthPct}%` }}
+ className="bar-enter h-full rounded-full bg-risk-low"
+ style={{ "--w": `${info.widthPct}%`, width: `${info.widthPct}%` }}
  />
  </div>
  </div>
