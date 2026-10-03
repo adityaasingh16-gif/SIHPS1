@@ -31,7 +31,15 @@ GROQ_MODELS_URL = os.getenv(
     "GROQ_MODELS_URL", "https://api.groq.com/openai/v1/models"
 )
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "").strip()
-GROQ_CHAT_MODEL = os.getenv("GROQ_CHAT_MODEL", "llama-3.3-70b-versatile").strip()
+GROQ_CHAT_MODEL = os.getenv("GROQ_CHAT_MODEL", "openai/gpt-oss-120b").strip()
+DEFAULT_CANDIDATE_MODELS = [
+    GROQ_CHAT_MODEL,
+    "openai/gpt-oss-120b",
+    "qwen/qwen3.8-27b",
+    "llama-3.3-70b-versatile",
+    "llama-3.1-8b-instant",
+]
+
 try:
     GROQ_TIMEOUT = max(5.0, float(os.getenv("GROQ_REQUEST_TIMEOUT_SECONDS", "30")))
 except (TypeError, ValueError):
@@ -40,11 +48,13 @@ MAX_TOKENS = 1024
 
 
 def _post_completion(messages: list[dict]) -> Optional[str]:
-    if not GROQ_API_KEY:
+    api_key = os.getenv("GROQ_API_KEY", GROQ_API_KEY).strip()
+    if not api_key:
         return None
 
+    model_to_use = getattr(ProductionChatService, "model", GROQ_CHAT_MODEL)
     payload = {
-        "model": GROQ_CHAT_MODEL,
+        "model": model_to_use,
         "messages": messages,
         "temperature": 0,
         "max_completion_tokens": MAX_TOKENS,
@@ -55,7 +65,7 @@ def _post_completion(messages: list[dict]) -> Optional[str]:
         data=json.dumps(payload).encode("utf-8"),
         headers={
             "Content-Type": "application/json",
-            "Authorization": f"Bearer {GROQ_API_KEY}",
+            "Authorization": f"Bearer {api_key}",
         },
         method="POST",
     )
@@ -75,25 +85,28 @@ def _post_completion(messages: list[dict]) -> Optional[str]:
 
 
 def is_healthy() -> bool:
-    if not GROQ_API_KEY:
+    api_key = os.getenv("GROQ_API_KEY", GROQ_API_KEY).strip()
+    if not api_key:
         logger.warning("Groq assistant health check: GROQ_API_KEY is not configured.")
         return False
     request = urllib.request.Request(
         GROQ_MODELS_URL,
-        headers={"Authorization": f"Bearer {GROQ_API_KEY}"},
+        headers={"Authorization": f"Bearer {api_key}"},
         method="GET",
     )
     try:
         with urllib.request.urlopen(request, timeout=5) as response:
             if response.status != 200:
                 return False
-            models = json.loads(response.read()).get("data", [])
-            available = any(model.get("id") == GROQ_CHAT_MODEL for model in models)
-            if not available:
-                logger.warning("Groq assistant health check: configured model is not available to this key.")
-            return available
+            data = json.loads(response.read()).get("data", [])
+            available_ids = {m.get("id") for m in data if m.get("id")}
+            for candidate in DEFAULT_CANDIDATE_MODELS:
+                if candidate in available_ids:
+                    ProductionChatService.model = candidate
+                    return True
+            logger.warning("Groq assistant health check: none of candidate models available.")
+            return False
     except urllib.error.HTTPError as exc:
-        # Log only the HTTP status; never log the Authorization header or API key.
         logger.warning("Groq assistant health check failed with HTTP %s.", exc.code)
         return False
     except (urllib.error.URLError, TimeoutError, ValueError, OSError) as exc:
