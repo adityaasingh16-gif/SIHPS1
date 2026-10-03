@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://sihps1-f.onrender.com/:path*"
+      "destination": "https://sihps1-3.onrender.com/:path*"
     },
     {
       "source": "/(.*)",
