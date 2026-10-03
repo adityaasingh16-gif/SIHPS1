@@ -1,0 +1,18 @@
+name: Keep Render Backend Warm
+
+on:
+  schedule:
+    # Ping every 10 minutes to prevent Render free-tier cold starts
+    - cron: '*/10 * * * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping backend health endpoint
+        run: |
+          echo "Pinging Render backend to keep it warm..."
+          curl -sf --max-time 30 https://sihps1-3.onrender.com/health || echo "Backend warming up..."
+          curl -sf --max-time 30 https://sihps1-3.onrender.com/groq-chat/health || echo "AI health check done"
+          echo "Ping complete at $(date -u)"
