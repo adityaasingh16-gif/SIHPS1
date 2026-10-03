@@ -85,9 +85,44 @@ def chat_health():
 
 @router.get("/version")
 def chat_version():
-    import subprocess, os
+    import subprocess
     try:
         sha = subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], stderr=subprocess.DEVNULL).decode().strip()
     except Exception:
         sha = "unknown"
     return {"version": sha, "key_configured": bool(is_healthy.__module__)}
+
+
+@router.get("/test")
+def chat_test():
+    """Direct minimal Groq call for diagnosing production failures."""
+    from ..groq_service import _post_completion, get_api_key, GROQ_API_URL
+    import urllib.request, json, os
+    key = get_api_key()
+    if not key:
+        return {"ok": False, "error": "no_key"}
+    try:
+        payload = {
+            "model": "openai/gpt-oss-120b",
+            "messages": [{"role": "user", "content": "Reply with only the word: OK"}],
+            "max_completion_tokens": 10,
+            "stream": False,
+        }
+        req = urllib.request.Request(
+            GROQ_API_URL,
+            data=json.dumps(payload).encode(),
+            headers={"Content-Type": "application/json", "Authorization": f"Bearer {key}"},
+            method="POST",
+        )
+        import urllib.error
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            body = json.loads(resp.read())
+        choice = body.get("choices", [{}])[0]
+        content = (choice.get("message", {}).get("content") or "").strip()
+        return {"ok": True, "response": content, "finish": choice.get("finish_reason")}
+    except urllib.error.HTTPError as exc:
+        err = exc.read().decode("utf-8", errors="replace")[:300]
+        return {"ok": False, "error": f"HTTP {exc.code}", "detail": err}
+    except Exception as exc:
+        return {"ok": False, "error": type(exc).__name__, "detail": str(exc)[:200]}
+

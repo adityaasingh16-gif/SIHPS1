@@ -58,6 +58,7 @@ def get_api_key() -> str:
 def _post_completion(messages: list[dict]) -> Optional[str]:
     api_key = get_api_key()
     if not api_key:
+        logger.warning("Groq: no API key available")
         return None
 
     model_to_use = getattr(ProductionChatService, "model", GROQ_CHAT_MODEL)
@@ -78,17 +79,22 @@ def _post_completion(messages: list[dict]) -> Optional[str]:
         method="POST",
     )
     try:
-        with urllib.request.urlopen(request, timeout=GROQ_TIMEOUT) as response:
+        with urllib.request.urlopen(request, timeout=60) as response:
             body = json.loads(response.read())
-        return (
-            body.get("choices", [{}])[0]
-            .get("message", {})
-            .get("content", "")
-            .strip()
-            or None
-        )
-    except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError, ValueError, OSError) as exc:
-        logger.warning("Groq generation failed: %s", exc)
+        choice = body.get("choices", [{}])[0]
+        msg = choice.get("message", {})
+        # gpt-oss-120b may return empty content with reasoning only
+        content = (msg.get("content") or "").strip()
+        if not content:
+            content = (msg.get("reasoning") or "").strip()
+        logger.info("Groq completion: model=%s finish=%s len=%d", model_to_use, choice.get("finish_reason"), len(content))
+        return content or None
+    except urllib.error.HTTPError as exc:
+        body_err = exc.read().decode("utf-8", errors="replace")[:300]
+        logger.warning("Groq generation HTTPError %s: %s", exc.code, body_err)
+        return None
+    except (urllib.error.URLError, TimeoutError, ValueError, OSError) as exc:
+        logger.warning("Groq generation failed: %s: %s", type(exc).__name__, exc)
         return None
 
 
