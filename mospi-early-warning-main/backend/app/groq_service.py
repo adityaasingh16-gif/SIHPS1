@@ -31,7 +31,7 @@ GROQ_MODELS_URL = os.getenv(
     "GROQ_MODELS_URL", "https://api.groq.com/openai/v1/models"
 )
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "").strip()
-GROQ_CHAT_MODEL = os.getenv("GROQ_CHAT_MODEL", "llama-3.3-70b-versatile")
+GROQ_CHAT_MODEL = os.getenv("GROQ_CHAT_MODEL", "openai/gpt-oss-120b")
 try:
     GROQ_TIMEOUT = max(5.0, float(os.getenv("GROQ_REQUEST_TIMEOUT_SECONDS", "30")))
 except (TypeError, ValueError):
@@ -78,13 +78,16 @@ def is_healthy() -> bool:
     if not GROQ_API_KEY:
         return False
     request = urllib.request.Request(
-        f"{GROQ_MODELS_URL}/{GROQ_CHAT_MODEL}",
+        GROQ_MODELS_URL,
         headers={"Authorization": f"Bearer {GROQ_API_KEY}"},
         method="GET",
     )
     try:
         with urllib.request.urlopen(request, timeout=5) as response:
-            return response.status == 200
+            if response.status != 200:
+                return False
+            models = json.loads(response.read()).get("data", [])
+            return any(model.get("id") == GROQ_CHAT_MODEL for model in models)
     except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError, ValueError, OSError):
         return False
 
