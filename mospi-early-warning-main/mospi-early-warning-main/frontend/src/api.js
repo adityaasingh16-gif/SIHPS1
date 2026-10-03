@@ -6,7 +6,17 @@
 
 import { projects as fallbackProjects, alerts as fallbackAlerts } from "./data";
 
-export const API_BASE = import.meta.env.VITE_API_URL || "/api";
+// Vite only serves /api through its local development proxy. A static Vercel
+// deployment has no API proxy, so production must default to the hosted API.
+// VITE_API_URL remains an override for staging or a custom backend domain.
+const configuredApiUrl = import.meta.env.VITE_API_URL?.trim();
+const productionApiUrl = "https://sihps1-f.onrender.com";
+const productionApiMisconfigured = import.meta.env.PROD && configuredApiUrl === "/api";
+export const API_BASE = (
+  productionApiMisconfigured
+    ? productionApiUrl
+    : configuredApiUrl || (import.meta.env.PROD ? productionApiUrl : "/api")
+).replace(/\/+$/, "");
 
 /**
  * Provenance of the last `fetchProjects` / `fetchAlerts` result.

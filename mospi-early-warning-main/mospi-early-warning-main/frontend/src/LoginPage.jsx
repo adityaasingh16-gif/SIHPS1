@@ -10,7 +10,7 @@ import {
  UserRoundPlus,
 } from"lucide-react";
 import { LANGUAGES, translate } from"./i18n";
-import { loginPublicAccount, registerPublicAccount } from"./api";
+import { API_BASE, loginPublicAccount, registerPublicAccount } from"./api";
 import { useAuth } from"./AuthContext";
 import { DhrishtiMark } from"./components/public/PublicChrome";
 
@@ -62,7 +62,7 @@ export default function LoginPage({ language, setLanguage, onBackBrowse }) {
  const t = useMemo(() => (key, vars) => translate(language, key, vars), [language]);
 
  const goToGoogle = (intent) => {
- window.location.href = `${import.meta.env.VITE_API_URL ||"/api"}/auth/google/login?intent=${intent}`;
+ window.location.href = `${API_BASE}/auth/google/login?intent=${intent}`;
  };
 
  const setAuth = (res) => {
