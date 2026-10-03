@@ -40,15 +40,16 @@
   --fg-subtle: #667485;
   --fg-inverse: #ffffff;
 
-  /* Primary accent — violet. Drives every interactive affordance, the focus
-     ring, and the Build group identity. */
-  --brand: #6d28d9;
-  --brand-hover: #5b21b6;
-  --brand-active: #4a1a94;
+  /* Primary accent — government blue. Drives every interactive affordance,
+     the focus ring, and the command-center identity. Deep navy / MoSPI blue
+     replaces the previous violet ramp; risk ramps below are untouched. */
+  --brand: #1d4ed8;
+  --brand-hover: #1e40af;
+  --brand-active: #1e3a8a;
   --brand-fg: #ffffff;
-  --brand-subtle: #f4f0ff;
-  --brand-subtle-fg: #5b21b6;
-  --brand-border: #ddd2fd;
+  --brand-subtle: #e9f0fd;
+  --brand-subtle-fg: #1e40af;
+  --brand-border: #bfd4f8;
 
   /* Risk tiers are data encoding, not decoration — these must stay
      distinguishable in both themes and never be reused for chrome. */
@@ -66,9 +67,9 @@
   --risk-critical-border: #fca5a5;
 
   /* Chart series — ordered, colour-blind-safe, distinguishable in both */
-  --chart-1: #6d28d9;
+  --chart-1: #1d4ed8;
   --chart-2: #0e7c86;
-  --chart-3: #7c3aed;
+  --chart-3: #0e7490;
   --chart-4: #b45309;
   --chart-5: #be123c;
   --chart-6: #4d7c0f;
@@ -83,10 +84,10 @@
      stay distinguishable for the common forms of colour blindness and in
      greyscale. The base steps are dark enough for white text (AA) and the
      -subtle-fg steps clear AA on their own -subtle fill. */
-  --cat-1: #6d28d9; /* violet — primary, matches --brand */
-  --cat-1-subtle: #f4f0ff;
-  --cat-1-subtle-fg: #5b21b6;
-  --cat-1-border: #ddd2fd;
+  --cat-1: #1d4ed8; /* gov blue — primary, matches --brand */
+  --cat-1-subtle: #e9f0fd;
+  --cat-1-subtle-fg: #1e40af;
+  --cat-1-border: #bfd4f8;
 
   --cat-2: #a21caf; /* fuchsia */
   --cat-2-subtle: #fdf2fb;
@@ -135,7 +136,7 @@
   --group-build-subtle-fg: var(--cat-3-subtle-fg);
   --group-build-border: var(--cat-3-border);
 
-  --ring: #6d28d9;
+  --ring: #1d4ed8;
   /* Scrims sit *on top of* whatever surface is behind them, so they must
      stay dark in both themes. Deliberately NOT restated in `.dark`:
      a themed `inverse` would render a white scrim in dark mode. */
@@ -167,13 +168,13 @@
   --fg-subtle: #9aa7b8;
   --fg-inverse: #0d1526;
 
-  --brand: #a78bfa;
-  --brand-hover: #8b5cf6;
-  --brand-active: #7c3aed;
-  --brand-fg: #1a0b2e;
-  --brand-subtle: #1e1738;
-  --brand-subtle-fg: #ddd2fd;
-  --brand-border: #382a63;
+  --brand: #7aa8ff;
+  --brand-hover: #93bbff;
+  --brand-active: #a9c6ff;
+  --brand-fg: #0a1c3f;
+  --brand-subtle: #13294f;
+  --brand-subtle-fg: #c4d7ff;
+  --brand-border: #2b4a7f;
 
   --risk-low: #34d399;
   --risk-low-subtle: #06281f;
@@ -188,9 +189,9 @@
   --risk-critical-subtle: #2f1113;
   --risk-critical-border: #6b2020;
 
-  --chart-1: #a78bfa;
+  --chart-1: #7aa8ff;
   --chart-2: #2dd4bf;
-  --chart-3: #a78bfa;
+  --chart-3: #38bdd8;
   --chart-4: #fbbf24;
   --chart-5: #fb7185;
   --chart-6: #a3e635;
@@ -198,10 +199,10 @@
   /* Categorical accents, dark theme. Bases lift to ~L70 so they read on a
      dark surface; subtle fills become dark tints of the hue rather than
      pale washes, and the border steps sit just above the surface. */
-  --cat-1: #a78bfa;
-  --cat-1-subtle: #1e1738;
-  --cat-1-subtle-fg: #ddd2fd;
-  --cat-1-border: #382a63;
+  --cat-1: #7aa8ff;
+  --cat-1-subtle: #13294f;
+  --cat-1-subtle-fg: #c4d7ff;
+  --cat-1-border: #2b4a7f;
 
   --cat-2: #e879f9;
   --cat-2-subtle: #2a1030;
@@ -228,7 +229,7 @@
   --cat-6-subtle-fg: #fecdd3;
   --cat-6-border: #5c2130;
 
-  --ring: #a78bfa;
+  --ring: #7aa8ff;
   --elevation-card: 0 1px 2px rgb(0 0 0 / 0.4);
   --elevation-pop: 0 12px 28px -6px rgb(0 0 0 / 0.7), 0 2px 6px rgb(0 0 0 / 0.4);
 }
@@ -369,22 +370,22 @@
   --color-slate-900: #0d1526;
   --color-slate-950: #070c16;
 
-  /* Accent — the primary hue of the whole product.
+  /* Accent — government blue, the primary hue of the whole product.
      NOTE: the token *names* are kept as `blue-*` only so that any surviving
-     `bg-blue-600` / `text-blue-700` in JSX keeps compiling. The values are
-     violet, so those utilities render violet, not blue. Renaming would mean
-     auditing every call site for no behavioural gain. */
-  --color-blue-50: #f4f0ff;
-  --color-blue-100: #ede7fe;
-  --color-blue-200: #ddd2fd;
-  --color-blue-300: #c4aefb;
-  --color-blue-400: #a684f7;
-  --color-blue-500: #8b5cf6;
-  --color-blue-600: #6d28d9;
-  --color-blue-700: #5b21b6;
-  --color-blue-800: #4a1a94;
-  --color-blue-900: #3c1678;
-  --color-blue-950: #250e4d;
+     `bg-blue-600` / `text-blue-700` in JSX keeps compiling. The values below
+     are the official blue ramp. Renaming would mean auditing every call site
+     for no behavioural gain. */
+  --color-blue-50: #eff6ff;
+  --color-blue-100: #dbeafe;
+  --color-blue-200: #bfdbfe;
+  --color-blue-300: #93c5fd;
+  --color-blue-400: #60a5fa;
+  --color-blue-500: #3b82f6;
+  --color-blue-600: #2563eb;
+  --color-blue-700: #1d4ed8;
+  --color-blue-800: #1e40af;
+  --color-blue-900: #1e3a8a;
+  --color-blue-950: #172554;
 
   /* Risk: critical */
   --color-red-50: #fef2f2;
@@ -707,6 +708,74 @@ button {
 ::-webkit-scrollbar-thumb {
   background: #cbd5e1;
   border-radius: 999px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Command-center layer — DHRISHTI v2 national intelligence identity.    */
+/* Additive only: gradients, entrance motion and surface treatments for  */
+/* heroes, KPIs and the government trust bar. All motion is disabled      */
+/* under prefers-reduced-motion.                                          */
+/* ------------------------------------------------------------------ */
+.gov-gradient {
+  background: linear-gradient(135deg, #0a1c3f 0%, #0f2a5c 48%, #1d4ed8 100%);
+}
+
+.cmd-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: radial-gradient(75% 90% at 50% 10%, black 30%, transparent 100%);
+}
+
+@keyframes cmd-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: cmd-rise 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.rise-1 { animation-delay: 0.05s; }
+.rise-2 { animation-delay: 0.12s; }
+.rise-3 { animation-delay: 0.19s; }
+.rise-4 { animation-delay: 0.26s; }
+
+.kpi-lift {
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+.kpi-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--elevation-pop);
+  border-color: var(--brand-border);
+}
+
+::selection {
+  background: #1d4ed8;
+  color: #ffffff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise,
+  .rise-1,
+  .rise-2,
+  .rise-3,
+  .rise-4 {
+    animation: none;
+  }
+  .kpi-lift,
+  .kpi-lift:hover {
+    transform: none;
+  }
 }
 
 /* ------------------------------------------------------------------ */

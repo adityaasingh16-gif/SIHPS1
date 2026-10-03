@@ -105,21 +105,21 @@ function Sidebar({ active, setActive, collapsed, setCollapsed, mobileOpen, onClo
 
  return (
  <aside
- className={`fixed left-0 top-0 z-50 h-screen w-[260px] border-r border-line bg-raised transition-transform duration-300 ease-in-out md:z-40 md:transition-all ${
+ className={`fixed left-0 top-0 z-50 h-screen w-[260px] border-r border-white/10 bg-[#0a1c3f] text-slate-200 transition-transform duration-300 ease-in-out md:z-40 md:transition-all ${
  collapsed ?"md:w-[72px]" :"md:w-[260px]"
  } ${mobileOpen ?"translate-x-0" :"-translate-x-full md:translate-x-0"}`}
   aria-label={t("common.primaryNav")}
  >
   <div className="flex h-full flex-col">
-  <div className="flex h-16 shrink-0 items-center justify-between border-b border-line px-4">
+  <div className="flex h-16 shrink-0 items-center justify-between border-b border-white/10 px-4">
   {/* The mark doubles as the collapse affordance's neighbour, so when the
       sidebar is collapsed only the glyph is shown — matching the 72px rail. */}
   {collapsed ? (
   <span className="flex h-8 w-8 items-center justify-center" title="Dhrishti">
-  <DhrishtiGlyph className="h-7 w-7" />
+  <DhrishtiGlyph className="h-7 w-7" light />
   </span>
   ) : (
-  <DhrishtiMark className="h-8" t={t} />
+  <DhrishtiMark className="h-8" t={t} onDark />
   )}
 
 
@@ -134,7 +134,7 @@ function Sidebar({ active, setActive, collapsed, setCollapsed, mobileOpen, onClo
   aria-label={
   window.innerWidth < 768 ?t("shell.closeNavMenu") :t("shell.toggleSidebarWidth")
   }
- className="flex items-center gap-1.5 rounded-lg p-2 text-fg-3 transition hover:bg-hover hover:text-fg"
+ className="flex items-center gap-1.5 rounded-lg p-2 text-slate-400 transition hover:bg-white/10 hover:text-white"
  >
  <X size={18} className="md:hidden" />
  {/* The drawer no longer sits on a dismiss-on-tap backdrop, so the close
@@ -149,7 +149,7 @@ function Sidebar({ active, setActive, collapsed, setCollapsed, mobileOpen, onClo
   {[...workspaceItem, ...groups].map((group) => (
   <div key={group.label}>
   {!collapsed && (
-  <p className="flex items-center gap-2 px-3 pb-1.5 text-[10px] font-bold uppercase tracking-widest text-fg-3">
+  <p className="flex items-center gap-2 px-3 pb-1.5 text-[10px] font-bold uppercase tracking-widest text-slate-400">
   {/* Hue marker: the only place a group is identified by colour, so the
       nav stays scannable without tinting every row. */}
   <span
@@ -173,13 +173,13 @@ function Sidebar({ active, setActive, collapsed, setCollapsed, mobileOpen, onClo
   title={collapsed ? item.label : undefined}
   className={`group relative flex w-full items-center gap-3 rounded-lg border-l-2 py-2 pl-2.5 pr-3 text-left text-sm transition ${
   selected
-  ? `font-semibold ${group.hue.active} ${group.hue.edge}`
-  : "border-l-transparent text-fg-2 hover:bg-hover hover:text-fg"
+  ? "border-l-white bg-white/10 font-semibold text-white"
+  : "border-l-transparent text-slate-300 hover:bg-white/10 hover:text-white"
   }`}
   >
   <Icon
   size={17}
-  className={`shrink-0 ${selected ? group.hue.accent : ""}`}
+  className={`shrink-0 ${selected ? "text-cyan-300" : "text-slate-400"}`}
   />
 
   {!collapsed && (
@@ -189,7 +189,7 @@ function Sidebar({ active, setActive, collapsed, setCollapsed, mobileOpen, onClo
   {item.badge && (
   <span
   className={`rounded-full px-2 py-0.5 text-[9px] font-extrabold uppercase ${
-  selected ? group.hue.badge : "bg-sunken text-fg-3"
+  selected ? "bg-white/15 text-white" : "bg-white/10 text-slate-300"
   }`}
   >
   {item.badge}
@@ -197,7 +197,7 @@ function Sidebar({ active, setActive, collapsed, setCollapsed, mobileOpen, onClo
   )}
 
   {selected && !item.badge && (
-  <ChevronRight size={14} className={`shrink-0 ${group.hue.accent}`} />
+  <ChevronRight size={14} className="shrink-0 text-slate-300" />
   )}
   </>
   )}
@@ -212,16 +212,16 @@ function Sidebar({ active, setActive, collapsed, setCollapsed, mobileOpen, onClo
   </nav>
 
  {user && (
- <div className="flex shrink-0 items-center gap-3 border-t border-line p-3">
+ <div className="flex shrink-0 items-center gap-3 border-t border-white/10 p-3">
  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand text-[11px] font-bold uppercase text-brand-fg">
  {(user.name || user.email ||"?").slice(0, 1)}
  </span>
  {!collapsed && (
  <div className="min-w-0 flex-1">
- <p className="truncate text-xs font-semibold text-fg">
+ <p className="truncate text-xs font-semibold text-white">
   {user.name ||t("shell.userFallback")}
  </p>
- <p className="truncate text-[10px] capitalize text-fg-3">
+ <p className="truncate text-[10px] capitalize text-slate-400">
  {user.role} {user.ministry ? `· ${user.ministry}` :""}
  {user.project_id ? `· ${user.project_id}` :""}
  {language ? ` · ${languageLabel(language)}` :""}
@@ -232,7 +232,7 @@ function Sidebar({ active, setActive, collapsed, setCollapsed, mobileOpen, onClo
  onClick={onLogout}
   title={t("common.signOut")}
   aria-label={t("common.signOut")}
- className="rounded-lg p-2 text-fg-3 transition hover:bg-risk-critical-subtle hover:text-risk-critical"
+ className="rounded-lg p-2 text-slate-400 transition hover:bg-white/10 hover:text-red-300"
  >
  <LogOut size={15} />
  </button>

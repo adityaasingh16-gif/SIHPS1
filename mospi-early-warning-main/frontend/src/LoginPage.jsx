@@ -165,7 +165,7 @@ export default function LoginPage({ language, setLanguage, onBackBrowse }) {
 
  return (
   <div className="relative min-h-screen bg-page text-fg">
-  <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(70%_45%_at_50%_0%,rgba(99,102,241,0.14),transparent)]" />
+  <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(70%_45%_at_50%_0%,rgba(29,78,216,0.12),transparent)]" />
 
   <header className="relative flex items-center justify-between border-b border-line px-6 py-4">
   <div className="flex items-center gap-3">
@@ -199,8 +199,43 @@ export default function LoginPage({ language, setLanguage, onBackBrowse }) {
   </div>
   </header>
 
-  <main className="relative flex min-h-[calc(100vh-73px)] items-center justify-center px-6 py-12">
-  <section className="w-full max-w-md rounded-2xl border border-line bg-raised p-8 shadow-pop">
+  <main className="relative mx-auto grid min-h-[calc(100vh-73px)] w-full max-w-6xl items-center gap-10 px-6 py-12 lg:grid-cols-[1.05fr_1fr]">
+  {/* Government pitch panel: static chrome beside the unchanged auth forms. */}
+  <section className="rise relative hidden overflow-hidden rounded-3xl bg-gradient-to-br from-[#0a1c3f] via-[#0f2a5c] to-[#1d4ed8] p-9 text-white shadow-pop lg:block">
+  <div aria-hidden="true" className="cmd-grid absolute inset-0" />
+  <div aria-hidden="true" className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-cyan-400/20 blur-3xl" />
+  <div className="relative">
+  <DhrishtiMark className="h-10" t={t} onDark />
+  <p className="mt-6 inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-cyan-200">
+  MoSPI · PAIMANA · SIH 26103
+  </p>
+  <h2 className="mt-4 text-3xl font-extrabold leading-tight tracking-tight">
+  National Infrastructure Intelligence Command Center
+  </h2>
+  <p className="mt-3 max-w-md text-sm leading-6 text-slate-300">
+  AI-powered early warning and decision support for Government of India infrastructure projects — from reactive reporting to predictive, explainable action.
+  </p>
+  <ul className="mt-6 space-y-3.5 text-sm">
+  {[
+  { icon: AlertTriangle, text: "Early warnings across cost, schedule and milestone signals" },
+  { icon: ShieldCheck, text: "Role-based access for officers, ministries and agencies" },
+  { icon: Clock3, text: "Live portfolio monitoring with audited decision trails" },
+  { icon: KeyRound, text: "Explainable predictions every officer can defend" },
+  ].map((row) => (
+  <li key={row.text} className="flex items-start gap-3">
+  <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white/10 text-cyan-300">
+  <row.icon className="h-4 w-4" />
+  </span>
+  <span className="text-slate-200">{row.text}</span>
+  </li>
+  ))}
+  </ul>
+  <p className="mt-7 border-t border-white/15 pt-4 text-[11px] font-semibold uppercase tracking-widest text-slate-400">
+  Explainable AI · Audit trail · Secure by design
+  </p>
+  </div>
+  </section>
+  <section className="rise rise-1 w-full max-w-md justify-self-center rounded-2xl border border-line bg-raised p-8 shadow-pop lg:justify-self-start">
   {mode ==="signin" && (
   <>
   <h2 className="text-xl font-bold text-fg">{t("login.title")}</h2>

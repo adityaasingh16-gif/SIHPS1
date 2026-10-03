@@ -199,6 +199,43 @@ export function AppShell({ readOnly = false, bare = false }) {
 
           {!bare && !isRoleWorkspace && (
             <>
+              {/* Government trust bar: ministry identity, data provenance and
+                  session freshness. Static chrome — no data logic changes. */}
+              <div className="gov-gradient rise flex flex-wrap items-center justify-between gap-x-4 gap-y-1 px-4 py-1.5 text-[11px] text-white md:px-6">
+                <p className="flex min-w-0 items-center gap-2">
+                  <span
+                    aria-hidden="true"
+                    className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-emerald-600 text-[7px] font-extrabold text-white"
+                  >
+                    IN
+                  </span>
+                  <span className="truncate font-semibold tracking-wide">
+                    Government of India
+                    <span className="mx-1.5 opacity-40">|</span>
+                    <span className="font-normal opacity-90">
+                      Ministry of Statistics &amp; Programme Implementation
+                    </span>
+                    <span className="mx-1.5 hidden opacity-40 sm:inline">|</span>
+                    <span className="hidden font-normal opacity-70 sm:inline">
+                      PAIMANA · SIH 26103
+                    </span>
+                  </span>
+                </p>
+                <p className="flex shrink-0 items-center gap-2">
+                  <span
+                    className={`inline-block h-1.5 w-1.5 rounded-full ${
+                      backendStatus.online ? "animate-pulse bg-emerald-400" : "bg-amber-400"
+                    }`}
+                    aria-hidden="true"
+                  />
+                  <span className="font-semibold uppercase tracking-wider opacity-90">
+                    {backendStatus.online ? t("shell.mlOnline") : t("shell.demoMode")}
+                  </span>
+                  <span className="opacity-60">
+                    {t("common.lastSynced")}: {lastUpdated}
+                  </span>
+                </p>
+              </div>
               <Topbar
                 search={search}
                 setSearch={setSearch}

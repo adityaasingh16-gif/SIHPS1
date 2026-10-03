@@ -94,21 +94,56 @@ function DashboardHome({ setSelectedProject, projectsList = [], setActive }) {
   </div>
   )}
 
-  <section className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-inverse via-brand-active to-brand-active p-7 text-white shadow-card">
+  <section className="rise relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#0a1c3f] via-[#0f2a5c] to-[#1d4ed8] p-7 text-white shadow-card">
+  <div aria-hidden="true" className="cmd-grid absolute inset-0" />
+  <div aria-hidden="true" className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-cyan-400/20 blur-3xl" />
   <div className="relative max-w-3xl">
-  <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-raised/10 px-3 py-1.5 text-xs font-medium text-brand-subtle">
+  <div className="mb-3 flex flex-wrap items-center gap-2">
+  <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-medium text-cyan-200">
   <Sparkles size={14} />
   {t("dash.eyebrow")}
+  </span>
+  {hasLive ? (
+  <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-400/15 px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-emerald-300">
+  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
+  {t("dash.liveBadge")}
+  </span>
+  ) : (
+  <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-400/15 px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-amber-300">
+  {t("dash.sampleTitle")}
+  </span>
+  )}
   </div>
 
   <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
-  {t("dash.heroLine1")}
-  <span className="text-brand-subtle-fg">{t("dash.heroLine2")}</span>
+  {t("dash.heroLine1")}{" "}
+  <span className="text-cyan-300">{t("dash.heroLine2")}</span>
   </h2>
 
-  <p className="mt-4 max-w-2xl text-sm leading-6 text-line-strong">
+  <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-300">
   {t("dash.heroBody")}
   </p>
+
+  <div className="mt-5 flex flex-wrap gap-2">
+  {[
+  { label: t("dash.criticalBand"), value: criticalCount, tone: "text-red-300", go: "warnings" },
+  { label: t("dash.highBand"), value: highRiskCount, tone: "text-amber-300", go: "warnings" },
+  { label: t("dash.reviewBand"), value: reviewCount, tone: "text-cyan-300", go: "projects" },
+  { label: t("dash.trackedProjects"), value: sourceProjects.length, tone: "text-emerald-300", go: "projects" },
+  ].map((c) => (
+  <button
+  key={c.label}
+  type="button"
+  onClick={() => setActive && setActive(c.go)}
+  className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3.5 py-1.5 text-xs font-semibold text-white transition hover:bg-white/20"
+  >
+  <span className={`text-sm font-extrabold tabular-nums ${c.tone}`}>
+  {c.value.toLocaleString("en-IN")}
+  </span>
+  {c.label}
+  </button>
+  ))}
+  </div>
   </div>
    </section>
 
@@ -116,7 +151,7 @@ function DashboardHome({ setSelectedProject, projectsList = [], setActive }) {
       Expenditure against revised cost is the figure people open this app for,
       so it gets the dominant panel; everything else steps down to a compact
       tile rather than competing in a row of identical cards. */}
-  <div className="grid gap-4 lg:grid-cols-3">
+  <div className="rise rise-1 grid gap-4 lg:grid-cols-3">
   <div className="lg:col-span-2">
   <HeroKPI
   icon={Activity}
@@ -203,7 +238,7 @@ function DashboardHome({ setSelectedProject, projectsList = [], setActive }) {
 
   {/* Sanctioned vs revised, per project: the escalation story had no visual
       at all before this - it existed only as two summed totals. */}
-  <section className="rounded-2xl border border-line bg-raised p-5 shadow-sm">
+  <section className="rise rise-2 rounded-2xl border border-line bg-raised p-5 shadow-sm">
   <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
   <div>
   <h2 className="text-base font-bold tracking-tight text-fg">

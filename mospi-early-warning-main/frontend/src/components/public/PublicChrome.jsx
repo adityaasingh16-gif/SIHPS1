@@ -35,22 +35,24 @@ export const MOSPI_URL = "https://www.mospi.gov.in/";
 export const DFD_URL = "https://www.dic.gov.in/";
 
 /** Inline wordmark so the mark and the name scale as one unit. */
-export function DhrishtiMark({ className = "h-9", title = "Dhrishti", t, onLight = false }) {
+export function DhrishtiMark({ className = "h-9", title = "Dhrishti", t, onLight = false, onDark = false }) {
+  const titleTone = onDark
+    ? "text-white"
+    : onLight
+      ? "text-[#12203A]"
+      : "text-[#12203A] dark:text-white";
+  const subTone = onDark ? "text-white/60" : onLight ? "text-[#12203A]/60" : "text-fg-3";
   return (
     <span className={`inline-flex items-center gap-2.5 ${className}`}>
-      <DhrishtiGlyph className="h-full w-auto shrink-0" title={title} />
+      <DhrishtiGlyph className="h-full w-auto shrink-0" title={title} light={onDark} />
       <span className="flex min-w-0 flex-col leading-none">
         <span
-          className={`text-[15px] font-extrabold uppercase tracking-tight ${
-            onLight ? "text-[#12203A]" : "text-[#12203A] dark:text-white"
-          }`}
+          className={`text-[15px] font-extrabold uppercase tracking-tight ${titleTone}`}
         >
           {title}
         </span>
         <span
-          className={`mt-0.5 text-[9px] font-semibold uppercase tracking-widest ${
-            onLight ? "text-[#12203A]/60" : "text-fg-3"
-          }`}
+          className={`mt-0.5 text-[9px] font-semibold uppercase tracking-widest ${subTone}`}
         >
           {t?.("chrome.projectIntelligence") ?? "Project Intelligence"}
         </span>
@@ -436,8 +438,11 @@ export function PublicFooter({ t }) {
 
 /* ---------------------------------------------------------------- glyphs */
 
-/** Shield mark on its own, for tight slots like the collapsed sidebar rail. */
-export function DhrishtiGlyph({ className = "h-7 w-7", title = "Dhrishti" }) {
+/** Shield mark on its own, for tight slots like the collapsed sidebar rail.
+ *  `light` renders the shield in white for deep-navy surfaces. */
+export function DhrishtiGlyph({ className = "h-7 w-7", title = "Dhrishti", light = false }) {
+  const shield = light ? "#FFFFFF" : "#12203A";
+  const line = light ? "#0A1C3F" : "#FFFFFF";
   return (
     <svg
       viewBox="0 0 100 124"
@@ -448,13 +453,13 @@ export function DhrishtiGlyph({ className = "h-7 w-7", title = "Dhrishti" }) {
       <path
         d="M50 43 L150 43 L150 105 Q150 153 100 167 Q50 153 50 105 Z"
         transform="translate(-50 0)"
-        fill="#12203A"
+        fill={shield}
       />
       <path
         d="M70 130 L92 108 L112 118 L132 78"
         transform="translate(-50 0)"
         fill="none"
-        stroke="#FFFFFF"
+        stroke={line}
         strokeWidth="7"
         strokeLinecap="round"
         strokeLinejoin="round"
