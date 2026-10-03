@@ -75,8 +75,9 @@ def get_project_tool(
 
 @router.get("/health", response_model=ChatHealthResponse)
 def chat_health():
+    healthy = is_healthy()
     return ChatHealthResponse(
-        status="online" if is_healthy() else "offline",
-        model=GROQ_CHAT_MODEL,
+        status="online" if healthy else "offline",
+        model=getattr(production_chat, "model", GROQ_CHAT_MODEL) or "openai/gpt-oss-120b",
         project_context_loaded=True,
     )

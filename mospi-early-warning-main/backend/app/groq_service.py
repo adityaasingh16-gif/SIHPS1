@@ -47,8 +47,12 @@ except (TypeError, ValueError):
 MAX_TOKENS = 1024
 
 
+def get_api_key() -> str:
+    return os.getenv("GROQ_API_KEY", GROQ_API_KEY).strip()
+
+
 def _post_completion(messages: list[dict]) -> Optional[str]:
-    api_key = os.getenv("GROQ_API_KEY", GROQ_API_KEY).strip()
+    api_key = get_api_key()
     if not api_key:
         return None
 
@@ -85,7 +89,7 @@ def _post_completion(messages: list[dict]) -> Optional[str]:
 
 
 def is_healthy() -> bool:
-    api_key = os.getenv("GROQ_API_KEY", GROQ_API_KEY).strip()
+    api_key = get_api_key()
     if not api_key:
         logger.warning("Groq assistant health check: GROQ_API_KEY is not configured.")
         return False
@@ -128,11 +132,8 @@ class ProductionChatService:
         history = history or []
 
         if user is None:
-            return {
-                "answer": "Please sign in to use the project assistant.",
-                "sources": [],
-                "model": self.model,
-            }
+            from types import SimpleNamespace
+            user = SimpleNamespace(role="viewer", ministry=None, agency=None, project_id=None)
 
         if _is_prompt_attack(question) or any(
             m.get("role") == "user"

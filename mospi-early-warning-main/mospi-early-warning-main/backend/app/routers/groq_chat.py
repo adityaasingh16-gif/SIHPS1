@@ -6,8 +6,8 @@ from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
-from ..database import get_db
 from ..auth_security import get_current_user
+from ..database import get_db
 from ..groq_chat import get_project
 from ..groq_service import production_chat, is_healthy, GROQ_CHAT_MODEL
 
@@ -20,8 +20,8 @@ class ChatMessage(BaseModel):
 
 
 class ChatRequest(BaseModel):
-    message: str = Field(..., min_length=1, max_length=4000, description="User question")
-    history: Optional[List[ChatMessage]] = Field(default_factory=list, description="Optional prior turns")
+    message: str = Field(..., min_length=1, max_length=4000)
+    history: Optional[List[ChatMessage]] = Field(default_factory=list)
 
 
 class ChatSource(BaseModel):
@@ -49,31 +49,35 @@ def chat_endpoint(
     db: Session = Depends(get_db),
     user=Depends(get_current_user),
 ):
-    """Ask a question using role-scoped project records and hosted generation."""
     history = [m.model_dump() for m in payload.history]
     result = production_chat.chat(db, payload.message, history, user=user)
     return ChatResponse(
         answer=result["answer"],
-        sources=[ChatSource(**s) for s in result.get("sources", [])],
+        sources=[ChatSource(**source) for source in result.get("sources", [])],
         model=result["model"],
     )
 
 
 @router.get("/tools/get-project/{project_id}")
-def get_project_tool(project_id: str, db: Session = Depends(get_db), user=Depends(get_current_user)):
-    """Read-only deterministic project lookup, filtered by the caller's role scope."""
+def get_project_tool(
+    project_id: str,
+    db: Session = Depends(get_db),
+    user=Depends(get_current_user),
+):
     result = get_project(db, user, project_id)
     if result is None:
-        # Same response for nonexistent and unauthorized project IDs.
-        raise HTTPException(status_code=404, detail="Project not found in your authorized records.")
+        raise HTTPException(
+            status_code=404,
+            detail="Project not found in your authorized records.",
+        )
     return result
 
 
 @router.get("/health", response_model=ChatHealthResponse)
 def chat_health():
-    """Configured production assistant provider status."""
+    healthy = is_healthy()
     return ChatHealthResponse(
-        status="online" if is_healthy() else "offline",
-        model=GROQ_CHAT_MODEL,
+        status="online" if healthy else "offline",
+        model=getattr(production_chat, "model", GROQ_CHAT_MODEL) or "openai/gpt-oss-120b",
         project_context_loaded=True,
     )
