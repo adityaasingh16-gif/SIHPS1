@@ -21,14 +21,34 @@ export default function ChatWidget({ backendOnline }) {
   const [loading, setLoading] = useState(false);
   const [assistantHealth, setAssistantHealth] = useState(null);
   const assistantOnline = assistantHealth ? assistantHealth.status === "online" : null;
+  const [assistantWaking, setAssistantWaking] = useState(false);
   const scrollRef = useRef(null);
 
   useEffect(() => {
     if (!open) return;
-    checkLocalAssistantHealth().then((h) => {
-      setAssistantHealth(h || { status: "offline", model: "Groq" });
-    });
+    let cancelled = false;
+    const checkHealth = async () => {
+      // Retry up to 4 times with 15s gap — handles Render free-tier cold start (~50s)
+      for (let attempt = 0; attempt < 4; attempt++) {
+        const h = await checkLocalAssistantHealth();
+        if (cancelled) return;
+        if (h && h.status === "online") {
+          setAssistantHealth(h);
+          setAssistantWaking(false);
+          return;
+        }
+        if (attempt === 0) setAssistantWaking(true);
+        if (attempt < 3) await new Promise(r => setTimeout(r, 15000));
+      }
+      if (!cancelled) {
+        setAssistantHealth({ status: "offline", model: "Groq" });
+        setAssistantWaking(false);
+      }
+    };
+    checkHealth();
+    return () => { cancelled = true; };
   }, [open]);
+
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
@@ -126,14 +146,14 @@ export default function ChatWidget({ backendOnline }) {
                 <span
                   className={`h-1.5 w-1.5 rounded-full ${
                     assistantOnline === null
-                      ? "bg-risk-medium"
+                      ? assistantWaking ? "animate-pulse bg-yellow-400" : "bg-risk-medium"
                       : assistantOnline
                       ? "bg-risk-low"
                       : "bg-risk-high"
                   }`}
                 />
                 {assistantOnline === null
-                  ? t("chat.checkingLlm")
+                  ? assistantWaking ? "Waking up server, please wait (~30s)…" : t("chat.checkingLlm")
                   : assistantOnline
                   ? t("chat.aiReady", { model: assistantHealth?.model || "Groq" })
                   : t("chat.aiOffline")}
