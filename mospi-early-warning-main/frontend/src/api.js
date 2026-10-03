@@ -125,7 +125,10 @@ async function request(endpoint, options = {}) {
  */
 export async function checkBackendHealth() {
   try {
-    const data = await request("/");
+    // Use the explicit health route. With Vercel's /api/:path* rewrite,
+    // requesting /api/ (the API root) can fall through to the SPA rewrite
+    // because the wildcard path is empty, making a healthy backend look offline.
+    const data = await request("/health");
     return {
       online: data.status === "ONLINE",
       modelsLoaded: Boolean(data.models_loaded),
