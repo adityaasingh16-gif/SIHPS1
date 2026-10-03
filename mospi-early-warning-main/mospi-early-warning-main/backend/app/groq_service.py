@@ -75,6 +75,14 @@ def _post_completion(messages: list[dict]) -> Optional[str]:
         headers={
             "Content-Type": "application/json",
             "Authorization": f"Bearer {api_key}",
+            "User-Agent": "groq-python/0.11.0",
+            "X-Stainless-Lang": "python",
+            "X-Stainless-Package-Version": "0.11.0",
+            "X-Stainless-OS": "Linux",
+            "X-Stainless-Arch": "x64",
+            "X-Stainless-Runtime": "CPython",
+            "X-Stainless-Runtime-Version": "3.11.0",
+            "Accept": "application/json",
         },
         method="POST",
     )
