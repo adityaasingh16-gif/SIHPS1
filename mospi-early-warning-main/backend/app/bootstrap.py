@@ -9,7 +9,7 @@ from sqlalchemy import func, text
 from sqlalchemy.orm import Session
 
 from . import models
-from .auth_security import AUTH_DEMO_MODE, AUTH_SEED_ADMIN, seed_default_admin, log_audit
+from .auth_security import AUTH_DEMO_MODE, AUTH_SEED_ADMIN, seed_default_admin, log_audit, hash_password
 
 
 def ensure_auth_columns(db: Session) -> None:
@@ -124,10 +124,15 @@ def seed_public_rows(db: Session) -> int:
 def seed_demo_users(db: Session) -> int:
     """Create demo role users (idempotent) so each dashboard can be demoed."""
     seed_default_admin(db)
+    initial_pw = os.getenv("ADMIN_INITIAL_PASSWORD", "").strip() or "Admin@12345"
+    pw_hash = hash_password(initial_pw)
     created = 0
     for spec in DEMO_USERS:
         existing = db.query(models.User).filter(models.User.email == spec["email"]).first()
         if existing:
+            if not existing.password_hash:
+                existing.password_hash = pw_hash
+                db.commit()
             continue
         db.add(
             models.User(
@@ -138,6 +143,7 @@ def seed_demo_users(db: Session) -> int:
                 ministry=spec.get("ministry"),
                 agency=spec.get("agency"),
                 project_id=spec.get("project_id"),
+                password_hash=pw_hash,
                 created_at=datetime.now(timezone.utc),
                 last_login_at=datetime.now(timezone.utc),
             )

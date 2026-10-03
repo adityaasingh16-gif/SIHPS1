@@ -1,3 +1,6 @@
+import logging
+
+logger = logging.getLogger('auth')
 """
 Router for Authentication & Identity.
 Google OAuth 2.0 (Sign in with Google), public self-registration with password,
@@ -99,20 +102,25 @@ def _google_auth_url(intent: str) -> str:
 
 def _exchange_code_for_token(code: str) -> Optional[dict]:
     """Exchange the OAuth code for tokens at Google's token endpoint."""
-    resp = httpx.post(
-        "https://oauth2.googleapis.com/token",
-        data={
-            "code": code,
-            "client_id": GOOGLE_CLIENT_ID,
-            "client_secret": GOOGLE_CLIENT_SECRET,
-            "redirect_uri": GOOGLE_REDIRECT_URI,
-            "grant_type": "authorization_code",
-        },
-        timeout=20.0,
-    )
-    if resp.status_code != 200:
+    try:
+        resp = httpx.post(
+            "https://oauth2.googleapis.com/token",
+            data={
+                "code": code,
+                "client_id": GOOGLE_CLIENT_ID,
+                "client_secret": GOOGLE_CLIENT_SECRET,
+                "redirect_uri": GOOGLE_REDIRECT_URI,
+                "grant_type": "authorization_code",
+            },
+            timeout=20.0,
+        )
+        if resp.status_code != 200:
+            logger.error(f"Google token exchange failed: HTTP {resp.status_code} - {resp.text}")
+            return None
+        return resp.json()
+    except Exception as exc:
+        logger.error(f"Exception during Google token exchange: {exc}", exc_info=True)
         return None
-    return resp.json()
 
 
 class DemoLoginRequest(BaseModel):
@@ -315,29 +323,41 @@ def public_login(
     """
     email = payload.email.lower()
     ip = request.client.host if request and request.client else "unknown"
+    logger.info(f"Login attempt for email={email} from ip={ip}")
+
     if not rate_limit_allowed(f"{email}|{ip}"):
+        logger.warning(f"Rate limit exceeded for {email} ({ip})")
         raise HTTPException(status_code=429, detail="Too many login attempts. Please wait a minute and try again.")
 
     user = db.query(models.User).filter(models.User.email == email).first()
-    if not user or not user.password_hash or not verify_password(payload.password, user.password_hash):
-        if user:
-            if register_failed_login(db, user):
-                raise HTTPException(
-                    status_code=423,
-                    detail=f"Account locked after {MAX_FAILED_ATTEMPTS} failed attempts. Try again later.",
-                )
+    if not user:
+        logger.warning(f"Login failed: User not found for email={email}")
         raise HTTPException(status_code=401, detail="Invalid email or password.")
+
+    if not user.password_hash or not verify_password(payload.password, user.password_hash):
+        logger.warning(f"Login failed: Invalid password for email={email}")
+        if register_failed_login(db, user):
+            raise HTTPException(
+                status_code=423,
+                detail=f"Account locked after {MAX_FAILED_ATTEMPTS} failed attempts. Try again later.",
+            )
+        raise HTTPException(status_code=401, detail="Invalid email or password.")
+
     if user.status == "revoked":
+        logger.warning(f"Login rejected: Account revoked for email={email}")
         raise HTTPException(status_code=403, detail="Access revoked. Contact your administrator.")
+
     if is_account_locked(user):
+        logger.warning(f"Login rejected: Account locked for email={email}")
         raise HTTPException(status_code=423, detail="Account is temporarily locked. Try again later.")
 
     reset_login_failures(db, user)
     user.last_login_at = datetime.now(timezone.utc)
     db.commit()
     db.refresh(user)
-    log_audit(db, email, user.id, "user_logged_in_password", "user", email, {})
     token = issue_user_token(user)
+    logger.info(f"User successfully logged in: email={email}, role={user.role}")
+    log_audit(db, email, user.id, "user_logged_in_password", "user", email, {})
     return schemas.LoginResponse(token=token, user=schemas.UserOut.model_validate(user))
 
 

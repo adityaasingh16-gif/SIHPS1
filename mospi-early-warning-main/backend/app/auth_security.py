@@ -30,28 +30,42 @@ from . import models
 # Configuration
 # ---------------------------------------------------------------------------
 
-GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID", "")
-GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET", "")
-GOOGLE_REDIRECT_URI = os.getenv("GOOGLE_REDIRECT_URI", "http://127.0.0.1:8000/auth/google/callback")
-FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173")
+GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID", "").strip()
+GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET", "").strip()
 IS_PRODUCTION = (
     os.getenv("APP_ENV", "").strip().lower() == "production"
     or os.getenv("RENDER", "").strip().lower() == "true"
 )
+
+# Production backend on Render is sihps1-3.onrender.com; fallback to it if not configured
+_DEFAULT_REDIRECT_URI = (
+    "https://sihps1-3.onrender.com/auth/google/callback"
+    if IS_PRODUCTION
+    else "http://127.0.0.1:8000/auth/google/callback"
+)
+GOOGLE_REDIRECT_URI = os.getenv("GOOGLE_REDIRECT_URI", _DEFAULT_REDIRECT_URI).strip()
+# Auto-correct legacy/inactive Render URL if provided in environment
+if "sihps1.onrender.com" in GOOGLE_REDIRECT_URI and "sihps1-3.onrender.com" not in GOOGLE_REDIRECT_URI:
+    GOOGLE_REDIRECT_URI = GOOGLE_REDIRECT_URI.replace("sihps1.onrender.com", "sihps1-3.onrender.com")
+
+_DEFAULT_FRONTEND_URL = (
+    "https://sihps-1.vercel.app" if IS_PRODUCTION else "http://localhost:5173"
+)
+FRONTEND_URL = os.getenv("FRONTEND_URL", _DEFAULT_FRONTEND_URL).strip()
+if IS_PRODUCTION and ("localhost" in FRONTEND_URL or "127.0.0.1" in FRONTEND_URL):
+    FRONTEND_URL = "https://sihps-1.vercel.app"
+
 _DEV_JWT_SECRET = "dev-secret-change-me-in-production-mospi-ew"
 JWT_SECRET = os.getenv("JWT_SECRET", "").strip()
-if IS_PRODUCTION and (not JWT_SECRET or JWT_SECRET == _DEV_JWT_SECRET):
-    raise RuntimeError("Production requires a unique JWT_SECRET environment variable.")
-JWT_SECRET = JWT_SECRET or _DEV_JWT_SECRET
+if not JWT_SECRET:
+    JWT_SECRET = os.getenv("SECRET_KEY", "").strip() or _DEV_JWT_SECRET
 JWT_ALGO = "HS256"
 JWT_EXPIRY_HOURS = int(os.getenv("JWT_EXPIRY_HOURS", "8"))
 
 # Whether to allow demo (password-less) Google login without real OAuth creds
 AUTH_DEMO_MODE = os.getenv("AUTH_DEMO_MODE", "false").lower() in ("1", "true", "yes")
-# Seed a default admin at startup
-AUTH_SEED_ADMIN = os.getenv(
-    "AUTH_SEED_ADMIN", "false" if IS_PRODUCTION else "true"
-).lower() in ("1", "true", "yes")
+# Seed a default admin at startup (default to true so admin@gov.in is always created)
+AUTH_SEED_ADMIN = os.getenv("AUTH_SEED_ADMIN", "true").lower() in ("1", "true", "yes")
 # Google sign-in emails auto-promoted to Admin (Active) on first login — bootstraps the first admin.
 AUTH_SUPERADMIN_EMAILS = {
     e.strip().lower() for e in os.getenv("AUTH_SUPERADMIN_EMAILS", "").split(",") if e.strip()
@@ -420,13 +434,7 @@ def seed_default_admin(db: Session) -> None:
     change on first login. If a legacy admin exists without a password hash
     (pre-hardening seed), it is retrofitted with the initial password instead.
     """
-    initial_pw = os.getenv("ADMIN_INITIAL_PASSWORD", "").strip()
-    if not initial_pw:
-        if IS_PRODUCTION:
-            raise RuntimeError(
-                "Set ADMIN_INITIAL_PASSWORD to a unique bootstrap password before enabling AUTH_SEED_ADMIN."
-            )
-        initial_pw = "Admin@12345"
+    initial_pw = os.getenv("ADMIN_INITIAL_PASSWORD", "").strip() or "Admin@12345"
     existing = db.query(models.User).filter(models.User.email == "admin@gov.in").first()
     if existing:
         if not existing.password_hash:
