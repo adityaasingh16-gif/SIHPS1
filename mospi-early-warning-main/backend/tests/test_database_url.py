@@ -90,7 +90,12 @@ def test_real_database_still_resolves():
     assert out.returncode == 0, out.stderr
     url = out.stdout.strip().splitlines()[-1]
     path = pathlib.Path(url.replace("sqlite:///", ""))
-    assert path.exists(), f"resolved DB does not exist: {path}"
-    assert path.stat().st_size > 1_000_000, (
-        f"resolved DB looks empty ({path.stat().st_size} bytes) -- wrong file?"
-    )
+    assert path == (BACKEND / "mospi_ew.db")
+    if path.exists():
+        assert path.stat().st_size > 1_000_000, (
+            f"resolved DB looks empty ({path.stat().st_size} bytes) -- wrong file?"
+        )
+    else:
+        # Generated databases are intentionally excluded from a clean checkout;
+        # the Docker first-start bootstrap builds one from this tracked source.
+        assert (BACKEND / "data" / "panel_mospi.csv").is_file()

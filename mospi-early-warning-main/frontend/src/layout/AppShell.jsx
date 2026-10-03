@@ -244,8 +244,8 @@ export function AppShell({ readOnly = false, bare = false }) {
             {!bare && (
               <footer className="mt-10 border-t border-line py-6 text-center text-xs text-fg-3">
                 Dhrishti • SIH Problem Statement 26103 • ML Core: XGBoost +
-                MLP-with-dropout + TreeSHAP + Platt Calibrator + OR-Tools MILP • RAG Chat:
-                Ollama (llama3.2 + nomic-embed-text)
+                MLP-with-dropout + TreeSHAP + Platt Calibrator + OR-Tools MILP •
+                Dhrishti Assistant: Groq generation with role-scoped retrieval
                 <span className="mt-1 block">
                   {t("common.lastSynced")}: {lastUpdated}
                 </span>

@@ -24,8 +24,8 @@ backend/tests
 
 # ---- Runtime data the image must not embed ----
 # The live development SQLite DB, uploaded agency files and generated reports
-# stay out of the build. The image instead ships a sanitized pre-seeded copy at
-# backend/data/seed_mospi_ew.db (wired into the image by the Dockerfile).
+# stay out of the build. A pre-seeded SQLite copy is optional; clean builds use
+# the existing first-start database bootstrap when it is absent.
 backend/mospi_ew.db
 backend/uploads
 backend/data/generated

@@ -148,6 +148,7 @@ def test_date_must_match_cited_source():
 
 def test_local_embedding_batch_and_cache(scoped_projects, monkeypatch):
     import app.groq_chat as chat_module
+    monkeypatch.setattr(chat_module, "OLLAMA_BASE_URL", "http://localhost:11434")
     _EMBED_CACHE.clear()
     calls = []
 

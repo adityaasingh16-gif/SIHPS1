@@ -13,12 +13,14 @@ from typing import Any, Dict, List, Optional
 
 from sqlalchemy.orm import Session
 
-logger = logging.getLogger("mospi_backend.local_chat")
-OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434").rstrip("/")
+logger = logging.getLogger("mospi_backend.project_retrieval")
+# Ollama is optional for dense embeddings only; production chat generation uses Groq.
+# Without a configured embedding service, retrieval immediately falls back to BM25.
+OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "").strip().rstrip("/")
 CHAT_MODEL = os.getenv("OLLAMA_CHAT_MODEL", "llama3.1")
 EMBED_MODEL = os.getenv("OLLAMA_EMBED_MODEL", "nomic-embed-text")
 REQUEST_TIMEOUT = max(1.0, float(os.getenv("OLLAMA_REQUEST_TIMEOUT_SECONDS", "25")))
-EMBED_TIMEOUT = max(1.0, float(os.getenv("OLLAMA_EMBED_TIMEOUT_SECONDS", "8")))
+EMBED_TIMEOUT = max(0.5, float(os.getenv("OLLAMA_EMBED_TIMEOUT_SECONDS", "2")))
 MAX_TOKENS = 1024
 _EMBED_CACHE: dict[str, list[float]] = {}
 _EMBED_CACHE_LIMIT = 512
@@ -213,6 +215,8 @@ def _post_json(path: str, body: dict, timeout: float) -> dict:
 def _embed_batch(texts: list[str]) -> Optional[list[list[float]]]:
     if not texts:
         return []
+    if not OLLAMA_BASE_URL:
+        return None
     cached = [_EMBED_CACHE.get(hashlib.sha256(t.encode()).hexdigest()) for t in texts]
     missing = [i for i, v in enumerate(cached) if v is None]
     if missing:

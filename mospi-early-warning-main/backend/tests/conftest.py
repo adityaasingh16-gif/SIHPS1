@@ -38,6 +38,7 @@ import pytest
 
 from app.database import mongo_db, engine, Base, create_mongo_indexes
 from app.main import app
+from app.security import middleware as security_middleware
 from app.security.rate_limiter import rate_limiter
 
 Base.metadata.create_all(bind=engine)
@@ -59,5 +60,9 @@ def _isolate_ids_state():
         mongo_db[name].delete_many({})
     rate_limiter.reset()
     rate_limiter.limit = 10_000_000
+    security_middleware._block_cache.clear()
+    security_middleware._tele_cache.clear()
     yield
     rate_limiter.reset()
+    security_middleware._block_cache.clear()
+    security_middleware._tele_cache.clear()

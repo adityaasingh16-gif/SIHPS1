@@ -128,13 +128,16 @@ app = FastAPI(
 )
 
 # Configure CORS middleware securely (CWE-942 prevention: credentials only when origins are explicit)
-cors_origins_str = os.getenv("CORS_ORIGINS", "http://localhost:3000,http://localhost:5173,http://127.0.0.1:3000,http://127.0.0.1:5173")
+cors_origins_str = os.getenv(
+    "CORS_ORIGINS",
+    "https://sihps-1-om86z0b39-adityaasingh16-gifs-projects.vercel.app",
+)
 origins = [o.strip() for o in cors_origins_str.split(",") if o.strip()]
-is_wildcard = not origins or "*" in origins
+is_wildcard = "*" in origins
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins if origins else ["*"],
+    allow_origins=origins,
     allow_credentials=not is_wildcard,
     allow_methods=["*"],
     allow_headers=["*"],

@@ -635,7 +635,7 @@ export async function fetchModelComparison() {
 }
 
 /**
- * Ask the RAG chat assistant a question (local Ollama LLM + retrieved context)
+ * Ask the authenticated assistant using role-scoped context and Groq generation.
  */
 export async function askAssistant(message, history = []) {
   try {
@@ -772,7 +772,7 @@ export async function fetchRiskStatus() {
  */
 export async function checkAssistantHealth() {
   try {
-    return await request("/chat/health");
+    return await request("/groq-chat/health");
   } catch (e) {
     console.warn("Chat health unavailable:", e);
     return null;
@@ -780,7 +780,7 @@ export async function checkAssistantHealth() {
 }
 
 /**
- * Authenticated, role-scoped local assistant (Ollama).
+ * Authenticated, role-scoped assistant (Groq generation; optional local embeddings).
  */
 export async function askLocalAssistant(message, history = [], token = null, { onDelta, onMeta } = {}) {
   const url = `${API_BASE}/groq-chat`;
@@ -811,7 +811,7 @@ export async function checkLocalAssistantHealth() {
   try {
     return await request("/groq-chat/health");
   } catch (e) {
-    console.warn("Local assistant health unavailable:", e);
+    console.warn("Assistant health unavailable:", e);
     return null;
   }
 }

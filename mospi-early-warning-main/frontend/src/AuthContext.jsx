@@ -38,8 +38,8 @@ export function AuthProvider({ children }) {
       setToken(urlToken);
       if (pending) setStatus("pending");
       else if (revoked) setStatus("revoked");
-      else if (error) setBootError(error);
     }
+    if (error) setBootError(error);
     // Clean the query string so refreshes don't replay the redirect.
     window.history.replaceState({}, document.title, window.location.pathname);
   }, []);

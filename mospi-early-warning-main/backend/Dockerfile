@@ -38,9 +38,12 @@ ENV FRONTEND_DIST=/app/frontend/dist \
 # Persistent data location (kept outside the image for named-volume mounts)
 RUN mkdir -p /app/data /app/backend/uploads
 
-# Bundle the pre-seeded SQLite database (2185 projects, 18926 snapshots, plus
-# predictions/SHAP) so first boot is instant — no 13-minute retrain per deploy.
-COPY backend/data/seed_mospi_ew.db /app/data/mospi_ew.db
+# Use the sanitized pre-seed when a deployment package provides it. Generated
+# database files are excluded from Git, so clean checkouts use the existing
+# AUTO_SEED_DATABASE first-start path instead.
+RUN if [ -f /app/backend/data/seed_mospi_ew.db ]; then \
+      cp /app/backend/data/seed_mospi_ew.db /app/data/mospi_ew.db; \
+    fi
 
 WORKDIR /app/backend
 

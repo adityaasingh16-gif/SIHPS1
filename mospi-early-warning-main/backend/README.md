@@ -10,7 +10,7 @@ Backend services for the **AI-Powered Early-Warning and Decision-Support Platfor
 
 The compose stack (`docker-compose.yml` at the repo root) runs **MongoDB 7**, the
 **FastAPI backend** (which also serves the built React SPA single-origin), and
-**Ollama** for the assistant/RAG:
+an optional local **Ollama embedding service**. Assistant generation uses Groq.
 
 ```bash
 docker compose up --build -d
@@ -19,22 +19,20 @@ docker compose up --build -d
 - **Web app (SPA + API)**: `http://localhost:8000`
 - **Swagger docs**: `http://localhost:8000/docs`
 - **MongoDB**: `mongodb://mongo:27017`, database `dhrishti` (internal network)
-- **Ollama**: `http://ollama:11434` (internal network)
+- **Optional embeddings**: `http://ollama:11434` (internal network)
 
-All data lives in named volumes (`mongo_data`, `data` for SQLite, `uploads`,
-`ollama_models`) — nothing is written into the image. On **first boot** the
-backend auto-seeds the database from `backend/data/panel_mospi.csv` and trains
-the `.joblib` models (`AUTO_SEED_DATABASE=true`), so startup is slow (≈2–4 min);
-the healthcheck's `start_period` absorbs this.
+Database and upload data live in named volumes. The backend image includes the
+pre-seeded database and trained `.joblib` model artifacts; this deployment
+does not retrain the models.
 
-After first boot, pull the assistant models once:
+To use optional dense embeddings, pull the embedding model once:
 
 ```bash
-docker compose exec ollama ollama pull llama3.2
 docker compose exec ollama ollama pull nomic-embed-text
 ```
 
-Chat degrades to its keyword fallback until those models are available.
+Set `GROQ_API_KEY` in the root `.env` for assistant generation. Retrieval falls
+back to BM25 when the optional embedding service is not configured.
 
 ---
 
@@ -84,11 +82,11 @@ Chat degrades to its keyword fallback until those models are available.
    curl http://localhost:8000/health
    # {"status":"ONLINE","platform":"MoSPI Dhrishti Early-Warning Backend",...}
    ```
-5. **Assistant models (one-time)**:
+5. **Optional retrieval embeddings (one-time)**:
    ```bash
-   docker compose exec ollama ollama pull llama3.2
    docker compose exec ollama ollama pull nomic-embed-text
    ```
+   Set `GROQ_API_KEY` in the root `.env`; Ollama is not required for chat generation.
 6. **Reseed after the panel CSV changes**:
    ```bash
    docker compose exec backend python -c "from app.database import SessionLocal; from app.routers.admin import seed_database; print(seed_database(SessionLocal()))"
@@ -105,27 +103,29 @@ Chat degrades to its keyword fallback until those models are available.
 
 ### Pairing this API with the Vercel frontend
 
-Deploying only `frontend/` to Vercel does **not** deploy this API, MongoDB, or
-Ollama. In that setup `/api/*` resolves to the static frontend, project requests
-fall back to sample data, authentication cannot reach its routes, and the local
-assistant correctly reports offline. Host the Docker stack on a service that can
-run the full container and retain persistent database/model storage, then set
-these values:
+Deploying only `frontend/` to Vercel does **not** deploy this API or MongoDB.
+Configure the separate FastAPI backend and set the frontend API URL so project
+data, authentication, and assistant requests reach it. The Vercel preview URL
+in this guide currently requires Vercel SSO; set `FRONTEND_URL` and CORS to the
+public production domain after that domain is assigned to the project.
 
 - Vercel Production: `VITE_API_URL=https://<backend-host>` (API origin only;
   no `/api` suffix or trailing slash), then redeploy the frontend.
-- Backend: `FRONTEND_URL=https://sihps-1-f.vercel.app` and
-  `CORS_ORIGINS=https://sihps-1-f.vercel.app` (plus any other real frontend
-  origins), `GOOGLE_REDIRECT_URI=https://<backend-host>/auth/google/callback`,
+- Backend: `FRONTEND_URL=https://sihps-1-om86z0b39-adityaasingh16-gifs-projects.vercel.app` and
+  `CORS_ORIGINS=https://sihps-1-om86z0b39-adityaasingh16-gifs-projects.vercel.app`,
+  `GOOGLE_REDIRECT_URI=https://sihps1-f.onrender.com/auth/google/callback`,
   and valid `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` values.
 - Google OAuth client: add the exact backend callback URL above as an
   authorized redirect URI.
-- Backend: set a unique, strong `JWT_SECRET`, persistent MongoDB and auth
-  database configuration, and `OLLAMA_BASE_URL` to the Ollama service address
-  on the backend's reachable private network. `localhost` is the backend
-  container, not the user's PC or a separate Ollama container.
-- Ollama: pull the same models named by `OLLAMA_CHAT_MODEL` and
-  `OLLAMA_EMBED_MODEL` in the backend environment.
+- Backend: set a unique, strong `JWT_SECRET`, persistent MongoDB configuration,
+  `GROQ_API_KEY`, `GROQ_CHAT_MODEL=llama-3.3-70b-versatile`, and
+  `GROQ_REQUEST_TIMEOUT_SECONDS=30`. Keep the Groq key on the backend only.
+- On a fresh production database, leave `AUTH_SEED_ADMIN=false` unless you
+  intentionally provision the initial administrator. If enabled, provide a
+  unique `ADMIN_INITIAL_PASSWORD`; the development default is rejected.
+- Optional dense embeddings: set `OLLAMA_BASE_URL` to a reachable private
+  Ollama service and pull `OLLAMA_EMBED_MODEL` there. Without it, retrieval
+  immediately falls back to BM25; Ollama is not needed for generation.
 
 Keep `AUTH_DEMO_MODE=false` in production. The demo role-login route returns
 404 unless explicitly enabled, and Google sign-in returns a clear 503 when its
@@ -203,15 +203,15 @@ The script refuses non-localhost targets and sends only clearly malicious test t
 
 No component performs scanning, exploitation, geolocation, identity enrichment, retaliation, or requests to external systems.
 
-## Local project assistant
+## Dhrishti Assistant
 
-The compatibility route `POST /groq-chat` now uses the configured local Ollama service. It requires an active bearer-token session. Ministry and agency records are filtered before index construction and checked again before retrieval; viewers receive only the `project_public` projection. The approved index includes project records plus a small curated platform guide; it does not crawl source files or index uploaded content.
+The authenticated `POST /groq-chat` route uses Groq for generation and requires an active bearer-token session. Only already-authorized records are sent to Groq: ministry and agency records are filtered before index construction and checked again before retrieval; viewers receive only the `project_public` projection. The approved index includes project records plus a curated platform guide; it does not crawl source files or index uploaded content.
 
-Retrieval checks exact project IDs first, then combines BM25 lexical ranking with local Ollama embeddings. If embeddings are unavailable, it falls back to BM25. Generation and embedding requests have independent timeouts. Answers without citations, with unauthorized citations, or with numbers absent from cited records are replaced with a safe decline. Latest project snapshot reporting dates are included in source metadata. Conversation history is accepted only as context and is not used to widen the caller's record scope.
+Retrieval checks exact project IDs first, then combines BM25 lexical ranking with optional local Ollama embeddings. If embeddings are not configured or unavailable, it immediately falls back to BM25. Groq health and generation have bounded timeouts. Answers without citations, with unauthorized citations, or with numbers absent from cited records are replaced with a safe decline. Latest project reporting dates are included in source metadata. Conversation history is accepted only as context and does not widen the caller's record scope. If Groq is unavailable, the API returns a safe service-unavailable message and retains the authorized source list.
 
-Read-only lookup: `GET /groq-chat/tools/get-project/{project_id}`. It uses the same role filter and returns the same not-found response for missing and unauthorized project IDs. The route name remains stable for clients; the assistant is local Ollama, not Groq.
+Read-only lookup: `GET /groq-chat/tools/get-project/{project_id}`. It uses the same role filter and returns the same not-found response for missing and unauthorized project IDs.
 
-Pull the local models once with `docker compose exec ollama ollama pull llama3.1` and `docker compose exec ollama ollama pull nomic-embed-text`. Configure `OLLAMA_BASE_URL`, `OLLAMA_CHAT_MODEL`, `OLLAMA_EMBED_MODEL`, and the request timeout values in the backend environment. Dense retrieval degrades to BM25 when the local embedding model is unavailable; generation degrades to a short unavailable response if the chat model times out.
+Set `GROQ_API_KEY` only in the backend environment. Configure `GROQ_CHAT_MODEL` and `GROQ_REQUEST_TIMEOUT_SECONDS` as needed. For optional dense retrieval, set `OLLAMA_BASE_URL`, `OLLAMA_EMBED_MODEL`, and `OLLAMA_EMBED_TIMEOUT_SECONDS`.
 
 ### Ministry expansion gate
 

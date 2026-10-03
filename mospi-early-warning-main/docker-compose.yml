@@ -29,16 +29,17 @@ services:
       JWT_SECRET: ${JWT_SECRET:-dev-secret-change-me-in-production-mospi-ew}
       AUTH_DEMO_MODE: "false"
       AUTH_SEED_ADMIN: "true"
+      ADMIN_INITIAL_PASSWORD: ${ADMIN_INITIAL_PASSWORD:-}
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      GROQ_CHAT_MODEL: ${GROQ_CHAT_MODEL:-llama-3.3-70b-versatile}
+      GROQ_REQUEST_TIMEOUT_SECONDS: ${GROQ_REQUEST_TIMEOUT_SECONDS:-30}
       IDS_RATE_LIMIT: 300
       IDS_RATE_WINDOW_SECONDS: 60
       IDS_BLOCK_THRESHOLD: 20
       IDS_BLOCK_DURATION_HOURS: 24
       OLLAMA_BASE_URL: http://ollama:11434
-      OLLAMA_CHAT_MODEL: llama3.1
       OLLAMA_EMBED_MODEL: nomic-embed-text
-      OLLAMA_REQUEST_TIMEOUT_SECONDS: 25
-      OLLAMA_EMBED_TIMEOUT_SECONDS: 8
-      OLLAMA_PROXY_TIMEOUT_SECONDS: 25
+      OLLAMA_EMBED_TIMEOUT_SECONDS: 2
       MINISTRY_EXPANSION_ORDER: ${MINISTRY_EXPANSION_ORDER:-}
       PHASE_GATE_EVALUATIONS_JSON: ${PHASE_GATE_EVALUATIONS_JSON:-}
     ports:
@@ -58,10 +59,9 @@ services:
       retries: 5
       start_period: 240s
 
-  # Assistant/RAG backend. The models are NOT pre-pulled; on first use run:
-  #   docker compose exec ollama ollama pull llama3.2
+  # Optional local dense embedding service. Groq handles assistant generation.
+  # To enable dense retrieval, run:
   #   docker compose exec ollama ollama pull nomic-embed-text
-  # Chat degrades gracefully (keyword fallback) until they are pulled.
   ollama:
     image: ollama/ollama:latest
     container_name: mospi_ollama

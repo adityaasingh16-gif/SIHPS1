@@ -62,7 +62,7 @@ def test_unset_falls_back_to_backend_models(resolver, raw):
 
 
 def test_absolute_path_untouched(resolver):
-    raw = os.path.join(os.sep, "srv", "models")
+    raw = os.path.abspath(os.path.join(os.sep, "srv", "models"))
     assert resolver(raw) == raw
 
 

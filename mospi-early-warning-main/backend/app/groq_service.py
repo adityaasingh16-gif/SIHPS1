@@ -22,6 +22,7 @@ from .groq_chat import (
 )
 
 logger = logging.getLogger("mospi_backend.groq_service")
+_UNAVAILABLE = "Dhrishti Assistant is temporarily unavailable. Please try again shortly."
 
 GROQ_API_URL = os.getenv(
     "GROQ_API_URL", "https://api.groq.com/openai/v1/chat/completions"
@@ -31,7 +32,10 @@ GROQ_MODELS_URL = os.getenv(
 )
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "").strip()
 GROQ_CHAT_MODEL = os.getenv("GROQ_CHAT_MODEL", "llama-3.3-70b-versatile")
-GROQ_TIMEOUT = max(5.0, float(os.getenv("GROQ_REQUEST_TIMEOUT_SECONDS", "30")))
+try:
+    GROQ_TIMEOUT = max(5.0, float(os.getenv("GROQ_REQUEST_TIMEOUT_SECONDS", "30")))
+except (TypeError, ValueError):
+    GROQ_TIMEOUT = 30.0
 MAX_TOKENS = 1024
 
 
@@ -81,18 +85,8 @@ def is_healthy() -> bool:
     try:
         with urllib.request.urlopen(request, timeout=5) as response:
             return response.status == 200
-    except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError, OSError):
+    except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError, ValueError, OSError):
         return False
-
-
-def _fallback(docs: list[dict]) -> str:
-    parts = []
-    for doc in docs[:3]:
-        if doc.get("project_id"):
-            parts.append(f"{doc['text']} [Project {doc['project_id']}]")
-        else:
-            parts.append(f"{doc['text']} [Platform Guide]")
-    return " ".join(parts) if parts else _DECLINE
 
 
 class ProductionChatService:
@@ -160,9 +154,9 @@ class ProductionChatService:
         )
 
         generated = _post_completion(messages)
-        answer = _validate_answer(generated, docs) if generated else _DECLINE
-        if not answer or answer == _DECLINE:
-            answer = _fallback(docs)
+        answer = _validate_answer(generated, docs) if generated else _UNAVAILABLE
+        if not answer:
+            answer = _DECLINE
 
         sources = [
             {

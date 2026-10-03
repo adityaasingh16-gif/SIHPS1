@@ -26,7 +26,7 @@ export default function ChatWidget({ backendOnline }) {
   useEffect(() => {
     if (!open) return;
     checkLocalAssistantHealth().then((h) => {
-      setAssistantHealth(h || { status: "offline", model: "local model" });
+      setAssistantHealth(h || { status: "offline", model: "Groq" });
     });
   }, [open]);
 
@@ -135,8 +135,8 @@ export default function ChatWidget({ backendOnline }) {
                 {assistantOnline === null
                   ? t("chat.checkingLlm")
                   : assistantOnline
-                  ? t("chat.localReady", { model: assistantHealth?.model || "local model" })
-                  : t("chat.localOffline")}
+                  ? t("chat.aiReady", { model: assistantHealth?.model || "Groq" })
+                  : t("chat.aiOffline")}
               </p>
             </div>
             <button
@@ -232,7 +232,7 @@ export default function ChatWidget({ backendOnline }) {
             )}
             {assistantOnline === false && (
               <p className="mt-2 text-[10px] text-risk-high">
-                {t("chat.localOffline")}
+                {t("chat.aiOffline")}
               </p>
             )}
           </footer>

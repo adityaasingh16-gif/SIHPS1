@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { RefreshCw } from "lucide-react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 
 import { useAuth } from "./AuthContext";
 import { useLanguage } from "./hooks/usePreferences";
@@ -31,6 +31,7 @@ export default function App() {
   const { status, user, logout, mustChangePassword } = useAuth();
   const { language, setLanguage } = useLanguage();
   const [loginOpen, setLoginOpen] = useState(false);
+  const location = useLocation();
 
   if (status === "loading") {
     return (
@@ -48,7 +49,7 @@ export default function App() {
   }
 
   if (status !== "authed" || user?.role === "viewer") {
-    if (loginOpen) {
+    if (loginOpen || location.pathname === "/login") {
       return (
         <LoginPage
           language={language}
@@ -67,6 +68,8 @@ export default function App() {
       />
     );
   }
+
+  if (location.pathname === "/login") return <Navigate to="/" replace />;
 
   return (
     <Routes>
