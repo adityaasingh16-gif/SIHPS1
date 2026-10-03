@@ -76,6 +76,7 @@ def _post_completion(messages: list[dict]) -> Optional[str]:
 
 def is_healthy() -> bool:
     if not GROQ_API_KEY:
+        logger.warning("Groq assistant health check: GROQ_API_KEY is not configured.")
         return False
     request = urllib.request.Request(
         GROQ_MODELS_URL,
@@ -87,8 +88,16 @@ def is_healthy() -> bool:
             if response.status != 200:
                 return False
             models = json.loads(response.read()).get("data", [])
-            return any(model.get("id") == GROQ_CHAT_MODEL for model in models)
-    except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError, ValueError, OSError):
+            available = any(model.get("id") == GROQ_CHAT_MODEL for model in models)
+            if not available:
+                logger.warning("Groq assistant health check: configured model is not available to this key.")
+            return available
+    except urllib.error.HTTPError as exc:
+        # Log only the HTTP status; never log the Authorization header or API key.
+        logger.warning("Groq assistant health check failed with HTTP %s.", exc.code)
+        return False
+    except (urllib.error.URLError, TimeoutError, ValueError, OSError) as exc:
+        logger.warning("Groq assistant health check failed: %s", type(exc).__name__)
         return False
 
 
