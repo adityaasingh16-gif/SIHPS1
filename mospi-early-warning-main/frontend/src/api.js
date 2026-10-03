@@ -6,6 +6,8 @@
 
 import { projects as fallbackProjects, alerts as fallbackAlerts } from "./data";
 
+// Vercel rewrites /api requests to the hosted FastAPI service. Keeping this
+// same-origin avoids CORS failures for dashboard, login, and assistant calls.
 export const API_BASE = (import.meta.env.VITE_API_URL || "/api").replace(/\/+$/, "");
 
 function apiUrl(endpoint) {

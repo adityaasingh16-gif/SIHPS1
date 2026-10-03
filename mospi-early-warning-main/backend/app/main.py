@@ -130,7 +130,7 @@ app = FastAPI(
 # Configure CORS middleware securely (CWE-942 prevention: credentials only when origins are explicit)
 cors_origins_str = os.getenv(
     "CORS_ORIGINS",
-    "https://sihps-1-om86z0b39-adityaasingh16-gifs-projects.vercel.app",
+    "https://sihps-1.vercel.app,https://sihps-1-om86z0b39-adityaasingh16-gifs-projects.vercel.app",
 )
 origins = [o.strip() for o in cors_origins_str.split(",") if o.strip()]
 is_wildcard = "*" in origins

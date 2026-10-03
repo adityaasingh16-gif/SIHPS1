@@ -6,17 +6,9 @@
 
 import { projects as fallbackProjects, alerts as fallbackAlerts } from "./data";
 
-// Vite only serves /api through its local development proxy. A static Vercel
-// deployment has no API proxy, so production must default to the hosted API.
-// VITE_API_URL remains an override for staging or a custom backend domain.
-const configuredApiUrl = import.meta.env.VITE_API_URL?.trim();
-const productionApiUrl = "https://sihps1-f.onrender.com";
-const productionApiMisconfigured = import.meta.env.PROD && configuredApiUrl === "/api";
-export const API_BASE = (
-  productionApiMisconfigured
-    ? productionApiUrl
-    : configuredApiUrl || (import.meta.env.PROD ? productionApiUrl : "/api")
-).replace(/\/+$/, "");
+// Vercel rewrites /api requests to the hosted FastAPI service. Keeping this
+// same-origin avoids CORS failures for dashboard, login, and assistant calls.
+export const API_BASE = (import.meta.env.VITE_API_URL || "/api").replace(/\/+$/, "");
 
 /**
  * Provenance of the last `fetchProjects` / `fetchAlerts` result.
@@ -56,7 +48,7 @@ async function requestWithHeaders(endpoint, options = {}) {
     return { data: await res.json(), headers: res.headers };
   } catch (err) {
     // If proxied fetch fails, try direct localhost:8000 fallback before throwing
-    if (!url.startsWith("http://127.0.0.1:8000") && !url.startsWith("http://localhost:8000")) {
+    if (import.meta.env.DEV && !url.startsWith("http://127.0.0.1:8000") && !url.startsWith("http://localhost:8000")) {
       const directUrl = `http://127.0.0.1:8000${endpoint.startsWith("/") ? endpoint : `/${endpoint}`}`;
       try {
         const directRes = await fetch(directUrl, {
@@ -95,7 +87,7 @@ async function request(endpoint, options = {}) {
     return await res.json();
   } catch (err) {
     // If proxied fetch fails, try direct localhost:8000 fallback before throwing
-    if (!url.startsWith("http://127.0.0.1:8000") && !url.startsWith("http://localhost:8000")) {
+    if (import.meta.env.DEV && !url.startsWith("http://127.0.0.1:8000") && !url.startsWith("http://localhost:8000")) {
       const directUrl = `http://127.0.0.1:8000${endpoint.startsWith("/") ? endpoint : `/${endpoint}`}`;
       try {
         const directRes = await fetch(directUrl, {
@@ -662,7 +654,7 @@ export async function askAssistantStream(message, history = [], { onDelta, onMet
   } catch {
     res = null;
   }
-  if ((!res || !res.ok) && !url.startsWith("http://127.0.0.1") && !url.startsWith("http://localhost")) {
+  if (import.meta.env.DEV && (!res || !res.ok) && !url.startsWith("http://127.0.0.1") && !url.startsWith("http://localhost")) {
     try {
       res = await post("http://127.0.0.1:8000/chat/stream");
     } catch {

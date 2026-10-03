@@ -175,13 +175,13 @@ No component performs scanning, exploitation, geolocation, identity enrichment, 
 
 ## Local project assistant
 
-The compatibility route `POST /groq-chat` now uses the configured local Ollama service. It requires an active bearer-token session. Ministry and agency records are filtered before index construction and checked again before retrieval; viewers receive only the `project_public` projection. The approved index includes project records plus a small curated platform guide; it does not crawl source files or index uploaded content.
+The authenticated `POST /groq-chat` route uses Groq for generation and requires `GROQ_API_KEY` on the backend. Ministry and agency records are filtered before index construction and checked again before retrieval; viewers receive only the `project_public` projection. The approved index includes project records plus a small curated platform guide; it does not crawl source files or index uploaded content.
 
 Retrieval checks exact project IDs first, then combines BM25 lexical ranking with local Ollama embeddings. If embeddings are unavailable, it falls back to BM25. Generation and embedding requests have independent timeouts. Answers without citations, with unauthorized citations, or with numbers absent from cited records are replaced with a safe decline. Latest project snapshot reporting dates are included in source metadata. Conversation history is accepted only as context and is not used to widen the caller's record scope.
 
-Read-only lookup: `GET /groq-chat/tools/get-project/{project_id}`. It uses the same role filter and returns the same not-found response for missing and unauthorized project IDs. The route name remains stable for clients; the assistant is local Ollama, not Groq.
+Read-only lookup: `GET /groq-chat/tools/get-project/{project_id}`. It uses the same role filter and returns the same not-found response for missing and unauthorized project IDs. Ollama remains optional for local embeddings; without it, retrieval falls back to BM25.
 
-Pull the local models once with `docker compose exec ollama ollama pull llama3.1` and `docker compose exec ollama ollama pull nomic-embed-text`. Configure `OLLAMA_BASE_URL`, `OLLAMA_CHAT_MODEL`, `OLLAMA_EMBED_MODEL`, and the request timeout values in the backend environment. Dense retrieval degrades to BM25 when the local embedding model is unavailable; generation degrades to a short unavailable response if the chat model times out.
+For production, set `GROQ_API_KEY`, `GROQ_CHAT_MODEL=llama-3.3-70b-versatile`, and `GROQ_REQUEST_TIMEOUT_SECONDS=30` in the backend environment. Keep the API key out of Vercel and source control. To enable optional dense embeddings locally, pull `nomic-embed-text` and configure `OLLAMA_BASE_URL` and `OLLAMA_EMBED_MODEL`; retrieval falls back to BM25 when embeddings are unavailable.
 
 ### Ministry expansion gate
 
