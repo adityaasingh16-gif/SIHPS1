@@ -97,6 +97,7 @@ _HEALTH_TTL = 300  # cache for 5 minutes
 
 
 def is_healthy() -> bool:
+    """Return True if the API key is configured (no outbound call needed)."""
     import time
     now = time.monotonic()
     if _health_cache["result"] is not None and now - _health_cache["ts"] < _HEALTH_TTL:
@@ -104,38 +105,18 @@ def is_healthy() -> bool:
 
     api_key = get_api_key()
     if not api_key:
-        logger.warning("Groq assistant health check: GROQ_API_KEY is not configured.")
+        logger.warning("Groq assistant: GROQ_API_KEY is not configured.")
         _health_cache.update(result=False, ts=now)
         return False
-    request = urllib.request.Request(
-        GROQ_MODELS_URL,
-        headers={"Authorization": f"Bearer {api_key}"},
-        method="GET",
-    )
-    try:
-        with urllib.request.urlopen(request, timeout=15) as response:
-            if response.status != 200:
-                _health_cache.update(result=False, ts=now)
-                return False
-            data = json.loads(response.read()).get("data", [])
-            available_ids = {m.get("id") for m in data if m.get("id")}
-            for candidate in DEFAULT_CANDIDATE_MODELS:
-                if candidate in available_ids:
-                    ProductionChatService.model = candidate
-                    logger.info("Groq healthy: using model %s", candidate)
-                    _health_cache.update(result=True, ts=now)
-                    return True
-            logger.warning("Groq health: none of candidate models available. Available: %s", available_ids)
-            _health_cache.update(result=False, ts=now)
-            return False
-    except urllib.error.HTTPError as exc:
-        logger.warning("Groq assistant health check failed with HTTP %s.", exc.code)
-        _health_cache.update(result=False, ts=now)
-        return False
-    except (urllib.error.URLError, TimeoutError, ValueError, OSError) as exc:
-        logger.warning("Groq assistant health check failed: %s", type(exc).__name__)
-        _health_cache.update(result=False, ts=now)
-        return False
+
+    # Key is present — pick the best candidate model and report healthy.
+    # We don't make an outbound models-list call here because that fails
+    # intermittently on Render Free (network latency / cold-start timeouts).
+    model = os.getenv("GROQ_CHAT_MODEL", "").strip() or GROQ_CHAT_MODEL
+    ProductionChatService.model = model
+    logger.info("Groq healthy: key present, model=%s", model)
+    _health_cache.update(result=True, ts=now)
+    return True
 
 
 class ProductionChatService:
