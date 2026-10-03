@@ -1,19 +1,17 @@
-"""Authenticated local RAG chat routes."""
+"""Authenticated production RAG chat routes."""
 
-import logging
 from typing import List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
-from ..database import get_db
 from ..auth_security import get_current_user
-from ..groq_chat import get_project, local_chat
+from ..database import get_db
+from ..groq_chat import get_project
+from ..groq_service import production_chat, is_healthy, GROQ_CHAT_MODEL
 
-logger = logging.getLogger("mospi_backend.local_chat")
-
-router = APIRouter(prefix="/groq-chat", tags=["Local Project Assistant"])
+router = APIRouter(prefix="/groq-chat", tags=["Dhrishti Assistant"])
 
 
 class ChatMessage(BaseModel):
@@ -22,8 +20,8 @@ class ChatMessage(BaseModel):
 
 
 class ChatRequest(BaseModel):
-    message: str = Field(..., min_length=1, max_length=4000, description="User question")
-    history: Optional[List[ChatMessage]] = Field(default_factory=list, description="Optional prior turns")
+    message: str = Field(..., min_length=1, max_length=4000)
+    history: Optional[List[ChatMessage]] = Field(default_factory=list)
 
 
 class ChatSource(BaseModel):
@@ -46,32 +44,39 @@ class ChatHealthResponse(BaseModel):
 
 
 @router.post("", response_model=ChatResponse)
-def chat_endpoint(payload: ChatRequest, db: Session = Depends(get_db), user=Depends(get_current_user)):
-    """Ask a question using role-scoped project records and local Ollama."""
-    history = [m.dict() for m in payload.history]
-    result = local_chat.chat(db, payload.message, history, user=user)
+def chat_endpoint(
+    payload: ChatRequest,
+    db: Session = Depends(get_db),
+    user=Depends(get_current_user),
+):
+    history = [m.model_dump() for m in payload.history]
+    result = production_chat.chat(db, payload.message, history, user=user)
     return ChatResponse(
         answer=result["answer"],
-        sources=[ChatSource(**s) for s in result.get("sources", [])],
+        sources=[ChatSource(**source) for source in result.get("sources", [])],
         model=result["model"],
     )
 
 
 @router.get("/tools/get-project/{project_id}")
-def get_project_tool(project_id: str, db: Session = Depends(get_db), user=Depends(get_current_user)):
-    """Read-only deterministic project lookup, filtered by the caller's role scope."""
+def get_project_tool(
+    project_id: str,
+    db: Session = Depends(get_db),
+    user=Depends(get_current_user),
+):
     result = get_project(db, user, project_id)
     if result is None:
-        # Same response for nonexistent and unauthorized project IDs.
-        raise HTTPException(status_code=404, detail="Project not found in your authorized records.")
+        raise HTTPException(
+            status_code=404,
+            detail="Project not found in your authorized records.",
+        )
     return result
 
 
 @router.get("/health", response_model=ChatHealthResponse)
 def chat_health():
-    """Local Ollama model status."""
     return ChatHealthResponse(
-        status="online" if local_chat.is_healthy() else "offline",
-        model=local_chat.model,
-        project_context_loaded=local_chat.context_loaded,
+        status="online" if is_healthy() else "offline",
+        model=GROQ_CHAT_MODEL,
+        project_context_loaded=True,
     )
