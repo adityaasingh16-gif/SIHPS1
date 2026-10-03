@@ -31,7 +31,7 @@ GROQ_MODELS_URL = os.getenv(
     "GROQ_MODELS_URL", "https://api.groq.com/openai/v1/models"
 )
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "").strip()
-GROQ_CHAT_MODEL = os.getenv("GROQ_CHAT_MODEL", "openai/gpt-oss-120b")
+GROQ_CHAT_MODEL = os.getenv("GROQ_CHAT_MODEL", "llama-3.3-70b-versatile").strip()
 try:
     GROQ_TIMEOUT = max(5.0, float(os.getenv("GROQ_REQUEST_TIMEOUT_SECONDS", "30")))
 except (TypeError, ValueError):

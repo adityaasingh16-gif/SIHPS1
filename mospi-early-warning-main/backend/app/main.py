@@ -39,7 +39,7 @@ def _auto_seed_real_if_empty() -> bool:
     """First-boot convenience (AUTO_SEED_DATABASE=true): train on the real MoSPI
     panel and seed the empty database, mirroring what POST /admin/seed-database
     does by hand. Idempotent: never touches a database that already has rows."""
-    flag = os.getenv("AUTO_SEED_DATABASE", "").strip().lower()
+    flag = os.getenv("AUTO_SEED_DATABASE", "true").strip().lower()
     if flag not in ("1", "true", "yes", "on"):
         return False
     from . import models
