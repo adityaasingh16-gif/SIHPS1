@@ -1,0 +1,33 @@
+# ---- VCS & editor ----
+.git
+.gitignore
+.idea
+.vscode
+*.log
+
+# ---- Node ----
+**/node_modules
+frontend/dist
+frontend/.vite
+
+# ---- Python ----
+**/__pycache__
+**/*.py[cod]
+**/.pytest_cache
+**/.venv
+**/venv
+backend/tests
+
+# ---- Secrets - never enter a build context ----
+**/.env
+**/.env.*
+
+# ---- Runtime data the image must not embed ----
+# The live development SQLite DB, uploaded agency files and generated reports
+# stay out of the build. The image instead ships a sanitized pre-seeded copy at
+# backend/data/seed_mospi_ew.db (wired into the image by the Dockerfile).
+backend/mospi_ew.db
+backend/uploads
+backend/data/generated
+backend/flashreport/out
+backend/flashreport/data/generated

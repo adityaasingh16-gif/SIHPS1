@@ -1,0 +1,718 @@
+@import "tailwindcss";
+
+/* Enable class-based dark mode (toggled via `.dark` on <html>) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ------------------------------------------------------------------ */
+/* Design tokens                                                       */
+/* Semantic layers only. Components must never reference a raw palette */
+/* value (slate-700, blue-600, ...) — that is what made theming drift. */
+/* `inline` keeps the var reference in the generated utility so the     */
+/* `.dark` overrides below actually take effect at runtime.             */
+/* ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ */
+/* Design tokens — "operations console"                                */
+/* Light-first, data-dense, one blue accent. Elevation comes from      */
+/* borders rather than shadows so tables stay legible and printable.   */
+/* Components must never reference a raw palette value                 */
+/* (slate-700, blue-600, ...) — that is what made theming drift.       */
+/* `inline` keeps the var reference in the generated utility so the     */
+/* `.dark` overrides actually take effect at runtime.                   */
+/* ------------------------------------------------------------------ */
+:root {
+  /* Surfaces — near-white page, pure-white raised, faint sunken wells */
+  --surface-page: #f7f8fa;
+  --surface-raised: #ffffff;
+  --surface-sunken: #f1f3f7;
+  --surface-overlay: #ffffff;
+  --surface-hover: #eef1f6;
+  --surface-inverse: #0f172a;
+
+  /* Borders carry the structure, so they need to be reliable, not faint */
+  --border-subtle: #e3e7ee;
+  --border-default: #cbd2dd;
+  --border-strong: #94a0b4;
+
+  /* Foreground ramp — muted steps are dark enough for 12–13px text (AA) */
+  --fg-primary: #0d1526;
+  --fg-secondary: #3d4a5f;
+  --fg-muted: #5b6a80;
+  --fg-subtle: #667485;
+  --fg-inverse: #ffffff;
+
+  /* Primary accent — violet. Drives every interactive affordance, the focus
+     ring, and the Build group identity. */
+  --brand: #6d28d9;
+  --brand-hover: #5b21b6;
+  --brand-active: #4a1a94;
+  --brand-fg: #ffffff;
+  --brand-subtle: #f4f0ff;
+  --brand-subtle-fg: #5b21b6;
+  --brand-border: #ddd2fd;
+
+  /* Risk tiers are data encoding, not decoration — these must stay
+     distinguishable in both themes and never be reused for chrome. */
+  --risk-low: #047857;
+  --risk-low-subtle: #ecfdf5;
+  --risk-low-border: #a7f3d0;
+  --risk-medium: #a16207;
+  --risk-medium-subtle: #fefce8;
+  --risk-medium-border: #fde68a;
+  --risk-high: #c2410c;
+  --risk-high-subtle: #fff7ed;
+  --risk-high-border: #fdba74;
+  --risk-critical: #b91c1c;
+  --risk-critical-subtle: #fef2f2;
+  --risk-critical-border: #fca5a5;
+
+  /* Chart series — ordered, colour-blind-safe, distinguishable in both */
+  --chart-1: #6d28d9;
+  --chart-2: #0e7c86;
+  --chart-3: #7c3aed;
+  --chart-4: #b45309;
+  --chart-5: #be123c;
+  --chart-6: #4d7c0f;
+
+  /* Categorical accents ---------------------------------------------------
+     Six hues, each with the same four roles the brand ramp uses (base,
+     subtle fill, readable text on that fill, hairline border) so any hue
+     can be dropped into an icon tile, a nav group, a stat card or a chip
+     without inventing a one-off colour.
+
+     Hues are spread across the wheel and separated in lightness, so they
+     stay distinguishable for the common forms of colour blindness and in
+     greyscale. The base steps are dark enough for white text (AA) and the
+     -subtle-fg steps clear AA on their own -subtle fill. */
+  --cat-1: #6d28d9; /* violet — primary, matches --brand */
+  --cat-1-subtle: #f4f0ff;
+  --cat-1-subtle-fg: #5b21b6;
+  --cat-1-border: #ddd2fd;
+
+  --cat-2: #a21caf; /* fuchsia */
+  --cat-2-subtle: #fdf2fb;
+  --cat-2-subtle-fg: #86198f;
+  --cat-2-border: #f5c8f0;
+
+  --cat-3: #0e7490; /* cyan — Portfolio */
+  --cat-3-subtle: #e4f7fb;
+  --cat-3-subtle-fg: #0b5c73;
+  --cat-3-border: #b2e2ef;
+
+  --cat-4: #047857; /* emerald — health/positive */
+  --cat-4-subtle: #ecfdf5;
+  --cat-4-subtle-fg: #065f46;
+  --cat-4-border: #a7f3d0;
+
+  --cat-5: #b45309; /* amber — attention */
+  --cat-5-subtle: #fffbeb;
+  --cat-5-subtle-fg: #92400e;
+  --cat-5-border: #fde68a;
+
+  --cat-6: #be123c; /* rose — Monitor */
+  --cat-6-subtle: #fff1f3;
+  --cat-6-subtle-fg: #9f1239;
+  --cat-6-border: #fecdd3;
+
+  /* Domain identity for the sidebar groups. Keeping these as named tokens
+     means a group keeps its colour if it is ever reordered or renamed. */
+  --group-monitor: var(--cat-6);
+  --group-monitor-subtle: var(--cat-6-subtle);
+  --group-monitor-subtle-fg: var(--cat-6-subtle-fg);
+  --group-monitor-border: var(--cat-6-border);
+
+  --group-intelligence: var(--cat-1);
+  --group-intelligence-subtle: var(--cat-1-subtle);
+  --group-intelligence-subtle-fg: var(--cat-1-subtle-fg);
+  --group-intelligence-border: var(--cat-1-border);
+
+  --group-portfolio: var(--cat-4);
+  --group-portfolio-subtle: var(--cat-4-subtle);
+  --group-portfolio-subtle-fg: var(--cat-4-subtle-fg);
+  --group-portfolio-border: var(--cat-4-border);
+
+  --group-build: var(--cat-3);
+  --group-build-subtle: var(--cat-3-subtle);
+  --group-build-subtle-fg: var(--cat-3-subtle-fg);
+  --group-build-border: var(--cat-3-border);
+
+  --ring: #6d28d9;
+  /* Scrims sit *on top of* whatever surface is behind them, so they must
+     stay dark in both themes. Deliberately NOT restated in `.dark`:
+     a themed `inverse` would render a white scrim in dark mode. */
+  --scrim: #0f172a;
+  /* Named --elevation-* (not --shadow-*) on purpose: `@theme inline` below
+     must point at a *different* custom property than the one it declares,
+     or the reference is circular and resolves to nothing. */
+  --elevation-card: 0 1px 2px rgb(13 21 38 / 0.05);
+  --elevation-pop: 0 12px 28px -6px rgb(13 21 38 / 0.16), 0 2px 6px rgb(13 21 38 / 0.06);
+}
+
+.dark {
+  color-scheme: dark;
+
+  --surface-page: #0a0f1a;
+  --surface-raised: #111827;
+  --surface-sunken: #0d1420;
+  --surface-overlay: #161f2e;
+  --surface-hover: #1c2637;
+  --surface-inverse: #f7f8fa;
+
+  --border-subtle: #1f2a3d;
+  --border-default: #2b3749;
+  --border-strong: #46546b;
+
+  --fg-primary: #f1f5f9;
+  --fg-secondary: #c3ccd9;
+  --fg-muted: #94a0b4;
+  --fg-subtle: #9aa7b8;
+  --fg-inverse: #0d1526;
+
+  --brand: #a78bfa;
+  --brand-hover: #8b5cf6;
+  --brand-active: #7c3aed;
+  --brand-fg: #1a0b2e;
+  --brand-subtle: #1e1738;
+  --brand-subtle-fg: #ddd2fd;
+  --brand-border: #382a63;
+
+  --risk-low: #34d399;
+  --risk-low-subtle: #06281f;
+  --risk-low-border: #14532d;
+  --risk-medium: #fbbf24;
+  --risk-medium-subtle: #2a1f05;
+  --risk-medium-border: #553c07;
+  --risk-high: #fb923c;
+  --risk-high-subtle: #2e1608;
+  --risk-high-border: #6b3410;
+  --risk-critical: #f87171;
+  --risk-critical-subtle: #2f1113;
+  --risk-critical-border: #6b2020;
+
+  --chart-1: #a78bfa;
+  --chart-2: #2dd4bf;
+  --chart-3: #a78bfa;
+  --chart-4: #fbbf24;
+  --chart-5: #fb7185;
+  --chart-6: #a3e635;
+
+  /* Categorical accents, dark theme. Bases lift to ~L70 so they read on a
+     dark surface; subtle fills become dark tints of the hue rather than
+     pale washes, and the border steps sit just above the surface. */
+  --cat-1: #a78bfa;
+  --cat-1-subtle: #1e1738;
+  --cat-1-subtle-fg: #ddd2fd;
+  --cat-1-border: #382a63;
+
+  --cat-2: #e879f9;
+  --cat-2-subtle: #2a1030;
+  --cat-2-subtle-fg: #f5c8f0;
+  --cat-2-border: #4a1a52;
+
+  --cat-3: #38bdd8;
+  --cat-3-subtle: #0a2430;
+  --cat-3-subtle-fg: #a5e3f0;
+  --cat-3-border: #14424f;
+
+  --cat-4: #34d399;
+  --cat-4-subtle: #06281f;
+  --cat-4-subtle-fg: #a7f3d0;
+  --cat-4-border: #14532d;
+
+  --cat-5: #fbbf24;
+  --cat-5-subtle: #2a1f05;
+  --cat-5-subtle-fg: #fde68a;
+  --cat-5-border: #553c07;
+
+  --cat-6: #fb7185;
+  --cat-6-subtle: #2f1119;
+  --cat-6-subtle-fg: #fecdd3;
+  --cat-6-border: #5c2130;
+
+  --ring: #a78bfa;
+  --elevation-card: 0 1px 2px rgb(0 0 0 / 0.4);
+  --elevation-pop: 0 12px 28px -6px rgb(0 0 0 / 0.7), 0 2px 6px rgb(0 0 0 / 0.4);
+}
+
+@theme inline {
+  /* Surfaces */
+  --color-page: var(--surface-page);
+  --color-raised: var(--surface-raised);
+  --color-sunken: var(--surface-sunken);
+  --color-overlay: var(--surface-overlay);
+  --color-hover: var(--surface-hover);
+  --color-inverse: var(--surface-inverse);
+  --color-scrim: var(--scrim);
+
+  /* Borders */
+  --color-line: var(--border-subtle);
+  --color-line-strong: var(--border-default);
+  --color-line-heavy: var(--border-strong);
+
+  /* Foreground */
+  --color-fg: var(--fg-primary);
+  --color-fg-2: var(--fg-secondary);
+  --color-fg-3: var(--fg-muted);
+  --color-fg-4: var(--fg-subtle);
+  --color-fg-inverse: var(--fg-inverse);
+
+  /* Accent */
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-brand-active: var(--brand-active);
+  --color-brand-fg: var(--brand-fg);
+  --color-brand-subtle: var(--brand-subtle);
+  --color-brand-subtle-fg: var(--brand-subtle-fg);
+  --color-brand-border: var(--brand-border);
+
+  /* Categorical accents — six interchangeable hues. Generate
+     `bg-cat-2`, `text-cat-2-subtle-fg`, `border-cat-2-border`, and the
+     `/opacity` modifiers all resolve from these. */
+  --color-cat-1: var(--cat-1);
+  --color-cat-1-subtle: var(--cat-1-subtle);
+  --color-cat-1-subtle-fg: var(--cat-1-subtle-fg);
+  --color-cat-1-border: var(--cat-1-border);
+  --color-cat-2: var(--cat-2);
+  --color-cat-2-subtle: var(--cat-2-subtle);
+  --color-cat-2-subtle-fg: var(--cat-2-subtle-fg);
+  --color-cat-2-border: var(--cat-2-border);
+  --color-cat-3: var(--cat-3);
+  --color-cat-3-subtle: var(--cat-3-subtle);
+  --color-cat-3-subtle-fg: var(--cat-3-subtle-fg);
+  --color-cat-3-border: var(--cat-3-border);
+  --color-cat-4: var(--cat-4);
+  --color-cat-4-subtle: var(--cat-4-subtle);
+  --color-cat-4-subtle-fg: var(--cat-4-subtle-fg);
+  --color-cat-4-border: var(--cat-4-border);
+  --color-cat-5: var(--cat-5);
+  --color-cat-5-subtle: var(--cat-5-subtle);
+  --color-cat-5-subtle-fg: var(--cat-5-subtle-fg);
+  --color-cat-5-border: var(--cat-5-border);
+  --color-cat-6: var(--cat-6);
+  --color-cat-6-subtle: var(--cat-6-subtle);
+  --color-cat-6-subtle-fg: var(--cat-6-subtle-fg);
+  --color-cat-6-border: var(--cat-6-border);
+
+  /* Sidebar group identity */
+  --color-group-monitor: var(--group-monitor);
+  --color-group-monitor-subtle: var(--group-monitor-subtle);
+  --color-group-monitor-subtle-fg: var(--group-monitor-subtle-fg);
+  --color-group-monitor-border: var(--group-monitor-border);
+  --color-group-intelligence: var(--group-intelligence);
+  --color-group-intelligence-subtle: var(--group-intelligence-subtle);
+  --color-group-intelligence-subtle-fg: var(--group-intelligence-subtle-fg);
+  --color-group-intelligence-border: var(--group-intelligence-border);
+  --color-group-portfolio: var(--group-portfolio);
+  --color-group-portfolio-subtle: var(--group-portfolio-subtle);
+  --color-group-portfolio-subtle-fg: var(--group-portfolio-subtle-fg);
+  --color-group-portfolio-border: var(--group-portfolio-border);
+  --color-group-build: var(--group-build);
+  --color-group-build-subtle: var(--group-build-subtle);
+  --color-group-build-subtle-fg: var(--group-build-subtle-fg);
+  --color-group-build-border: var(--group-build-border);
+
+  /* Risk tiers */
+  --color-risk-low: var(--risk-low);
+  --color-risk-low-subtle: var(--risk-low-subtle);
+  --color-risk-low-border: var(--risk-low-border);
+  --color-risk-medium: var(--risk-medium);
+  --color-risk-medium-subtle: var(--risk-medium-subtle);
+  --color-risk-medium-border: var(--risk-medium-border);
+  --color-risk-high: var(--risk-high);
+  --color-risk-high-subtle: var(--risk-high-subtle);
+  --color-risk-high-border: var(--risk-high-border);
+  --color-risk-critical: var(--risk-critical);
+  --color-risk-critical-subtle: var(--risk-critical-subtle);
+  --color-risk-critical-border: var(--risk-critical-border);
+
+  /* Categorical chart series */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-chart-6: var(--chart-6);
+
+  /* Tighter radii than Tailwind's defaults — this is a data console,
+     not a marketing page. */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 0.875rem;
+  --radius-3xl: 1rem;
+
+  --shadow-card: var(--elevation-card);
+  --shadow-pop: var(--elevation-pop);
+}
+
+/* ------------------------------------------------------------------ */
+/* Palette remap                                                       */
+/* Phase-2 lever: realigning Tailwind's built-in ramps means the ~1200  */
+/* not-yet-migrated `bg-blue-600` / `text-slate-400` / `bg-red-50`     */
+/* usages shift onto the new accent and risk ramps automatically, so    */
+/* the app never looks half-migrated. Phase 3 replaces these with      */
+/* semantic tokens; this block is what makes that safe to do          */
+/* incrementally. Blue is the single accent; red/amber/orange/emerald  */
+/* are reserved for risk encoding.                                     */
+/* ------------------------------------------------------------------ */
+@theme {
+  /* Neutral — slate-400/500 nudged darker so 12–13px muted text clears AA */
+  --color-slate-50: #f8fafc;
+  --color-slate-100: #f1f4f8;
+  --color-slate-200: #e3e7ee;
+  --color-slate-300: #c6cedb;
+  --color-slate-400: #7e8b9e;
+  --color-slate-500: #5b6a80;
+  --color-slate-600: #3d4a5f;
+  --color-slate-700: #2a3547;
+  --color-slate-800: #1a2333;
+  --color-slate-900: #0d1526;
+  --color-slate-950: #070c16;
+
+  /* Accent — the primary hue of the whole product.
+     NOTE: the token *names* are kept as `blue-*` only so that any surviving
+     `bg-blue-600` / `text-blue-700` in JSX keeps compiling. The values are
+     violet, so those utilities render violet, not blue. Renaming would mean
+     auditing every call site for no behavioural gain. */
+  --color-blue-50: #f4f0ff;
+  --color-blue-100: #ede7fe;
+  --color-blue-200: #ddd2fd;
+  --color-blue-300: #c4aefb;
+  --color-blue-400: #a684f7;
+  --color-blue-500: #8b5cf6;
+  --color-blue-600: #6d28d9;
+  --color-blue-700: #5b21b6;
+  --color-blue-800: #4a1a94;
+  --color-blue-900: #3c1678;
+  --color-blue-950: #250e4d;
+
+  /* Risk: critical */
+  --color-red-50: #fef2f2;
+  --color-red-100: #fee2e2;
+  --color-red-200: #fecaca;
+  --color-red-300: #fca5a5;
+  --color-red-400: #f87171;
+  --color-red-500: #ef4444;
+  --color-red-600: #dc2626;
+  --color-red-700: #b91c1c;
+  --color-red-800: #991b1b;
+  --color-red-900: #7f1d1d;
+
+  /* Risk: medium */
+  --color-amber-50: #fefce8;
+  --color-amber-100: #fef9c3;
+  --color-amber-200: #fde68a;
+  --color-amber-300: #fcd34d;
+  --color-amber-400: #fbbf24;
+  --color-amber-500: #f59e0b;
+  --color-amber-600: #d97706;
+  --color-amber-700: #a16207;
+  --color-amber-800: #854d0e;
+  --color-amber-900: #713f12;
+
+  /* Risk: high */
+  --color-orange-50: #fff7ed;
+  --color-orange-100: #ffedd5;
+  --color-orange-200: #fed7aa;
+  --color-orange-300: #fdba74;
+  --color-orange-400: #fb923c;
+  --color-orange-500: #f97316;
+  --color-orange-600: #ea580c;
+  --color-orange-700: #c2410c;
+  --color-orange-800: #9a3412;
+  --color-orange-900: #7c2d12;
+
+  /* Risk: low */
+  --color-emerald-50: #ecfdf5;
+  --color-emerald-100: #d1fae5;
+  --color-emerald-200: #a7f3d0;
+  --color-emerald-300: #6ee7b7;
+  --color-emerald-400: #34d399;
+  --color-emerald-500: #10b981;
+  --color-emerald-600: #059669;
+  --color-emerald-700: #047857;
+  --color-emerald-800: #065f46;
+  --color-emerald-900: #064e3b;
+
+  /* Secondary categorical — used for series, not chrome */
+  --color-indigo-50: #eef2ff;
+  --color-indigo-100: #e0e7ff;
+  --color-indigo-200: #c7d2fe;
+  --color-indigo-300: #a5b4fc;
+  --color-indigo-400: #818cf8;
+  --color-indigo-500: #6366f1;
+  --color-indigo-600: #4f46e5;
+  --color-indigo-700: #4338ca;
+  --color-indigo-800: #3730a3;
+  --color-indigo-900: #312e81;
+
+  --color-teal-50: #f0fdfa;
+  --color-teal-100: #ccfbf1;
+  --color-teal-200: #99f6e4;
+  --color-teal-300: #5eead4;
+  --color-teal-400: #2dd4bf;
+  --color-teal-500: #14b8a6;
+  --color-teal-600: #0d9488;
+  --color-teal-700: #0f766e;
+  --color-teal-800: #115e59;
+  --color-teal-900: #134e4a;
+
+  --color-purple-50: #faf5ff;
+  --color-purple-100: #f3e8ff;
+  --color-purple-200: #e9d5ff;
+  --color-purple-300: #d8b4fe;
+  --color-purple-400: #c084fc;
+  --color-purple-500: #a855f7;
+  --color-purple-600: #9333ea;
+  --color-purple-700: #7e22ce;
+  --color-purple-800: #6b21a8;
+  --color-purple-900: #581c87;
+
+  --color-green-50: #f0fdf4;
+  --color-green-100: #dcfce7;
+  --color-green-200: #bbf7d0;
+  --color-green-300: #86efac;
+  --color-green-400: #4ade80;
+  --color-green-500: #22c55e;
+  --color-green-600: #16a34a;
+  --color-green-700: #15803d;
+  --color-green-800: #166534;
+  --color-green-900: #14532d;
+
+  --color-yellow-50: #fefce8;
+  --color-yellow-100: #fef9c3;
+  --color-yellow-200: #fef08a;
+  --color-yellow-300: #fde047;
+  --color-yellow-400: #facc15;
+  --color-yellow-500: #eab308;
+  --color-yellow-600: #ca8a04;
+  --color-yellow-700: #a16207;
+  --color-yellow-800: #854d0e;
+  --color-yellow-900: #713f12;
+
+  --color-cyan-50: #ecfeff;
+  --color-cyan-100: #cffafe;
+  --color-cyan-200: #a5f3fc;
+  --color-cyan-300: #67e8f9;
+  --color-cyan-400: #22d3ee;
+  --color-cyan-500: #06b6d4;
+  --color-cyan-600: #0891b2;
+  --color-cyan-700: #0e7490;
+  --color-cyan-800: #155e75;
+  --color-cyan-900: #164e63;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--surface-page);
+  color: var(--fg-primary);
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Keyboard-focus visibility */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Component layer                                                      */
+/* Shared primitives so pages stop re-hand-rolling the same surfaces.  */
+/* Built on the tokens above, so light/dark needs no extra rules.     */
+/* ------------------------------------------------------------------ */
+.card {
+  background: var(--surface-raised);
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.875rem;
+  box-shadow: var(--shadow-card);
+}
+
+.card-pad {
+  padding: 1.25rem;
+}
+
+.card-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--fg-primary);
+  letter-spacing: -0.01em;
+}
+
+.card-sub {
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+  margin-top: 0.125rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 2.25rem;
+  padding: 0 0.875rem;
+  border-radius: 0.5rem;
+  border: 1px solid transparent;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--brand);
+  color: var(--brand-fg);
+}
+.btn-primary:hover {
+  background: var(--brand-hover);
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: var(--border-default);
+  color: var(--fg-secondary);
+}
+.btn-ghost:hover {
+  background: var(--surface-hover);
+  color: var(--fg-primary);
+}
+
+.input {
+  height: 2.25rem;
+  width: 100%;
+  padding: 0 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-default);
+  background: var(--surface-raised);
+  color: var(--fg-primary);
+  font-size: 0.875rem;
+}
+.input::placeholder {
+  color: var(--fg-muted);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3125rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+/* Visible only to assistive tech, until focused (skip link). */
+.sr-only-focusable {
+  position: absolute;
+  left: 0.5rem;
+  top: 0.5rem;
+  z-index: 200;
+  transform: translateY(-200%);
+  background: var(--brand);
+  color: var(--brand-fg);
+  padding: 0.5rem 0.875rem;
+  border-radius: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  transition: transform 0.15s ease;
+}
+.sr-only-focusable:focus {
+  transform: translateY(0);
+}
+
+/* Loading placeholder — used while a panel waits on the API. */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--surface-sunken) 25%,
+    var(--surface-hover) 37%,
+    var(--surface-sunken) 63%
+  );
+  background-size: 400% 100%;
+  animation: skeleton-sweep 1.4s ease-in-out infinite;
+  border-radius: 0.5rem;
+}
+@keyframes skeleton-sweep {
+  from {
+    background-position: 100% 50%;
+  }
+  to {
+    background-position: 0 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+}
+
+/* Visually hidden but exposed to screen readers. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 999px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Theming                                                              */
+/* There is no per-class dark-mode remap any more. `.dark` on <html>    */
+/* only re-points the semantic tokens defined above, so every component */
+/* inverts for free. If you need a one-off dark override, add a token   */
+/* — do not reintroduce `.dark .bg-slate-900` style rules.              */
+/* ------------------------------------------------------------------ */

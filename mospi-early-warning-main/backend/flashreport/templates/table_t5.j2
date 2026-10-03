@@ -1,0 +1,8 @@
+{#- T5 : Ongoing Projects - North Eastern Region (aggregate bands like T1). -#}
+{% from "_rowspan_grouped.j2" import rowspan_grouped %}
+{{ rowspan_grouped(
+    tables.t5, "Ministry",
+    "TABLE 5 : ONGOING PROJECTS - NORTH EASTERN REGION",
+    "Aggregate status of all ongoing projects in the eight NE states, grouped by ministry.",
+    "Covers all ongoing central sector infrastructure projects located in the North Eastern Region."
+) }}

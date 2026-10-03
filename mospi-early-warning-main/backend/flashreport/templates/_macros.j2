@@ -1,0 +1,41 @@
+{#- Shared building blocks for the Flash Report templates. -#}
+
+{%- macro banner(title, subtitle) -%}
+<div class="title-banner">
+  <div class="tb-text">
+    <div class="tb-title">{{ title }}</div>
+    <div class="tb-sub">{{ subtitle }}</div>
+  </div>
+  <div class="tb-pill">{{ meta.month_label }}</div>
+</div>
+{%- endmacro -%}
+
+{%- macro kpi(number, label, unit=None, note=None, wide=False) -%}
+<div class="kpi-card{% if wide %} wide{% endif %}">
+  <div class="kpi-number">{{ number }}</div>
+  <div class="kpi-label">{{ label }}</div>
+  {%- if unit %}<div class="kpi-unit">{{ unit }}</div>{% endif %}
+  {%- if note %}<div class="kpi-note">{{ note }}</div>{% endif %}
+</div>
+{%- endmacro -%}
+
+{%- macro chart_panel(title, name, sub=None, note=None) -%}
+<div class="chart-panel">
+  <div class="cp-title">{{ title }}</div>
+  {%- if sub %}<div class="cp-sub">{{ sub }}</div>{% endif %}
+  {{ charts[name] | safe }}
+  {%- if note %}<div class="cp-note">Note: {{ note }}</div>{% endif %}
+</div>
+{%- endmacro -%}
+
+{%- macro asterisk() -%}
+<div class="report-asterisk">****</div>
+{%- endmacro -%}
+
+{%- macro divider(anchor, title, skyline) -%}
+<div class="divider-page">
+  {%- if anchor %}<span id="{{ anchor }}" class="anchor"></span>{% endif %}
+  <div class="divider-center"><div class="divider-title">{{ title }}</div></div>
+  {%- if skyline %}<img class="skyline" src="{{ skyline }}" alt="" />{% endif %}
+</div>
+{%- endmacro -%}

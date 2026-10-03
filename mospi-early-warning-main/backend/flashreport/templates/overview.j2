@@ -1,0 +1,75 @@
+﻿{#- Overview dashboard - two pages. -#}
+{% from "_macros.j2" import banner, kpi, chart_panel, asterisk with context %}
+{{ banner("OVERVIEW AND HIGHLIGHTS", "Monthly performance snapshot of monitored projects across ministries") }}
+
+<div class="kpi-row">
+  {{ kpi(overview.ongoing_count, "Ongoing Projects", unit=None, note=None) }}
+  {{ kpi(overview.line_ministries, "Line Ministries", unit=None, note=None) }}
+  {{ kpi(overview.north_east_count, "North-East Projects", unit=None, note=None) }}
+  {{ kpi(overview.revised_cost | inr, "Total Revised Cost", unit="₹ crore") }}
+</div>
+
+<div class="kpi-row two">
+  {{ kpi(overview.mega_count, "Mega Projects", unit="Original Cost ≥ ₹1000 crore", note=overview.mega_value | inr) }}
+  {{ kpi(overview.major_count, "Major Projects", unit="Original Cost < ₹1000 crore", note=overview.major_value | inr) }}
+</div>
+
+<div class="note-line">Cumulative expenditure stands at {{ overview.expenditure | inr }} crore, which is
+  {{ "%.2f"|format(overview.cost_effectiveness_pct) }}% of the revised cost.</div>
+
+<div class="charts-row">
+  {{ chart_panel("Category-wise Project Distribution", "overview_donut",
+                 sub="Original cost and count by category", note=None) }}
+  {{ chart_panel("Category-wise Cost Profile", "overview_combo",
+                 sub="₹ crore \u2014 Original, Revised, Expenditure & counts", note=None) }}
+</div>
+
+{{ asterisk() }}
+
+<div class="page-block">
+  <div class="charts-row">
+    {{ chart_panel("Physical Progress Buckets (normal distribution strip)", "overview_progress",
+                   sub="Count and value of projects in each progress band") }}
+    {{ chart_panel("Ministry-wise Cost of Projects at ≥ 81% Physical Progress", "overview_minstack",
+                   sub="Original cost of nearly-commissioned projects by ministry", note=None) }}
+  </div>
+
+  <div class="charts-row">
+    {{ chart_panel("Mega vs Major Projects \u2014 National vs North-East", "overview_megamajor",
+                   sub="Count and original cost (₹ crore)") }}
+    {% if charts.get("overview_compare") %}
+      {{ chart_panel("Comparison with Same Month 10 Years Ago", "overview_compare",
+                     sub="India's Progress", note=comparison.note) }}
+    {% else %}
+      <div class="chart-panel" style="flex:1 1 50%; min-width:0;">
+        <div class="cp-title">Comparison with Same Month 10 Years Ago</div>
+        <div class="cp-sub">India's Progress</div>
+        <p style="font-style:italic; font-size:7.5pt; color:#6B6B70; margin:16pt 4pt; text-align:center;">
+          Comparison figures are not available for this edition.
+        </p>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="charts-row">
+    {{ chart_panel("Project Lifecycle Funnel", "overview_funnel",
+                   sub="Project count and original cost by cost band") }}
+    <div class="chart-panel" style="flex:1 1 50%; min-width:0;">
+      <div class="cp-title">Commissioned During the Month</div>
+      <div style="display:flex; gap:6pt; margin-top:8pt;">
+        <div class="compare-cell">
+          <div class="cc-metric">Completed Projects</div>
+          <div style="font-size:14pt; font-weight:700; color:#122486;">{{ overview.completed_count }}</div>
+          <div class="cc-sub">Original cost {{ overview.completed_cost | inr }}</div>
+        </div>
+        <div class="compare-cell">
+          <div class="cc-metric">Newly Added</div>
+          <div style="font-size:14pt; font-weight:700; color:#122486;">{{ overview.newly_added_count }}</div>
+          <div class="cc-sub">Original cost {{ overview.newly_added_cost | inr }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{ asterisk() }}
+</div>

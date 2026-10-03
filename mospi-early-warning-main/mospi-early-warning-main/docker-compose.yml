@@ -1,0 +1,81 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: mospi_mongo
+    restart: unless-stopped
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: mospi_backend
+    restart: unless-stopped
+    environment:
+      MONGO_URI: mongodb://mongo:27017
+      MONGO_DB: dhrishti
+      MONGO_SERVER_TIMEOUT_MS: 3000
+      DATABASE_URL: sqlite:////app/data/mospi_ew.db
+      UPLOAD_DIR: /app/backend/uploads
+      FRONTEND_DIST: /app/frontend/dist
+      AUTO_SEED_DATABASE: "true"
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173,http://localhost:8000}
+      JWT_SECRET: ${JWT_SECRET:-dev-secret-change-me-in-production-mospi-ew}
+      AUTH_DEMO_MODE: "false"
+      AUTH_SEED_ADMIN: "true"
+      IDS_RATE_LIMIT: 300
+      IDS_RATE_WINDOW_SECONDS: 60
+      IDS_BLOCK_THRESHOLD: 20
+      IDS_BLOCK_DURATION_HOURS: 24
+      OLLAMA_BASE_URL: http://ollama:11434
+      OLLAMA_CHAT_MODEL: llama3.1
+      OLLAMA_EMBED_MODEL: nomic-embed-text
+      OLLAMA_REQUEST_TIMEOUT_SECONDS: 25
+      OLLAMA_EMBED_TIMEOUT_SECONDS: 8
+      OLLAMA_PROXY_TIMEOUT_SECONDS: 25
+      MINISTRY_EXPANSION_ORDER: ${MINISTRY_EXPANSION_ORDER:-}
+      PHASE_GATE_EVALUATIONS_JSON: ${PHASE_GATE_EVALUATIONS_JSON:-}
+    ports:
+      - "8000:8000"
+    depends_on:
+      mongo:
+        condition: service_healthy
+    volumes:
+      - data:/app/data
+      - uploads:/app/backend/uploads
+    healthcheck:
+      # First boot auto-seeds the DB (trains on the panel CSV), so startup is
+      # slow; start_period absorbs that before the interval kicks in.
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3).status == 200 else 1)"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 240s
+
+  # Assistant/RAG backend. The models are NOT pre-pulled; on first use run:
+  #   docker compose exec ollama ollama pull llama3.2
+  #   docker compose exec ollama ollama pull nomic-embed-text
+  # Chat degrades gracefully (keyword fallback) until they are pulled.
+  ollama:
+    image: ollama/ollama:latest
+    container_name: mospi_ollama
+    restart: unless-stopped
+    volumes:
+      - ollama_models:/root/.ollama
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  mongo_data:
+  data:
+  uploads:
+  ollama_models:

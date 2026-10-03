@@ -1,0 +1,7 @@
+<svg width="320" height="70" viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg">
+  <path d="M50 43 L150 43 L150 105 Q150 153 100 167 Q50 153 50 105 Z" fill="#12203A"/>
+  <path d="M70 130 L92 108 L112 118 L132 78" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="132" cy="78" r="7" fill="#0F766E"/>
+  <text x="192" y="103" font-size="34" font-weight="500" font-family="Montserrat, Inter, system-ui, sans-serif" fill="#12203A">Dhrishti</text>
+  <text x="192" y="131" font-size="14" font-family="Montserrat, Inter, system-ui, sans-serif" fill="#5B6472">Government project monitoring platform</text>
+</svg>

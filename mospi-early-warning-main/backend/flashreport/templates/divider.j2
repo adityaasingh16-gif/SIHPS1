@@ -1,0 +1,5 @@
+{#- Divider page - included inside body.j2 (page-break-before applied by CSS).
+   The section's page-start anchor travels inside this block so the Contents
+   range always begins on the divider itself, never on an earlier page. -#}
+{% from "_macros.j2" import divider %}
+{{ divider(anchor, title, assets.skyline_art) }}

@@ -1,0 +1,35 @@
+{#- CONTENTS page. Entry page ranges are filled by the two-pass render. -#}
+<div class="contents-page">
+  <img class="skyline skyline-top" src="{{ assets.skyline_art }}" alt="" />
+  <div class="contents-title">CONTENTS</div>
+
+  <ol class="contents-list">
+  {%- for entry in tree %}
+    <li>
+      <div class="toc-row roman">
+        <div class="toc-title" data-num="{{ entry.numeral }}">{{ entry.title }}</div>
+        <div class="toc-leader"></div>
+        <div class="toc-pages">{{ entry.pages }}</div>
+      </div>
+      {% if entry.children %}
+      <ul class="contents-list toc-sub">
+        {%- for child in entry.children %}
+        <li>
+          <div class="toc-row">
+            <div class="toc-title">{{ child.title }}</div>
+            <div class="toc-leader"></div>
+            <div class="toc-pages">{{ child.pages }}</div>
+          </div>
+        </li>
+        {%- endfor %}
+      </ul>
+      {% endif %}
+    </li>
+  {%- endfor %}
+  </ol>
+
+  <div class="contents-footnote">
+    {{ meta.data_cutoff_note or "Data as per the Harmonized Master List on the OMS portal at the time of generation of the report." }}
+  </div>
+  <img class="skyline skyline-bottom" src="{{ assets.skyline_art }}" alt="" />
+</div>

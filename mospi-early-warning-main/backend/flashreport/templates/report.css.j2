@@ -1,0 +1,258 @@
+{#- CSS for the Flash Report. Rendered through Jinja so theme values are exact.
+Used both by the standalone cover document and the body document. -#}
+{% set C = theme.colors %}
+{% set F = theme.fonts %}
+{% set S = theme.sizes %}
+{% set P = theme.page %}
+
+/* ------------------------------------------------------------------ pages */
+@page {
+  size: {{ P.size }} {{ P.orientation }};
+  margin: 24pt 24pt 30pt 24pt;
+
+  @top-center {
+    content: element(page-header);
+    vertical-align: bottom;
+    margin-bottom: 6pt;
+  }
+  @bottom-left {
+    content: element(page-footer-left);
+    vertical-align: middle;
+  }
+  @bottom-center {
+    content: "Page " counter(page);
+    vertical-align: middle;
+    text-align: center;
+    color: {{ C.note_grey }};
+  }
+  @bottom-right {
+    content: element(page-footer-right);
+    vertical-align: middle;
+  }
+}
+
+/* The BODY document's page 1 IS the Contents page, so the running header and
+   footer appear on it; the cover is a separate (margin-less) document. */
+@page cover {
+  size: {{ P.size }} {{ P.orientation }};
+  margin: 0;
+}
+
+.cover-page { page: cover; }
+
+html, body {
+  font-family: {{ F.body_stack | join(',') }};
+  font-size: {{ S.base_font_pt }}pt;
+  color: #1A1A1A;
+  line-height: 1.35;
+}
+body { margin: 0; padding: 0; }
+
+/* ------------------------------------------------------------------ anchors */
+.anchor { display: block; height: 0; margin: 0; padding: 0; }
+
+/* PDF outline (bookmarks) mirroring the Contents tree */
+.section { bookmark-level: 1; bookmark-label: attr(data-label); }
+.table-section { bookmark-level: 2; bookmark-label: attr(data-label); }
+
+/* ------------------------------------------------------------------ running header / footer */
+#page-header {
+  position: running(page-header);
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 0.7pt solid {{ C.line_grey }};
+  padding-bottom: 5pt;
+  font-family: {{ F.heading_stack | join(',') }};
+}
+#page-header .hd-left { display: flex; align-items: center; gap: 8pt; flex: 1 1 auto; min-width: 0; }
+#page-header .hd-emblem { height: 26pt; width: auto; }
+#page-header .hd-text { line-height: 1.12; }
+#page-header .hd-title { font-weight: 700; color: {{ C.navy }}; font-size: 9pt; letter-spacing: 0.04em; }
+#page-header .hd-sub { font-weight: 400; color: #5A6472; font-size: 7pt; }
+#page-header .hd-divider {
+  width: 0.7pt; height: 20pt; background: {{ C.line_grey }}; margin: 0 8pt;
+}
+#page-header .hd-logo { height: 20pt; width: auto; margin-left: 4pt; }
+
+#page-footer-left, #page-footer-right {
+  font-size: 6.6pt;
+  color: {{ C.muted_grey }};
+}
+#page-footer-left { position: running(page-footer-left); text-align: left; line-height: 1.2; }
+#page-footer-right { position: running(page-footer-right); text-align: right; font-style: italic; line-height: 1.2; }
+
+/* ------------------------------------------------------------------ headings */
+h1,h2,h3,h4 { font-family: {{ F.heading_stack | join(',') }}; margin: 0; }
+h2.sec-title { font-size: {{ S.heading_h1_pt }}pt; color: {{ C.navy }}; }
+
+/* ------------------------------------------------------------------ title banner */
+.title-banner {
+  background: {{ C.navy }};
+  color: #FFFFFF;
+  border-radius: 7pt;
+  padding: 9pt 12pt;
+  margin: 0 0 10pt 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10pt;
+}
+.title-banner .tb-text { flex: 1 1 auto; }
+.title-banner .tb-title {
+  font-family: {{ F.heading_stack | join(',') }};
+  font-size: 13pt; font-weight: 700; text-align: center; letter-spacing: 0.01em;
+}
+.title-banner .tb-sub {
+  font-style: italic; font-weight: 400; font-size: 8.5pt;
+  text-align: center; margin-top: 2pt; opacity: 0.95;
+}
+.title-banner .tb-pill {
+  background: #FFFFFF; color: {{ C.navy }};
+  font-weight: 700; font-size: 9.5pt;
+  padding: 4.5pt 12pt; border-radius: 10pt; white-space: nowrap;
+  font-family: {{ F.heading_stack | join(',') }};
+}
+
+/* ------------------------------------------------------------------ KPI cards */
+.kpi-row { display: flex; gap: 6pt; margin: 6pt 0; }
+.kpi-row.two .kpi-card { flex: 1 1 50%; }
+.kpi-card {
+  flex: 1 1 25%;
+  background: {{ C.card_bg }};
+  border-radius: 6pt;
+  padding: 7pt 9pt;
+}
+.kpi-card .kpi-number {
+  font-family: {{ F.heading_stack | join(',') }};
+  font-size: {{ S.kpi_number_pt }}pt;
+  font-weight: 700; color: {{ C.navy }};
+  line-height: 1.0;
+}
+.kpi-card .kpi-label { font-weight: 700; font-size: {{ S.kpi_label_pt }}pt; margin-top: 3pt; color: #101010; }
+.kpi-card .kpi-unit { font-style: italic; font-size: 7pt; color: {{ C.muted_grey }}; }
+.kpi-card .kpi-note { font-size: 6.6pt; color: {{ C.delta_red }}; margin-top: 1pt; }
+
+/* ------------------------------------------------------------------ chart panels */
+.chart-panel {
+  border: 0.6pt solid {{ C.card_border }};
+  border-radius: 6pt;
+  padding: 6pt 8pt 5pt 8pt;
+  margin: 6pt 0 4pt 0;
+  background: #FFFFFF;
+  page-break-inside: avoid;
+}
+.charts-row { display: flex; gap: 6pt; margin: 4pt 0; }
+.charts-row .chart-panel { flex: 1 1 50%; min-width: 0; margin: 0; }
+.chart-panel .cp-title {
+  font-family: {{ F.heading_stack | join(',') }};
+  font-size: 9.2pt; font-weight: 700; color: {{ C.navy }}; text-align: center;
+}
+.chart-panel .cp-sub {
+  font-style: italic; font-size: 6.8pt; text-align: center; color: {{ C.muted_grey }}; margin-bottom: 3pt;
+}
+.chart-panel .cp-note { font-style: italic; font-size: 6.4pt; color: {{ C.note_grey }}; text-align: right; margin-top: 2pt; }
+.chart-panel svg { width: 100%; height: auto; display: block; }
+
+.report-asterisk {
+  text-align: center; font-weight: 700; font-size: 10pt; color: {{ C.navy }};
+  margin: 6pt 0 2pt 0; letter-spacing: 0.6em;
+}
+
+/* ------------------------------------------------------------------ contents */
+.contents-page { page-break-before: always; }
+.contents-title {
+  text-align: center; font-family: {{ F.heading_stack | join(',') }};
+  font-size: 20pt; font-weight: 700; color: {{ C.navy }}; letter-spacing: 0.2em;
+  margin: 18pt 0 10pt 0;
+}
+.contents-list { list-style: none; margin: 8pt 0; padding: 0; }
+.contents-list li { margin: 4pt 0; }
+.toc-row {
+  display: flex; align-items: baseline;
+  font-size: 9.5pt; margin: 5pt 0;
+}
+.toc-row .toc-title { font-weight: 600; color: #141414; }
+.toc-row .toc-leader { flex: 1 1 auto; border-bottom: 1pt dotted #B9BDC6; margin: 0 6pt; transform: translateY(-0.2em); }
+.toc-row .toc-pages { font-variant-numeric: tabular-nums; color: {{ C.navy }}; font-weight: 600; }
+.toc-row.roman .toc-title::before { content: attr(data-num) "  "; color: {{ C.navy }}; font-weight: 700; }
+.toc-sub { margin-left: 22pt; }
+.toc-sub .toc-row { font-size: 8.4pt; }
+.toc-sub .toc-row .toc-title { font-weight: 400; }
+.contents-footnote {
+  font-style: italic; font-size: 7pt; color: {{ C.note_grey }};
+  margin-top: 16pt; border-top: 0.5pt solid {{ C.line_grey }}; padding-top: 6pt;
+}
+.skyline { width: 100%; height: auto; }
+.skyline-top { margin-bottom: 6pt; }
+.skyline-bottom { margin-top: 6pt; }
+
+/* ------------------------------------------------------------------ dividers */
+.divider-page {
+  page-break-before: always; position: relative; min-height: 26cm;
+}
+.divider-page .divider-center {
+  position: absolute; top: 42%; width: 100%; text-align: center;
+}
+.divider-page .skyline { position: absolute; bottom: 0; left: 0; width: 100%; }
+.divider-page .divider-title {
+  font-family: {{ F.heading_stack | join(',') }};
+  font-size: 24pt; font-weight: 700; color: {{ C.navy }}; letter-spacing: 0.03em;
+}
+.divider-page .divider-sub {
+  font-style: italic; font-size: 10pt; color: {{ C.muted_grey }}; margin-top: 6pt;
+}
+
+/* ------------------------------------------------------------------ tables */
+table { border-collapse: collapse; width: 100%; margin: 4pt 0; }
+thead, tr { page-break-inside: avoid; }
+thead { display: table-header-group; }
+th, td { padding: 2.6pt 4.5pt; border: 0.4pt solid {{ C.table_row_border }}; vertical-align: middle; }
+th {
+  background: {{ C.navy }}; color: #FFFFFF; font-weight: 700;
+  font-size: {{ S.table_header_pt }}pt; line-height: 1.15;
+  font-family: {{ F.heading_stack | join(',') }};
+}
+th .th-sub { font-style: italic; font-weight: 400; display: block; font-size: 6pt; opacity: 0.92; }
+tbody td { font-size: {{ S.table_body_pt }}pt; line-height: 1.2; }
+td.l, th.l { text-align: left; }
+td.c, th.c { text-align: center; }
+td.r, th.r { text-align: right; font-variant-numeric: tabular-nums; }
+
+tr.band-l1 td { background: {{ C.band_pink_l1 }}; font-weight: 700; }
+tr.band-l2 td { background: {{ C.band_pink_l2 }}; font-weight: 600; }
+tr.subtotal td { background: {{ C.total_grey }}; font-weight: 700; }
+tr.total td { background: {{ C.total_grey }}; font-weight: 800; color: {{ C.navy }}; }
+tr.band-sub td { background: {{ C.chart_red }}; color: #FFFFFF; font-weight: 700; }
+
+td.grp { font-weight: 700; background: #FFFFFF; }
+td.agency { font-style: italic; font-weight: 700; color: {{ C.agency_text }}; }
+.small { display: block; font-size: 6.2pt; line-height: 1.2; }
+.code { color: {{ C.project_code }}; font-weight: 600; }
+td.small { font-size: 6.2pt; line-height: 1.15; }
+td.delta-pos { color: {{ C.delta_green }}; font-weight: 700; }
+td.delta-neg { color: {{ C.delta_red }}; font-weight: 700; }
+
+/* subtitle of tables from the spec: two-line headers with italic units */
+th .u { font-style: italic; font-weight: 400; display: block; font-size: 5.8pt; opacity: 0.9; }
+
+/* appendix header block */
+.table-heading { margin: 8pt 0 2pt 0; }
+.table-heading .th-name { font-family: {{ F.heading_stack | join(',') }}; font-size: 12pt; font-weight: 700; color: {{ C.navy }}; }
+.table-heading .th-desc { font-size: 7.4pt; color: {{ C.muted_grey }}; font-style: italic; }
+
+/* ----- (sample) comparison strip */
+.compare-strip { display: flex; gap: 6pt; margin: 6pt 0; }
+.compare-cell {
+  flex: 1 1 33%; background: {{ C.card_bg }}; border-radius: 6pt; padding: 6pt 8pt;
+}
+.compare-cell .cc-metric { font-size: 6.4pt; text-transform: uppercase; letter-spacing: 0.04em; color: {{ C.muted_grey }}; }
+.compare-cell .cc-delta { font-weight: 700; color: {{ C.delta_green }}; font-size: 9.5pt; margin-top: 2pt; }
+.compare-cell .cc-sub { font-size: 6.4pt; color: {{ C.muted_grey }}; }
+
+/* banners/notes */
+.note-line { font-style: italic; font-size: 7pt; color: {{ C.note_grey }}; margin-top: 4pt; }
+.section-gap { height: 4pt; }
+.page-block { page-break-before: always; }
+.category-page, .ministry-page, .table-section { page-break-before: always; }

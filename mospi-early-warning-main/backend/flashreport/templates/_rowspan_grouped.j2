@@ -1,0 +1,60 @@
+{#- Shared rowspan-grouped table used identically for T1 (ministry) and T2 (state). -#}
+{% macro rowspan_grouped(bands, l1_label, title, desc, unit_note) %}
+{% from "_macros.j2" import asterisk %}
+<div class="appendix-table section-gap">
+  <div class="table-heading">
+    <div class="th-name">{{ title }}</div>
+    <div class="th-desc">{{ desc }}</div>
+  </div>
+  {% set ns = namespace(orig=0.0, rev=0.0, exp=0.0, count=0) %}
+  {% for band in bands %}{% set ns.orig = ns.orig + band.original_cost %}{% set ns.rev = ns.rev + band.revised_cost %}{% set ns.exp = ns.exp + band.expenditure %}{% set ns.count = ns.count + band.count %}{% endfor %}
+  <table>
+    <thead>
+      <tr>
+        <th class="l">{{ l1_label }}</th>
+        <th class="l">Sector</th>
+        <th class="c">No. of<br />Projects</th>
+        <th class="r">Original Cost<span class="u">₹ crore</span></th>
+        <th class="r">Revised Cost<span class="u">₹ crore</span></th>
+        <th class="r">Expenditure<span class="u">₹ crore</span></th>
+        <th class="r">Avg Physical %</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for band in bands %}
+      <tr class="band-l1">
+        <td class="grp" rowspan="{{ band.sectors | length + 1 }}">{{ band.name }}</td>
+        {% for s in band.sectors %}
+        {% if not loop.first %}</tr><tr>{% endif %}
+        <td class="grp">{{ s.name }}</td>
+        <td class="c">{{ s.count }}</td>
+        <td class="r">{{ s.original_cost | intl }}</td>
+        <td class="r">{{ s.revised_cost | intl }}</td>
+        <td class="r">{{ s.expenditure | intl }}</td>
+        <td class="r">{{ "%.2f"|format(s.avg_physical) }}</td>
+        {% endfor %}
+      </tr>
+      <tr class="subtotal">
+        <td class="l">Total : {{ band.name }}</td>
+        <td class="c">{{ band.count }}</td>
+        <td class="r">{{ band.original_cost | intl }}</td>
+        <td class="r">{{ band.revised_cost | intl }}</td>
+        <td class="r">{{ band.expenditure | intl }}</td>
+        <td class="r">-</td>
+        <td class="r">-</td>
+      </tr>
+      {% endfor %}
+      <tr class="total">
+        <td class="l" colspan="2">Grand Total</td>
+        <td class="c">{{ ns.count }}</td>
+        <td class="r">{{ ns.orig | intl }}</td>
+        <td class="r">{{ ns.rev | intl }}</td>
+        <td class="r">{{ ns.exp | intl }}</td>
+        <td class="r">-</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note-line">{{ unit_note }}</div>
+  {{ asterisk() }}
+</div>
+{% endmacro %}

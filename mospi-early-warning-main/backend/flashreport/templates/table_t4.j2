@@ -1,0 +1,9 @@
+{#- T4 : Newly Added Projects. -#}
+{% from "_banded_projects.j2" import banded_projects %}
+{{ banded_projects(
+    tables.t4,
+    "TABLE 4 : NEWLY ADDED PROJECTS",
+    "Projects newly added to monitoring during " ~ meta.month_label ~ ".",
+    "Newly added projects are welcome; please share corrections to the establishment data.",
+    "Added"
+) }}

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>{{ meta.report_title or (meta.month_label ~ ' Flash Report') }}</title>
+  <meta name="author" content="{{ meta.ministry_name }}" />
+  <meta name="generator" content="MoSPI Flash Report Generator" />
+  <style>{{ css | safe }}</style>
+</head>
+<body>
+
+{# ============ running header / footer elements ============ #}
+<div id="page-header">
+  <div class="hd-left">
+    {% if assets.emblem %}<img class="hd-emblem" src="{{ assets.emblem }}" alt="" />{% endif %}
+    <div class="hd-text">
+      <div class="hd-title">INFRASTRUCTURE AND PROJECT MONITORING DIVISION</div>
+      <div class="hd-sub">MINISTRY OF STATISTICS AND PROGRAMME IMPLEMENTATION</div>
+    </div>
+    <div class="hd-divider"></div>
+  </div>
+  {% if assets.org_logo %}<img class="hd-logo" src="{{ assets.org_logo }}" alt="" />{% endif %}
+</div>
+<div id="page-footer-left">{{ meta.report_title or 'Flash Report' }} &middot; As per Harmonized Master List (HML)</div>
+<div id="page-footer-right">For details visit: {{ meta.portal_url }}</div>
+
+{# ============ CONTENTS ============ #}
+<div class="section" data-label="Contents">
+  <span id="sec-contents-start" class="anchor"></span>
+  {% include "contents.j2" %}
+  <span id="sec-contents-end" class="anchor"></span>
+</div>
+
+{# ============ I. Overview & Highlights ============ #}
+<div class="section" data-label="I. Overview & Highlights">
+  {% with title="Overview", subtitle="Overall performance of monitored central sector infrastructure projects", anchor="sec-overview-start" %}
+    {% include "divider.j2" %}
+  {% endwith %}
+  {% include "overview.j2" %}
+  <span id="sec-overview-end" class="anchor"></span>
+</div>
+
+{# ============ II. Special Focus : North Eastern Region ============ #}
+<div class="section" data-label="II. Special Focus : North Eastern Region">
+  {% with title=theme.layout.north_east, subtitle="Special focus on the North Eastern Region", anchor="sec-ne-start" %}
+    {% include "divider.j2" %}
+  {% endwith %}
+  {% include "ne.j2" %}
+  <span id="sec-ne-end" class="anchor"></span>
+</div>
+
+{# ============ III. As per Harmonized Master List (HML) ============ #}
+<div class="section" data-label="III. As per Harmonized Master List (HML)">
+  {% with title="Category Analysis", subtitle="As per Harmonized Master List (HML)", anchor="sec-hml-start" %}
+    {% include "divider.j2" %}
+  {% endwith %}
+  {% for cat in categories %}
+    {% include "category.j2" %}
+  {% endfor %}
+  <span id="sec-hml-end" class="anchor"></span>
+</div>
+
+{# ============ IV. Major Ministries & Departments ============ #}
+<div class="section" data-label="IV. Major Infrastructure Central Ministries & Departments">
+  {% with title="Major Ministries &amp; Departments", subtitle="Top ministries by number of monitored projects", anchor="sec-ministries-start" %}
+    {% include "divider.j2" %}
+  {% endwith %}
+  {% for mp in ministry_pages %}
+    {% include "ministry.j2" %}
+  {% endfor %}
+  <span id="sec-ministries-end" class="anchor"></span>
+</div>
+
+{# ============ V. Appendix : List of Tables ============ #}
+<div class="section" data-label="V. Appendix : List of Tables">
+  {% with title="Appendix : List of Tables", subtitle="Detailed project-wise and aggregate annexures", anchor="sec-appendix-start" %}
+    {% include "divider.j2" %}
+  {% endwith %}
+
+  <div class="table-section" data-label="T1. Ministry-wise Ongoing Projects">
+    <span id="sec-t1-start" class="anchor"></span>
+    {% include "table_t1.j2" %}
+    <span id="sec-t1-end" class="anchor"></span>
+  </div>
+  <div class="table-section" data-label="T2. State-wise Ongoing Projects">
+    <span id="sec-t2-start" class="anchor"></span>
+    {% include "table_t2.j2" %}
+    <span id="sec-t2-end" class="anchor"></span>
+  </div>
+  <div class="table-section" data-label="T3. Projects Completed during the Month">
+    <span id="sec-t3-start" class="anchor"></span>
+    {% include "table_t3.j2" %}
+    <span id="sec-t3-end" class="anchor"></span>
+  </div>
+  <div class="table-section" data-label="T4. Newly Added Projects">
+    <span id="sec-t4-start" class="anchor"></span>
+    {% include "table_t4.j2" %}
+    <span id="sec-t4-end" class="anchor"></span>
+  </div>
+  <div class="table-section" data-label="T5. Ongoing Projects - North Eastern Region">
+    <span id="sec-t5-start" class="anchor"></span>
+    {% include "table_t5.j2" %}
+    <span id="sec-t5-end" class="anchor"></span>
+  </div>
+  <div class="table-section" data-label="T6. All Ongoing Projects">
+    <span id="sec-t6-start" class="anchor"></span>
+    {% include "table_t6.j2" %}
+    <span id="sec-t6-end" class="anchor"></span>
+  </div>
+
+  <span id="sec-appendix-end" class="anchor"></span>
+</div>
+
+</body>
+</html>

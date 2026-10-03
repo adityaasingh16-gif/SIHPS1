@@ -1,0 +1,8 @@
+{#- T2 : State-wise Ongoing Projects. -#}
+{% from "_rowspan_grouped.j2" import rowspan_grouped %}
+{{ rowspan_grouped(
+    tables.t2, "State",
+    "TABLE 2 : STATE-WISE ONGOING PROJECTS",
+    "State-wise status of ongoing projects (aggregate by sector within each state).",
+    "T1 and T2 are released as a combined telecast by MoSPI with the Flash Report."
+) }}

@@ -1,0 +1,69 @@
+{#- Shared project-row banded table used by T3 (completed) and T4 (newly added). -#}
+{% macro banded_projects(bands, title, desc, note, doc_col) %}
+{% from "_macros.j2" import asterisk %}
+<div class="appendix-table section-gap">
+  <div class="table-heading">
+    <div class="th-name">{{ title }}</div>
+    <div class="th-desc">{{ desc }}</div>
+  </div>
+  {% set ns = namespace(orig=0.0, rev=0.0, exp=0.0, count=0) %}
+  {% for band in bands %}{% set ns.orig = ns.orig + band.original_cost %}{% set ns.rev = ns.rev + band.revised_cost %}{% set ns.exp = ns.exp + band.expenditure %}{% set ns.count = ns.count + band.count %}{% endfor %}
+  <table>
+    <thead>
+      <tr>
+        <th class="c" style="width:3%">Sl.</th>
+        <th class="l">Project &amp; Agency</th>
+        <th class="l">State</th>
+        <th class="c">Approved</th>
+        <th class="c">Start</th>
+        <th class="c">{{ doc_col }}<span class="u">MM/YYYY</span></th>
+        <th class="r">Original Cost<span class="u">₹ crore</span></th>
+        <th class="r">Revised Cost<span class="u">₹ crore</span></th>
+        <th class="r">Expenditure<span class="u">₹ crore</span></th>
+        <th class="r">Prog %</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% set sl = namespace(n=0) %}
+      {% for band in bands %}
+      <tr class="band-l1"><td class="l" colspan="10">{{ band.name }} &mdash; {{ band.count }} project(s)</td></tr>
+      {% for s in band.sectors %}
+      <tr class="band-l2"><td class="l" colspan="10">Sector : {{ s.name }}</td></tr>
+      {% for p in s.projects %}
+      {% set sl.n = sl.n + 1 %}
+      <tr>
+        <td class="c">{{ sl.n }}</td>
+        <td><span class="code">{{ p.legacy_code or p.pmgid or "" }}</span> {{ p.project_name }}
+            <div class="small agency">{{ p.agency }}</div></td>
+        <td class="l">{{ p.state }}</td>
+        <td class="c">{{ p.approval_date | mm_yyyy }}</td>
+        <td class="c">{{ p.start_date | mm_yyyy }}</td>
+        <td class="c">{{ p.actual_completion_date | mm_yyyy }}</td>
+        <td class="r">{{ p.original_cost | intl }}</td>
+        <td class="r">{{ p.revised_cost | intl }}</td>
+        <td class="r">{{ p.cumulative_expenditure | intl }}</td>
+        <td class="r">{{ "%.2f"|format(p.physical_progress_pct) }}</td>
+      </tr>
+      {% endfor %}
+      {% endfor %}
+      <tr class="subtotal">
+        <td class="r" colspan="6">Total : {{ band.name }}</td>
+        <td class="r">{{ band.original_cost | intl }}</td>
+        <td class="r">{{ band.revised_cost | intl }}</td>
+        <td class="r">{{ band.expenditure | intl }}</td>
+        <td class="r">-</td>
+      </tr>
+      {% endfor %}
+      <tr class="total">
+        <td class="r" colspan="6">Grand Total</td>
+        <td class="r">{{ ns.orig | intl }}</td>
+        <td class="r">{{ ns.rev | intl }}</td>
+        <td class="r">{{ ns.exp | intl }}</td>
+        <td class="r">-</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note-line">{{ note }}</div>
+  {{ asterisk() }}
+</div>
+{% endmacro %}

@@ -1,0 +1,63 @@
+﻿{#- A major ministry/department page. Loop variable is `mp` (dict from ministry_sub_groups). -#}
+{% from "_macros.j2" import banner, kpi, chart_panel, asterisk with context %}
+{% set key = mp["ministry"] | slug %}
+
+<div class="ministry-page">
+  {{ banner("Ministry / Department : " ~ mp["ministry"], "Top ministry by number of monitored projects") }}
+
+  <div class="kpi-row">
+    {{ kpi(mp["count"], "Projects", unit=None, note=None) }}
+    {{ kpi(mp["original_cost"] | inr, "Original Cost", unit="₹ crore") }}
+    {{ kpi(mp["revised_cost"] | inr, "Revised Cost", unit="₹ crore") }}
+    {{ kpi(mp["expenditure"] | inr, "Expenditure", unit="₹ crore") }}
+  </div>
+
+  <div class="charts-row">
+    {{ chart_panel("Agency-wise Project Distribution", "min_" ~ key ~ "_donut",
+                   sub="Original cost and count by agency") }}
+    {{ chart_panel("Sector-wise Project Distribution", "min_" ~ key ~ "_sector_donut",
+                   sub="Original cost and count by sector") }}
+  </div>
+
+  <div class="charts-row">
+    {{ chart_panel("Agency-wise Cost Profile", "min_" ~ key ~ "_combo",
+                   sub="₹ crore \u2014 Original, Revised, Expenditure & counts") }}
+    {{ chart_panel("State-wise Spread", "min_" ~ key ~ "_bubble",
+                   sub="Bubble size = original cost") }}
+  </div>
+
+  {% set top = mp["projects"][:theme.layout.top_n_major_projects] %}
+  <div class="table-heading">
+    <div class="th-name">Major Projects of the Ministry</div>
+    <div class="th-desc">Top projects by original cost (₹ crore)</div>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th class="c" style="width:4%">Sl.</th>
+        <th class="l">Project &amp; Agency</th>
+        <th class="l">State</th>
+        <th class="r">Original</th>
+        <th class="r">Revised</th>
+        <th class="r">Expenditure</th>
+        <th class="r">Physical %</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in top %}
+      <tr>
+        <td class="c">{{ loop.index }}</td>
+        <td><span class="code">{{ p.legacy_code or p.pmgid or "" }}</span> {{ p.project_name }}
+            <div class="small agency">{{ p.agency }} &middot; {{ p.sector }}</div></td>
+        <td class="l">{{ p.state }}</td>
+        <td class="r">{{ p.original_cost | intl }}</td>
+        <td class="r">{{ p.revised_cost | intl }}</td>
+        <td class="r">{{ p.cumulative_expenditure | intl }}</td>
+        <td class="r">{{ "%.2f"|format(p.physical_progress_pct) }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {{ asterisk() }}
+</div>

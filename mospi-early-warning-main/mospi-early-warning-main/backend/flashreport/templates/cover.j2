@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>{{ meta.report_title or (meta.month_label ~ ' Flash Report') }}</title>
+  <meta name="author" content="{{ meta.ministry_name }}" />
+  <meta name="description" content="{{ meta.edition_no | ordinal }} Flash Report on Central Sector Infrastructure Projects - {{ meta.month_label }}" />
+  <meta name="keywords" content="flash report, infrastructure, MoSPI, {{ meta.month_label }}" />
+  <meta name="generator" content="MoSPI Flash Report Generator" />
+  <style>{{ css | safe }}</style>
+  <style>
+    @page { page: cover; }
+    body { margin: 0; padding: 0; }
+  </style>
+</head>
+<body>
+<div class="cover-page">
+  {#- full-bleed geometric background -#}
+  <div style="position:relative; width:100%; height:100%; background: {{ theme.colors.cover_bg }}; overflow:hidden;">
+    <div style="position:absolute; top:-12%; right:-8%; width:55%; height:80%; border-radius:42% 58% 55% 45% / 45% 40% 60% 55%; background: {{ theme.colors.chart_light_teal }}; opacity:.18;"></div>
+    <div style="position:absolute; bottom:-15%; left:-10%; width:60%; height:70%; border-radius:60% 40% 55% 45% / 55% 60% 40% 45%; background: {{ theme.colors.navy }}; opacity:.10;"></div>
+
+    <div style="padding: 7% 9% 5% 9%;">
+      {#- top emblem row -#}
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        {% if assets.emblem %}<img src="{{ assets.emblem }}" alt="" style="height:52pt;" />{% endif %}
+        <div style="text-align:right; color: {{ theme.colors.navy }};">
+          <div style="font-weight:700; font-size:9.5pt; letter-spacing:.02em;">{{ meta.ministry_name }}</div>
+          <div style="font-size:8pt; margin-top:2pt;">Central Sector Infrastructure Projects</div>
+        </div>
+      </div>
+
+      {#- main title block -#}
+      <div style="margin-top:10%;">
+        <div style="display:inline-block; background: {{ theme.colors.navy }}; color:#fff;
+                    border-radius:6pt; padding:4pt 12pt; font-size:10.5pt; font-weight:700; letter-spacing:.06em;">
+          {{ meta.edition_no | ordinal }} Flash Report
+        </div>
+        <div style="font-size:27pt; line-height:1.12; font-weight:700; color: {{ theme.colors.navy }};
+                    margin-top:12pt; max-width:72%;">
+          On Central Sector Infrastructure Projects
+        </div>
+        <div style="font-size:11pt; color:#4A5568; margin-top:10pt; max-width:62%;">
+          Monthly performance snapshot, risk highlights and project-wise status of monitored
+          central sector infrastructure projects executed by line ministries and departments.
+        </div>
+      </div>
+
+      {#- month pill + cost threshold box -#}
+      <div style="margin-top:8%;">
+        <span style="display:inline-block; background: {{ theme.colors.navy }}; color:#fff;
+                     border-radius:16pt; padding:6pt 22pt; font-size:15pt; font-weight:700; letter-spacing:.08em;">
+          {{ meta.month_label }}
+        </span>
+        <div style="display:inline-block; margin-left:14pt; border:1.4pt solid {{ theme.colors.navy }};
+                    border-radius:8pt; padding:6pt 14pt; font-size:9pt; font-weight:700; color: {{ theme.colors.navy }};">
+          ({{ meta.cost_threshold_text }})
+        </div>
+      </div>
+
+      {#- circular photo collage -#}
+      <div style="margin-top:9%; position:relative; height:150pt;">
+        {% if assets.cover_art %}
+        <img src="{{ assets.cover_art }}" alt="" style="position:absolute; right:6%; top:-8pt; width:200pt; height:200pt; object-fit:cover; border-radius:50%; border:5pt solid #fff; box-shadow:0 6pt 16pt rgba(18,36,134,.18);" />
+        {% endif %}
+      </div>
+
+      {#- QR + bottom navy strip -#}
+      <div style="position:absolute; left:9%; bottom:6%; display:flex; gap:12pt; align-items:center;">
+        {% if assets.qr_image %}
+        <img src="{{ assets.qr_image }}" alt="QR" style="width:64pt; height:64pt; border-radius:4pt; background:#fff; padding:4pt;" />
+        {% endif %}
+        <div style="font-size:7.5pt; color:#4A5568; max-width:150pt; font-style:italic;">
+          Scan the QR code to access the portal
+        </div>
+      </div>
+    </div>
+
+    {#- rounded navy strip at the bottom -#}
+    <div style="position:absolute; left:9%; right:9%; bottom:0; background: {{ theme.colors.navy }};
+                border-radius:10pt 10pt 0 0; color:#fff; padding:11pt 16pt;
+                display:flex; justify-content:space-between; align-items:center; font-size:8.5pt;">
+      <span style="font-weight:700; letter-spacing:.02em;">{{ meta.portal_url }}</span>
+      <span style="font-weight:600; opacity:.9;">{{ meta.program_name }}</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

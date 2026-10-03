@@ -1,0 +1,9 @@
+{#- T3 : Projects Completed during the month. -#}
+{% from "_banded_projects.j2" import banded_projects %}
+{{ banded_projects(
+    tables.t3,
+    "TABLE 3 : PROJECTS COMPLETED DURING THE MONTH",
+    "Projects that reported physical 100% completion during " ~ meta.month_label ~ ".",
+    "Programme implementations with actual date of completion (DoC) within the month.",
+    "Actual DoC"
+) }}

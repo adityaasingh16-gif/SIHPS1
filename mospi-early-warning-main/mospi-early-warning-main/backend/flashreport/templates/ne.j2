@@ -1,0 +1,23 @@
+﻿{#- Special Focus : North Eastern Region - single page. -#}
+{% from "_macros.j2" import banner, kpi, chart_panel, asterisk with context %}
+{{ banner(theme.layout.north_east, "Projects located in the eight states of the North Eastern Region") }}
+
+<div class="kpi-row">
+  {{ kpi(ne.ongoing_count, "NE Ongoing Projects", unit=None, note=None) }}
+  {{ kpi(ne.original_cost | inr, "Original Cost", unit="₹ crore") }}
+  {{ kpi(ne.expenditure | inr, "Cumulative Expenditure", unit="₹ crore") }}
+  {{ kpi(ne.avg_physical | pct, "Avg Physical Progress", unit=None, note=None) }}
+</div>
+
+<div class="charts-row">
+  {{ chart_panel("NE Category-wise Distribution", "ne_donut",
+                 sub="Original cost and count by category") }}
+  {{ chart_panel("NE Category-wise Cost Profile", "ne_combo",
+                 sub="₹ crore \u2014 Original, Revised, Expenditure & counts") }}
+</div>
+
+{{ chart_panel("NE Physical Progress Buckets", "ne_progress",
+               sub="Count and value of NE projects in each progress band") }}
+
+<div class="note-line">{{ ne.ongoing_count }} ongoing projects in the North Eastern Region with a revised cost of
+  {{ ne.revised_cost | inr }} crore and cumulative expenditure of {{ ne.expenditure | inr }} crore.</div>

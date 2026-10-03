@@ -1,0 +1,78 @@
+# =============================================================================
+# Flash Report theme + layout configuration.
+# Every hard-coded colour/size used by the report generator lives here.
+# =============================================================================
+
+page:
+  # Original design size (pt): 1080 x 1512 pt (15 x 21 in, ratio 1.4).
+  # We keep the ratio, then scale proportionally to the target size below.
+  legacy_size_pt: [1080, 1512]
+  size: A4            # any CSS page size: A4, A3, letter, or [w, h] in pt
+  orientation: portrait
+  margin_pt: 24       # ~4-5% of page width; see css/base
+
+colors:
+  navy: "#122486"
+  navy_soft: "#2E3FA8"
+  white: "#FFFFFF"
+  card_bg: "#F0F0EE"
+  card_border: "#D9D9D6"
+  chart_dark_teal: "#0B6170"
+  chart_light_teal: "#50C0C0"
+  chart_gold: "#E0A030"
+  chart_red: "#E03A3A"
+  total_grey: "#D4D4D4"
+  band_pink_l1: "#FAD5DC"
+  band_pink_l2: "#FDE4E8"
+  delta_green: "#1E7A44"
+  delta_red: "#C0392B"
+  agency_text: "#8B1A2B"
+  project_code: "#1B4FB8"
+  note_grey: "#8A8A8E"
+  muted_grey: "#6B6B70"
+  line_grey: "#C9CBD1"
+  table_row_border: "#E5E6EA"
+  cover_bg: "#DCEAF7"
+  skyline_grey: "#B7BCC4"
+
+fonts:
+  heading_stack: ["Calibri", "Segoe UI", "Carlito", "Open Sans", "Liberation Sans", "sans-serif"]
+  heading: "Calibri"
+  body_stack: ["Arial", "Helvetica", "Open Sans", "Liberation Sans", "sans-serif"]
+  body: "Arial"
+  # table body is slightly narrower than headings so dense columns fit
+  table_stack: ["Arial", "Helvetica", "Liberation Sans", "sans-serif"]
+
+sizes:
+  base_font_pt: 8.5
+  heading_h1_pt: 24
+  heading_h2_pt: 15
+  heading_h3_pt: 11
+  table_body_pt: 7.5
+  table_header_pt: 7.5
+  note_pt: 7
+  kpi_number_pt: 26
+  kpi_label_pt: 9.5
+
+layout:
+  kpi_cards_row1: 4
+  kpi_cards_row2_wide: 2
+  ministry_row2: 4
+  default_category_order:
+    - "Transport & Logistics"
+    - "Energy"
+    - "Water & Sanitation"
+    - "Communication"
+    - "Social & Commercial"
+    - "Other Sectors"
+  top_ministries: 5
+  mega_threshold_crore: 1000
+  progress_buckets: [0, 20, 40, 60, 80, 100]
+  top_n_major_projects: 5
+  north_east: "North Eastern Region"
+  axis_label_unit_crore: 100000     # 1 lakh crore
+  thumb_crore: 1000                 # 1 thousand crore (for NE charts)
+
+misc:
+  portal_url: "https://oms.mospi.gov.in"
+  program_short: "Dhrishti·Flash"

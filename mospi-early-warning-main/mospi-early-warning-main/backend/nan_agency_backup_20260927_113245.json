@@ -1,0 +1,5001 @@
+{
+ "note": "pre-backfill snapshot of sentinel implementing_agency rows",
+ "count": 999,
+ "rows": [
+  {
+   "project_id": "108841",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "124199",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "171218",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "175860",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "210914",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "222253",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "240484",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "317725",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "400012",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "400018",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "400019",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "400043",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "400073",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "400074",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "400078",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "400081",
+   "implementing_agency": "nan",
+   "ministry": "Department of Sports"
+  },
+  {
+   "project_id": "400093",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "400094",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "400095",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "400096",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "400097",
+   "implementing_agency": "nan",
+   "ministry": "Department of Water Resources, River Development & GR"
+  },
+  {
+   "project_id": "400100",
+   "implementing_agency": "nan",
+   "ministry": "Department of Water Resources, River Development & GR"
+  },
+  {
+   "project_id": "400101",
+   "implementing_agency": "nan",
+   "ministry": "Department of Water Resources, River Development & GR"
+  },
+  {
+   "project_id": "400102",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "400103",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "400104",
+   "implementing_agency": "nan",
+   "ministry": "Department of Water Resources, River Development & GR"
+  },
+  {
+   "project_id": "400105",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "400107",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "400109",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "400111",
+   "implementing_agency": "nan",
+   "ministry": "Department of Water Resources, River Development & GR"
+  },
+  {
+   "project_id": "400112",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "400115",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "400116",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "400117",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "400136",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "400138",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "400139",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "400148",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "400150",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "400151",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "400153",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "400154",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "400155",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "400156",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "400158",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "400160",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "400168",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "400182",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "400203",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "400234",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "400253",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "400277",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "400301",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "400352",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "400416",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "400425",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "400429",
+   "implementing_agency": "nan",
+   "ministry": "Department for Promotion of Industry & Internal Trade"
+  },
+  {
+   "project_id": "437130",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "462136",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "476006",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "547243",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "602096",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Power"
+  },
+  {
+   "project_id": "602098",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "602099",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "602181",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Power"
+  },
+  {
+   "project_id": "602182",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Power"
+  },
+  {
+   "project_id": "602792",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "603945",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "604791",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "604792",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "604833",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "604852",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "604853",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "604859",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "604863",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "605156",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Power"
+  },
+  {
+   "project_id": "605292",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "606013",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "606112",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "606431",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "606479",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "607653",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Railways"
+  },
+  {
+   "project_id": "607701",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "609019",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "609041",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "609736",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "609996",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "610315",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "610940",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "610985",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "611016",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "611017",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "611452",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "611864",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "611918",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "611927",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "611929",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "611938",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "611939",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "611943",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "611944",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "611945",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "611957",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "611961",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "611963",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "611969",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "611970",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "611971",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "611972",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "611973",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "611974",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "611975",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "611976",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "611977",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "611978",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "611979",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "611980",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "612072",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "612128",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "612135",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "612203",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "612838",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "612851",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "612876",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "612877",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "612878",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "612883",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "612885",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "612894",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "612898",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "612916",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "612998",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "613002",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "613003",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "613008",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "613013",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "613015",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "613785",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "613786",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "613787",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "613795",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "613804",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "613808",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "615349",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "615820",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "615821",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "615822",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "615843",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "615915",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Railways"
+  },
+  {
+   "project_id": "616227",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "616235",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "616236",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "616253",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "616254",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "616586",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "616587",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "616594",
+   "implementing_agency": "nan",
+   "ministry": "Department of Water Resources, River Development & GR"
+  },
+  {
+   "project_id": "616600",
+   "implementing_agency": "nan",
+   "ministry": "Department of Water Resources, River Development & GR"
+  },
+  {
+   "project_id": "616604",
+   "implementing_agency": "nan",
+   "ministry": "Department of Water Resources, River Development & GR"
+  },
+  {
+   "project_id": "616605",
+   "implementing_agency": "nan",
+   "ministry": "Department of Water Resources, River Development & GR"
+  },
+  {
+   "project_id": "616611",
+   "implementing_agency": "nan",
+   "ministry": "Department of Water Resources, River Development & GR"
+  },
+  {
+   "project_id": "616612",
+   "implementing_agency": "nan",
+   "ministry": "Department of Water Resources, River Development & GR"
+  },
+  {
+   "project_id": "616615",
+   "implementing_agency": "nan",
+   "ministry": "Department of Water Resources, River Development & GR"
+  },
+  {
+   "project_id": "616616",
+   "implementing_agency": "nan",
+   "ministry": "Department of Water Resources, River Development & GR"
+  },
+  {
+   "project_id": "616702",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "616839",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Railways"
+  },
+  {
+   "project_id": "616858",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "616879",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "616886",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "616933",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "616950",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "616983",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Railways"
+  },
+  {
+   "project_id": "617200",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "617201",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "617213",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Railways"
+  },
+  {
+   "project_id": "617221",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "617224",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "617252",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "617280",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Mines"
+  },
+  {
+   "project_id": "617284",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "617287",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "617290",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Railways"
+  },
+  {
+   "project_id": "617302",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "617303",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "617304",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "617320",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Railways"
+  },
+  {
+   "project_id": "617321",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Railways"
+  },
+  {
+   "project_id": "617345",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Railways"
+  },
+  {
+   "project_id": "617361",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Railways"
+  },
+  {
+   "project_id": "617364",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Railways"
+  },
+  {
+   "project_id": "617379",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Railways"
+  },
+  {
+   "project_id": "617390",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Railways"
+  },
+  {
+   "project_id": "617412",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "617422",
+   "implementing_agency": "nan",
+   "ministry": "Department of Water Resources, River Development & GR"
+  },
+  {
+   "project_id": "617727",
+   "implementing_agency": "nan",
+   "ministry": "Department for Promotion of Industry & Internal Trade"
+  },
+  {
+   "project_id": "617729",
+   "implementing_agency": "nan",
+   "ministry": "Department for Promotion of Industry & Internal Trade"
+  },
+  {
+   "project_id": "617806",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Power"
+  },
+  {
+   "project_id": "617818",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "617819",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "617822",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "617824",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Railways"
+  },
+  {
+   "project_id": "617827",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "617829",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "617830",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "617836",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "617837",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "617838",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "617839",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "617877",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "617878",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "617882",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "617883",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "617885",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617886",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617887",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617888",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617889",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617890",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617891",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617892",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617893",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617894",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617895",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617896",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617897",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617898",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617899",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617900",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617901",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617902",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617904",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617905",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617906",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617907",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617908",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617909",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617911",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617913",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617916",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617917",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617918",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617919",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617920",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617921",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617922",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617923",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617924",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617925",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617926",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617927",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617928",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617929",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617930",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617931",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617932",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617933",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617934",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617935",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617936",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617937",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617939",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617940",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617941",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617942",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617943",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617944",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617945",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617946",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617947",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617948",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617949",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617950",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617951",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617954",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617955",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617957",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617958",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617959",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617960",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617961",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617962",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617963",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617964",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617965",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617966",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617967",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617968",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617969",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617970",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617971",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617972",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617973",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617974",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617975",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617976",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617977",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617978",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617979",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617980",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617981",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617982",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617983",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617984",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617985",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617986",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617987",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617988",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617989",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617990",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617991",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617992",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617993",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617994",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617995",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617996",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617997",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617998",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "617999",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618000",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618001",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618002",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618003",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618005",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618006",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618007",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618008",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618009",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618010",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618011",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618012",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618013",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618015",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618017",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618018",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618019",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618021",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618022",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618023",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618024",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618025",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618026",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618027",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618028",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618029",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618030",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618031",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618033",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618034",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618035",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618038",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618039",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618040",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618041",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618042",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618044",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618046",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618047",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618049",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618050",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618051",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618052",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618053",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618054",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618055",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618056",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618057",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618060",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618061",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618062",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618063",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618064",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618065",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618066",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618067",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618069",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618070",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618071",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618072",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618073",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618074",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618075",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618076",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618078",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618079",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618081",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618082",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618083",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618084",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618085",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618086",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618087",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618088",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618089",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618090",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618091",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618092",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618093",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618094",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618095",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618096",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618097",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618098",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618099",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618101",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618103",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618104",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618105",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618106",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618108",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618109",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618110",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618111",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618112",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618113",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618114",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618116",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618117",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618118",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618119",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618120",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618121",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618122",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618123",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618124",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618125",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618127",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618130",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618132",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618134",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618136",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618137",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618138",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618139",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618140",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618141",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618142",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618143",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618144",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618145",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618146",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618147",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618148",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618149",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618151",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618152",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618153",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618154",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618155",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618156",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618160",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618161",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618162",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618163",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618164",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618165",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618166",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618167",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618168",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618169",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618171",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618172",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618173",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618174",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618175",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618177",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618178",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618179",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618180",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618181",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618182",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618183",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618184",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618185",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618186",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618188",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618189",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618190",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618191",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618192",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618193",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618194",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618196",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618197",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618198",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618199",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618200",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618206",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618207",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618208",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618209",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618210",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618212",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618214",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618215",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618216",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618217",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618218",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618219",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618222",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618223",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618225",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618226",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618227",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618228",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618229",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618230",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618231",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618232",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618233",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618234",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618235",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618236",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618237",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618238",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618239",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618240",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618242",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618243",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618244",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618246",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618247",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618248",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618249",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618250",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618251",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618252",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618253",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618254",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618255",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618256",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618257",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618258",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618259",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618260",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618262",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618263",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618264",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618265",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618266",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618267",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618282",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618283",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618284",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618285",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618286",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618287",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618288",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618289",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618290",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618291",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618292",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618293",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618294",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618295",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618296",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618297",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618298",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618299",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618300",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618301",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618302",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618303",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618304",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618305",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618306",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618308",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618309",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618310",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618311",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618312",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618313",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618314",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618315",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618316",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618317",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618318",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618319",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618320",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618321",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618323",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618324",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618325",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618326",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618327",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618328",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618331",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618333",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618334",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618335",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618336",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618337",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618339",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618340",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618341",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618342",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618343",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618344",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618345",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618346",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618347",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618348",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618349",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618350",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618351",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618352",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618353",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618354",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618355",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618356",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618357",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618358",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618359",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618362",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618363",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618364",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618365",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618366",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618371",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618372",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618373",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618374",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618375",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618376",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618377",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618379",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618380",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618381",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618382",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618383",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618384",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618387",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618388",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618389",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618390",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618391",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618392",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618393",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618394",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618395",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618396",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618397",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618398",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618399",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618400",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618401",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618402",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618405",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618406",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618407",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618408",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618409",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618410",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618412",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618413",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618414",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618415",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618416",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618417",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618418",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618419",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618420",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618421",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618422",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618423",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618424",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618426",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618427",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618428",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618429",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618430",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618431",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618432",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618433",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618434",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618435",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618436",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618437",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618438",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618439",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618440",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618441",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618442",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618443",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618444",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618445",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618446",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618447",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618448",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618449",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618450",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618452",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618454",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618455",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618565",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618567",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618568",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618648",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618729",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618731",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618733",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618741",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618766",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618779",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618784",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618842",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618892",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618953",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618954",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618955",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618956",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "618972",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Railways"
+  },
+  {
+   "project_id": "618978",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Railways"
+  },
+  {
+   "project_id": "618995",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Railways"
+  },
+  {
+   "project_id": "619004",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619005",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619008",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619009",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619010",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619013",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619014",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619033",
+   "implementing_agency": "nan",
+   "ministry": "Department of Higher Education"
+  },
+  {
+   "project_id": "619038",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619039",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619042",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619053",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "619057",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619059",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619060",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619061",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619065",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619089",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619127",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619166",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619171",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "619172",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Coal"
+  },
+  {
+   "project_id": "619183",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619184",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619186",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619187",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619191",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "619193",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619194",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619196",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "619221",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619223",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "619224",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "619225",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "619226",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "619229",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Ports, Shipping and Waterways"
+  },
+  {
+   "project_id": "619248",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619251",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619253",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619265",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619270",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619271",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619289",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619291",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619292",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619293",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619294",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619295",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619297",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619298",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619299",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619300",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619301",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619305",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619306",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619307",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619308",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619312",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "619313",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "619314",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "619316",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "619317",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619320",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619321",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "619328",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "619347",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Road Transport & Highways"
+  },
+  {
+   "project_id": "660056",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "665021",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "701168",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "701170",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "701171",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "701172",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "701173",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "701228",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "701263",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "701269",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "701289",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "701324",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "701329",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "701330",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "701338",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "701341",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "701343",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "701344",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "701346",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "701349",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "701350",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "701354",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "701370",
+   "implementing_agency": "nan",
+   "ministry": "Department of Water Resources, River Development & GR"
+  },
+  {
+   "project_id": "701371",
+   "implementing_agency": "nan",
+   "ministry": "Department of Water Resources, River Development & GR"
+  },
+  {
+   "project_id": "701372",
+   "implementing_agency": "nan",
+   "ministry": "Department of Water Resources, River Development & GR"
+  },
+  {
+   "project_id": "701376",
+   "implementing_agency": "nan",
+   "ministry": "Department of Water Resources, River Development & GR"
+  },
+  {
+   "project_id": "701377",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "701383",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "701384",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "701386",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "701388",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "701390",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "701391",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "701392",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "701395",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "701396",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "701398",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "701399",
+   "implementing_agency": "nan",
+   "ministry": "Department of Water Resources, River Development & GR"
+  },
+  {
+   "project_id": "701400",
+   "implementing_agency": "nan",
+   "ministry": "Department of Water Resources, River Development & GR"
+  },
+  {
+   "project_id": "701402",
+   "implementing_agency": "nan",
+   "ministry": "Department of Water Resources, River Development & GR"
+  },
+  {
+   "project_id": "701404",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "701405",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "701406",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "701408",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "701410",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "701411",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "701412",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "701415",
+   "implementing_agency": "nan",
+   "ministry": "Department of Water Resources, River Development & GR"
+  },
+  {
+   "project_id": "701530",
+   "implementing_agency": "nan",
+   "ministry": "Department of Water Resources, River Development & GR"
+  },
+  {
+   "project_id": "701564",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Ports, Shipping and Waterways"
+  },
+  {
+   "project_id": "701719",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "701745",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "701766",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "701991",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "702355",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "702522",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "702524",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "702540",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "702544",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "702555",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "702612",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "702635",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "702664",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "702665",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "702674",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "702682",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "702699",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "702734",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "702735",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "702741",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "702742",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "702746",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "702760",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "702764",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "702793",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "702798",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "702808",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "702810",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "702833",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "702840",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "702842",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "702851",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "702854",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "702948",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "702949",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "702958",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "703021",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "703057",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "705237",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705244",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705252",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Railways"
+  },
+  {
+   "project_id": "705253",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Railways"
+  },
+  {
+   "project_id": "705298",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705300",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705356",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705419",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705428",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705429",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705433",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705479",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705480",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705482",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705489",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Railways"
+  },
+  {
+   "project_id": "705497",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Railways"
+  },
+  {
+   "project_id": "705520",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Railways"
+  },
+  {
+   "project_id": "705583",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Railways"
+  },
+  {
+   "project_id": "705588",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705598",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705608",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705616",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705628",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705635",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705639",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705648",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705650",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705651",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705667",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705668",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705730",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705735",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705743",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705763",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705766",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705767",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705771",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Railways"
+  },
+  {
+   "project_id": "705772",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705774",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705777",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705780",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705782",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705783",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705784",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705793",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705794",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705799",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705918",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "705919",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "706757",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "706776",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "706777",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "706844",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Railways"
+  },
+  {
+   "project_id": "706898",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Railways"
+  },
+  {
+   "project_id": "706940",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Railways"
+  },
+  {
+   "project_id": "706942",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Railways"
+  },
+  {
+   "project_id": "706950",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "706965",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "706966",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "706988",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "706989",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "707016",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "707017",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "707018",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "707019",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "707020",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "707021",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "707022",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "707039",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "707044",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "707045",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "707046",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "707049",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "707050",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "707051",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "707052",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "707057",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "707058",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "707059",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "707067",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "707069",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "707070",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "707086",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "707087",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Health & Family Welfare"
+  },
+  {
+   "project_id": "707229",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "707267",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Housing & Urban Affairs"
+  },
+  {
+   "project_id": "708687",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "709749",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "709766",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709770",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709771",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709772",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709773",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709774",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709776",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709777",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709778",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709779",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709780",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709781",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709783",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709785",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709786",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709798",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709799",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709800",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709808",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709810",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709812",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709813",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709814",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709815",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709816",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709817",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709818",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709819",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709830",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Mines"
+  },
+  {
+   "project_id": "709847",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709848",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709849",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709850",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709851",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709856",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "709857",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "709858",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "709859",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "709864",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "709865",
+   "implementing_agency": "nan",
+   "ministry": "Ministry of Petroleum & Natural Gas"
+  },
+  {
+   "project_id": "914467",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "938832",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "946208",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  },
+  {
+   "project_id": "976009",
+   "implementing_agency": "nan",
+   "ministry": "Department of Telecommunications"
+  }
+ ]
+}
