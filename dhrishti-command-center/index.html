@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0f2a5c">
+<meta name="description" content="DHRISHTI — AI-Powered Infrastructure Intelligence & Early Warning System for MoSPI">
+<title>DHRISHTI — National Infrastructure Intelligence Command Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f2a5c'/%3E%3Cpath d='M18 44V20h9c6 0 10 3.4 10 8.6 0 3.6-2 6.4-5.4 7.6L38 44h-7l-5.4-6.8h-1.4V44H18zm6.2-11.4h2.6c2.6 0 4.2-1.5 4.2-3.9s-1.6-3.9-4.2-3.9h-2.6v7.8z' fill='white'/%3E%3Ccircle cx='46' cy='20' r='4' fill='%232dd4bf'/%3E%3C/svg%3E">
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<!-- Government trust bar -->
+<div class="govbar" role="banner">
+  <div class="govbar-inner">
+    <div class="govbar-left">
+      <span class="emblem" aria-hidden="true">IN</span>
+      <span><strong>Government of India</strong> <span class="sep">|</span> Ministry of Statistics &amp; Programme Implementation <span class="sep">|</span> <span class="muted-w">PAIMANA · SIH 26103</span></span>
+    </div>
+    <div class="govbar-right">
+      <span class="live-dot" id="apiDot" title="Backend connectivity"><span></span><em id="apiStatus">connecting…</em></span>
+      <label class="sys-wrap">System
+        <select id="themeSel" aria-label="Colour theme">
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+          <option value="system">System</option>
+        </select>
+      </label>
+      <span class="session" id="sessionInfo" title="Session status">Session: guest</span>
+    </div>
+  </div>
+</div>
+
+<!-- Command header -->
+<header class="cmdbar">
+  <button class="iconbtn menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="true">☰</button>
+  <div class="brand">
+    <div class="brand-mark" aria-hidden="true">D</div>
+    <div>
+      <div class="brand-name">DHRISHTI <span class="brand-sub">National Infrastructure Intelligence Command Center</span></div>
+      <div class="brand-tag">AI-Powered Infrastructure Intelligence &amp; Early Warning System</div>
+    </div>
+  </div>
+  <div class="cmd-actions">
+    <button class="search-trigger" id="searchTrigger" aria-label="Global search (Ctrl+K)">
+      <span aria-hidden="true">⌕</span><span class="stext">Search projects, ministries, states…</span><kbd>Ctrl K</kbd>
+    </button>
+    <button class="iconbtn" id="notifBtn" aria-label="Notifications">🔔<span class="count" id="notifCount" hidden>0</span></button>
+    <button class="btn ghost sm" id="loginBtn">Sign in</button>
+    <div class="userchip" id="userChip" hidden><span id="userInit">G</span><span id="userName">Guest</span></div>
+  </div>
+</header>
+
+<div class="shell">
+  <!-- Sidebar -->
+  <nav class="side" id="sidebar" aria-label="Primary">
+    <div class="side-sec">COMMAND</div>
+    <button class="navitem active" data-view="dashboard"><i>▦</i><span>Dashboard</span></button>
+    <button class="navitem" data-view="warnings"><i>⚠</i><span>Early Warnings</span><b class="pill danger" id="navWarn">0</b></button>
+    <button class="navitem" data-view="projects"><i>🏗</i><span>Projects</span></button>
+    <button class="navitem" data-view="risk"><i>◉</i><span>Risk Intelligence</span></button>
+    <button class="navitem" data-view="analytics"><i>📈</i><span>Analytics</span></button>
+    <button class="navitem" data-view="map"><i>🗺</i><span>India Map</span></button>
+    <div class="side-sec">DECISION SUPPORT</div>
+    <button class="navitem" data-view="ai"><i>✦</i><span>Dhrishti AI</span></button>
+    <button class="navitem" data-view="reports"><i>📄</i><span>Reports</span></button>
+    <button class="navitem" data-view="notifications"><i>🔔</i><span>Notifications</span></button>
+    <div class="side-sec">GOVERNANCE</div>
+    <button class="navitem" data-view="audit" data-role="admin,officer,analyst"><i>📜</i><span>Audit Trail</span></button>
+    <button class="navitem" data-view="admin" data-role="admin"><i>⚙</i><span>Administration</span></button>
+    <button class="navitem" data-view="settings"><i>🔧</i><span>Settings</span></button>
+    <div class="side-foot">
+      <div class="sec-card">
+        <div class="sec-t">Portfolio at a glance</div>
+        <div class="sec-n" id="sideTotal">—</div>
+        <div class="sec-s" id="sideRisk">— at risk</div>
+      </div>
+      <div class="ver">DHRISHTI v2.0 · MoSPI<br>PAIMANA / SIH 26103</div>
+    </div>
+  </nav>
+
+  <!-- Main -->
+  <main id="main" class="main" tabindex="-1">
+    <!-- Landing hero (shown when logged out & on dashboard) -->
+    <section id="landing" class="landing" hidden>
+      <div class="hero">
+        <div class="hero-bg" aria-hidden="true"><svg id="netSvg" viewBox="0 0 800 380" preserveAspectRatio="xMidYMid slice"></svg></div>
+        <div class="hero-inner">
+          <div class="kicker">MINISTRY OF STATISTICS &amp; PROGRAMME IMPLEMENTATION</div>
+          <h1>DHRISHTI</h1>
+          <p class="lede">AI-Powered Infrastructure Intelligence &amp; Early Warning System</p>
+          <p class="sub">Transforming infrastructure monitoring from reactive reporting into predictive, explainable and actionable decision support.</p>
+          <div class="hero-cta">
+            <button class="btn primary lg" id="ctaLogin">Sign in to Command Center</button>
+            <button class="btn ghost lg" id="ctaExplore">Explore public dashboard</button>
+          </div>
+          <div class="trust">
+            <span>✔ Role-based access</span><span>✔ Explainable AI</span><span>✔ Audit trail</span><span>✔ Secure by design</span>
+          </div>
+        </div>
+        <div class="hero-panel">
+          <div class="hp-h">LIVE PORTFOLIO SIGNAL <span class="live">● live</span></div>
+          <div class="hp-grid" id="heroKpis"></div>
+          <div class="hp-note">Risk-scored across cost, schedule, milestone &amp; expenditure signals.</div>
+        </div>
+      </div>
+      <div class="caps" id="capsRow"></div>
+    </section>
+
+    <div id="viewRoot"><!-- views render here --></div>
+  </main>
+</div>
+
+<!-- Bottom nav (mobile) -->
+<nav class="bottomnav" aria-label="Primary mobile">
+  <button data-view="dashboard" class="active">▦<small>Home</small></button>
+  <button data-view="warnings">⚠<small>Alerts</small></button>
+  <button data-view="projects">🏗<small>Projects</small></button>
+  <button data-view="map">🗺<small>Map</small></button>
+  <button data-view="ai">✦<small>AI</small></button>
+</nav>
+
+<!-- Command palette -->
+<div class="overlay" id="paletteOverlay" hidden>
+  <div class="palette" role="dialog" aria-modal="true" aria-label="Global search">
+    <div class="pal-h"><span aria-hidden="true">⌕</span><input id="paletteInput" placeholder="Search projects, ministries, states, sectors, IDs, alerts…" autocomplete="off"><kbd>esc</kbd></div>
+    <div class="pal-b" id="paletteResults" role="listbox"></div>
+  </div>
+</div>
+
+<!-- Project drawer -->
+<div class="overlay" id="drawerOverlay" hidden>
+  <aside class="drawer" role="dialog" aria-modal="true" aria-label="Project intelligence" id="drawer"></aside>
+</div>
+
+<!-- Auth modal -->
+<div class="overlay" id="authOverlay" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Sign in">
+    <div class="modal-h"><h3>Sign in to DHRISHTI</h3><button class="iconbtn" id="authClose" aria-label="Close">✕</button></div>
+    <div class="modal-b">
+      <form id="loginForm">
+        <div class="field"><label for="loginEmail">Email / Username</label><input id="loginEmail" type="email" required placeholder="officer.mospi@gov.in" autocomplete="username"></div>
+        <div class="field"><label for="loginPass">Password</label><input id="loginPass" type="password" required placeholder="••••••••" autocomplete="current-password"></div>
+        <div class="row"><button class="btn primary" type="submit" style="flex:1">Sign in</button><button class="btn ghost" type="button" id="guestBtn">Continue as guest</button></div>
+      </form>
+      <div class="demo-row"><span>1-click demo:</span>
+        <button class="chipbtn" data-demo="admin">Admin</button>
+        <button class="chipbtn" data-demo="officer">Officer</button>
+        <button class="chipbtn" data-demo="analyst">Analyst</button>
+        <button class="chipbtn" data-demo="agency">Authority</button>
+      </div>
+      <p class="hint">Demo roles run fully against the live API when reachable, otherwise against a realistic local dataset. No credentials are stored except a session token.</p>
+    </div>
+  </div>
+</div>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+<div class="sr" aria-live="polite" id="srLive"></div>
+
+<script src="js/api.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
