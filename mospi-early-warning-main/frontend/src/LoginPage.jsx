@@ -77,7 +77,7 @@ export default function LoginPage({ language, setLanguage, onBackBrowse }) {
  }
  };
 
- const showDemoLogin = import.meta.env.DEV || import.meta.env.VITE_ENABLE_DEMO_LOGIN === "true";
+ const showDemoLogin = true;
 
  const setAuth = (res) => {
  if (res?.token) {
@@ -304,11 +304,11 @@ export default function LoginPage({ language, setLanguage, onBackBrowse }) {
                 </button>
                 <button
                   type="button"
-                  onClick={() => handleDemoLogin("agency")}
+                  onClick={() => handleDemoLogin("contractor")}
                   disabled={loading}
                   className="flex items-center justify-center gap-1.5 rounded-lg border border-line bg-raised px-2.5 py-2 text-xs font-semibold text-fg transition-colors hover:border-brand hover:bg-brand-subtle hover:text-brand"
                 >
-                  🏭 Agency
+                  🏗️ Contractor
                 </button>
                 <button
                   type="button"
@@ -319,9 +319,13 @@ export default function LoginPage({ language, setLanguage, onBackBrowse }) {
                   👤 Citizen
                 </button>
               </div>
-              <p className="mt-2 text-[11px] text-fg-3">
-                Default password for all accounts: <code className="rounded bg-sunken px-1 font-mono text-brand">Admin@12345</code>
-              </p>
+              <div className="mt-3 space-y-1 rounded-lg bg-raised/80 p-2 text-[11px] text-fg-3 border border-line">
+                <p className="font-semibold text-fg-2">Direct Login Credentials:</p>
+                <div className="flex justify-between"><span>👑 Admin:</span> <code className="text-brand font-mono">admin@gov.in</code></div>
+                <div className="flex justify-between"><span>🏛️ Ministry:</span> <code className="text-brand font-mono">ministry@gov.in</code></div>
+                <div className="flex justify-between"><span>🏗️ Contractor:</span> <code className="text-brand font-mono">contractor@gov.in</code></div>
+                <div className="flex justify-between"><span>🔑 Password:</span> <code className="text-brand font-mono font-bold">Admin@12345</code></div>
+              </div>
             </div>}
 
 

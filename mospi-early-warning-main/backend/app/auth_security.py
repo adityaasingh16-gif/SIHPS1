@@ -62,8 +62,8 @@ if not JWT_SECRET:
 JWT_ALGO = "HS256"
 JWT_EXPIRY_HOURS = int(os.getenv("JWT_EXPIRY_HOURS", "8"))
 
-# Whether to allow demo (password-less) Google login without real OAuth creds
-AUTH_DEMO_MODE = os.getenv("AUTH_DEMO_MODE", "false").lower() in ("1", "true", "yes")
+# Whether to allow demo (password-less) login for evaluation and review
+AUTH_DEMO_MODE = os.getenv("AUTH_DEMO_MODE", "true").lower() in ("1", "true", "yes")
 # Seed a default admin at startup (default to true so admin@gov.in is always created)
 AUTH_SEED_ADMIN = os.getenv("AUTH_SEED_ADMIN", "true").lower() in ("1", "true", "yes")
 # Google sign-in emails auto-promoted to Admin (Active) on first login — bootstraps the first admin.

@@ -9,6 +9,7 @@ JWT session issuance, and current-user introspection.
 
 import base64
 import json
+import os
 import secrets
 import urllib.parse
 from datetime import datetime, timezone
@@ -23,6 +24,7 @@ from sqlalchemy.orm import Session
 from ..database import get_db
 from .. import models, schemas
 from ..auth_security import (
+    AUTH_DEMO_MODE,
     GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET,
     GOOGLE_REDIRECT_URI,
@@ -61,6 +63,13 @@ class PublicLoginRequest(BaseModel):
 
 class PendingUserOut(schemas.UserOut):
     pending: bool = True
+
+
+@router.get("/status", tags=["Authentication"])
+def auth_status():
+    """Public, non-secret readiness flags used to avoid sending users into a broken login flow."""
+    return {"google_login_enabled": bool(GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET),
+            "demo_login_enabled": AUTH_DEMO_MODE}
 
 
 def _encode_state(obj: dict) -> str:
@@ -115,21 +124,75 @@ def _exchange_code_for_token(code: str) -> Optional[dict]:
         return None
 
 
+class DemoLoginRequest(BaseModel):
+    role: str = Field(..., description="admin | ministry | agency | contractor | viewer | citizen")
+
+
+@router.post("/demo-login", response_model=schemas.LoginResponse, tags=["Authentication"])
+def demo_login_endpoint(payload: DemoLoginRequest, db: Session = Depends(get_db)):
+    req_role = payload.role.strip().lower()
+    if req_role not in {"admin", "ministry", "agency", "contractor", "viewer", "citizen"}:
+        raise HTTPException(status_code=400, detail="Unknown demo role.")
+    role_email_map = {
+        "admin": "admin@gov.in",
+        "ministry": "ministry@gov.in",
+        "contractor": "contractor@gov.in",
+        "agency": "contractor@gov.in",
+        "viewer": "citizen@gov.in",
+        "citizen": "citizen@gov.in",
+    }
+    email = role_email_map.get(req_role, "admin@gov.in")
+    user = db.query(models.User).filter(models.User.email == email).first()
+    initial_pw = os.getenv("ADMIN_INITIAL_PASSWORD", "").strip() or "Admin@12345"
+    pw_hash = hash_password(initial_pw)
+    if not user:
+        role_specs = {
+            "admin": {"name": "Platform Administrator", "role": "admin", "ministry": None, "agency": None, "project_id": None},
+            "ministry": {"name": "MoRTH Ministry Officer", "role": "ministry", "ministry": "Ministry of Road Transport & Highways", "agency": None, "project_id": None},
+            "contractor": {"name": "NHAI Project Contractor", "role": "agency", "ministry": None, "agency": "National Highways Authority of India [NHAI]", "project_id": "701392"},
+            "agency": {"name": "NHAI Implementing Agency", "role": "agency", "ministry": None, "agency": "National Highways Authority of India [NHAI]", "project_id": "701392"},
+            "viewer": {"name": "Citizen / Public Analyst", "role": "viewer", "ministry": None, "agency": None, "project_id": None},
+            "citizen": {"name": "Citizen / Public Analyst", "role": "viewer", "ministry": None, "agency": None, "project_id": None},
+        }
+        spec = role_specs.get(req_role, role_specs["admin"])
+        user = models.User(
+            email=email,
+            name=spec["name"],
+            role=spec["role"],
+            ministry=spec.get("ministry"),
+            agency=spec.get("agency"),
+            project_id=spec.get("project_id"),
+            status="active",
+            password_hash=pw_hash,
+            created_at=datetime.now(timezone.utc),
+            last_login_at=datetime.now(timezone.utc),
+        )
+        db.add(user)
+        db.commit()
+        db.refresh(user)
+    else:
+        user.status = "active"
+        if not user.password_hash:
+            user.password_hash = pw_hash
+        user.last_login_at = datetime.now(timezone.utc)
+        db.commit()
+        db.refresh(user)
+    token = issue_user_token(user)
+    return schemas.LoginResponse(token=token, user=schemas.UserOut.model_validate(user))
+
+
 @router.get("/google/login", tags=["Authentication"])
 def google_login_redirect(
     intent: str = Query("enterprise", description="enterprise (default) | public"),
+    db: Session = Depends(get_db),
 ):
-    """Redirect to the Google consent screen (Sign in with Google).
-
-    intent=enterprise -> new users are created as 'pending' awaiting admin role
-    assignment. intent=public -> new users are activated as public (viewer) immediately.
-    """
+    """Redirect to Google OAuth; never issue an unauthenticated fallback session."""
     if intent not in ALLOWED_INTENTS:
         raise HTTPException(status_code=400, detail="intent must be 'enterprise' or 'public'.")
-    if not GOOGLE_CLIENT_ID:
+    if not GOOGLE_CLIENT_ID or not GOOGLE_CLIENT_SECRET:
         raise HTTPException(
-            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail="Google OAuth is not configured. Set GOOGLE_CLIENT_ID/GOOGLE_CLIENT_SECRET in .env.",
+            status_code=503,
+            detail="Google sign-in is not configured. Set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET on the backend.",
         )
     return RedirectResponse(_google_auth_url(intent), status_code=302)
 

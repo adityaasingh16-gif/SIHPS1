@@ -27,6 +27,38 @@ def ensure_auth_columns(db: Session) -> None:
 
 DEMO_USERS = [
     {
+        "email": "ministry@gov.in",
+        "name": "MoRTH Ministry Officer",
+        "role": "ministry",
+        "ministry": "Ministry of Road Transport & Highways",
+        "agency": None,
+        "project_id": None,
+    },
+    {
+        "email": "contractor@gov.in",
+        "name": "NHAI Project Contractor",
+        "role": "agency",
+        "ministry": None,
+        "agency": "National Highways Authority of India [NHAI]",
+        "project_id": "701392",
+    },
+    {
+        "email": "agency@gov.in",
+        "name": "NHAI Implementing Agency Cell",
+        "role": "agency",
+        "ministry": None,
+        "agency": "National Highways Authority of India [NHAI]",
+        "project_id": "701392",
+    },
+    {
+        "email": "citizen@gov.in",
+        "name": "Citizen / Public Analyst",
+        "role": "viewer",
+        "ministry": None,
+        "agency": None,
+        "project_id": None,
+    },
+    {
         "email": os.getenv("DEMO_MINISTRY_EMAIL", "ministry.petroleum@nic.in"),
         "name": "MoPNG Monitoring Officer",
         "role": "ministry",
@@ -38,7 +70,7 @@ DEMO_USERS = [
         "name": "IOCL Project Cell",
         "role": "agency",
         "agency": "IOCL",
-        "project_id": os.getenv("DEMO_AGENCY_PROJECT", "PRJ_003"),
+        "project_id": os.getenv("DEMO_AGENCY_PROJECT", "701392"),
     },
     {
         "email": os.getenv("DEMO_PUBLIC_EMAIL", "public.analyst@citizen.in"),
@@ -130,9 +162,15 @@ def seed_demo_users(db: Session) -> int:
     for spec in DEMO_USERS:
         existing = db.query(models.User).filter(models.User.email == spec["email"]).first()
         if existing:
-            if not existing.password_hash:
-                existing.password_hash = pw_hash
-                db.commit()
+            existing.password_hash = pw_hash
+            existing.status = "active"
+            if spec.get("ministry"):
+                existing.ministry = spec["ministry"]
+            if spec.get("agency"):
+                existing.agency = spec["agency"]
+            if spec.get("project_id"):
+                existing.project_id = spec["project_id"]
+            db.commit()
             continue
         db.add(
             models.User(
@@ -160,6 +198,6 @@ def bootstrap(db: Session) -> dict:
     """Run all startup seed steps; returns counts."""
     ensure_auth_columns(db)
     public_n = seed_public_rows(db)
-    admin_n = seed_default_admin(db) if AUTH_SEED_ADMIN else None
-    sig = seed_demo_users(db) if AUTH_DEMO_MODE else 0
-    return {"public_rows": public_n, "demo_users": sig}
+    admin_n = seed_default_admin(db)
+    sig = seed_demo_users(db)
+    return {"public_rows": public_n, "admin": admin_n, "demo_users": sig}

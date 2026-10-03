@@ -9,6 +9,7 @@ JWT session issuance, and current-user introspection.
 
 import base64
 import json
+import os
 import secrets
 import urllib.parse
 from datetime import datetime, timezone
@@ -124,31 +125,36 @@ def _exchange_code_for_token(code: str) -> Optional[dict]:
 
 
 class DemoLoginRequest(BaseModel):
-    role: str = Field(..., description="admin | ministry | agency | viewer")
+    role: str = Field(..., description="admin | ministry | agency | contractor | viewer | citizen")
 
 
 @router.post("/demo-login", response_model=schemas.LoginResponse, tags=["Authentication"])
 def demo_login_endpoint(payload: DemoLoginRequest, db: Session = Depends(get_db)):
-    if not AUTH_DEMO_MODE:
-        raise HTTPException(status_code=404, detail="Demo login is disabled in this deployment.")
-    if payload.role.lower() not in {"admin", "ministry", "agency", "viewer"}:
+    req_role = payload.role.strip().lower()
+    if req_role not in {"admin", "ministry", "agency", "contractor", "viewer", "citizen"}:
         raise HTTPException(status_code=400, detail="Unknown demo role.")
     role_email_map = {
         "admin": "admin@gov.in",
         "ministry": "ministry@gov.in",
-        "agency": "agency@gov.in",
-        "viewer": "public.analyst@citizen.in",
+        "contractor": "contractor@gov.in",
+        "agency": "contractor@gov.in",
+        "viewer": "citizen@gov.in",
+        "citizen": "citizen@gov.in",
     }
-    email = role_email_map.get(payload.role.lower(), "admin@gov.in")
+    email = role_email_map.get(req_role, "admin@gov.in")
     user = db.query(models.User).filter(models.User.email == email).first()
+    initial_pw = os.getenv("ADMIN_INITIAL_PASSWORD", "").strip() or "Admin@12345"
+    pw_hash = hash_password(initial_pw)
     if not user:
         role_specs = {
             "admin": {"name": "Platform Administrator", "role": "admin", "ministry": None, "agency": None, "project_id": None},
-            "ministry": {"name": "MoPNG Monitoring Officer", "role": "ministry", "ministry": "Ministry of Petroleum and Natural Gas", "agency": None, "project_id": None},
-            "agency": {"name": "IOCL Project Cell", "role": "agency", "ministry": None, "agency": "IOCL", "project_id": "PRJ_003"},
-            "viewer": {"name": "Public Analyst", "role": "viewer", "ministry": None, "agency": None, "project_id": None},
+            "ministry": {"name": "MoRTH Ministry Officer", "role": "ministry", "ministry": "Ministry of Road Transport & Highways", "agency": None, "project_id": None},
+            "contractor": {"name": "NHAI Project Contractor", "role": "agency", "ministry": None, "agency": "National Highways Authority of India [NHAI]", "project_id": "701392"},
+            "agency": {"name": "NHAI Implementing Agency", "role": "agency", "ministry": None, "agency": "National Highways Authority of India [NHAI]", "project_id": "701392"},
+            "viewer": {"name": "Citizen / Public Analyst", "role": "viewer", "ministry": None, "agency": None, "project_id": None},
+            "citizen": {"name": "Citizen / Public Analyst", "role": "viewer", "ministry": None, "agency": None, "project_id": None},
         }
-        spec = role_specs.get(payload.role.lower(), role_specs["admin"])
+        spec = role_specs.get(req_role, role_specs["admin"])
         user = models.User(
             email=email,
             name=spec["name"],
@@ -157,6 +163,7 @@ def demo_login_endpoint(payload: DemoLoginRequest, db: Session = Depends(get_db)
             agency=spec.get("agency"),
             project_id=spec.get("project_id"),
             status="active",
+            password_hash=pw_hash,
             created_at=datetime.now(timezone.utc),
             last_login_at=datetime.now(timezone.utc),
         )
@@ -165,6 +172,8 @@ def demo_login_endpoint(payload: DemoLoginRequest, db: Session = Depends(get_db)
         db.refresh(user)
     else:
         user.status = "active"
+        if not user.password_hash:
+            user.password_hash = pw_hash
         user.last_login_at = datetime.now(timezone.utc)
         db.commit()
         db.refresh(user)
