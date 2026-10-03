@@ -37,29 +37,34 @@ def _frontend_dist() -> str:
 
 def _auto_seed_real_if_empty() -> bool:
     """First-boot convenience (AUTO_SEED_DATABASE=true): train on the real MoSPI
-    panel and seed the empty database, mirroring what POST /admin/seed-database
-    does by hand. Idempotent: never touches a database that already has rows."""
+    panel and seed the empty database in a background thread so the server binds
+    its port instantly on boot."""
     flag = os.getenv("AUTO_SEED_DATABASE", "true").strip().lower()
     if flag not in ("1", "true", "yes", "on"):
         return False
     from . import models
 
-    with SessionLocal() as db:
-        if db.query(models.Project).count() > 0:
-            print("  AUTO_SEED_DATABASE=true but projects table is not empty; skipping.")
-            return False
-    print("  AUTO_SEED_DATABASE=true: training on the real MoSPI panel and seeding (first boot)...")
-    from .routers.admin import _mirror_to_mongo, _seed_real_database
+    try:
+        with SessionLocal() as db:
+            if db.query(models.Project).count() > 0:
+                print("  AUTO_SEED_DATABASE: projects table is already populated; skipping.")
+                return False
+        print("  AUTO_SEED_DATABASE: starting background training and seeding...")
+        from .routers.admin import _mirror_to_mongo, _seed_real_database
 
-    with SessionLocal() as db:
-        info = _seed_real_database(db)
-        warning = _mirror_to_mongo(db)
-    print(
-        f"  AUTO_SEED_DATABASE: seeded {info['n_projects']} projects, "
-        f"{info['n_snapshots']} snapshots, {info['n_predictions']} predictions, "
-        f"{info['n_shap']} SHAP.{warning}"
-    )
-    return True
+        with SessionLocal() as db:
+            info = _seed_real_database(db)
+            warning = _mirror_to_mongo(db)
+        ml_registry.load_models()
+        print(
+            f"  AUTO_SEED_DATABASE: seeded {info['n_projects']} projects, "
+            f"{info['n_snapshots']} snapshots, {info['n_predictions']} predictions, "
+            f"{info['n_shap']} SHAP.{warning}"
+        )
+        return True
+    except Exception as exc:
+        print(f"  AUTO_SEED_DATABASE background seeding error: {exc}")
+        return False
 
 
 def _health_payload() -> dict:
@@ -102,10 +107,6 @@ async def lifespan(app: FastAPI):
         info = bootstrap(seed_db)
         print(f"  Auth bootstrap: public rows={info['public_rows']}, demo users={info['demo_users']}.")
 
-    # First-boot convenience: seed real data when the database is empty. Runs
-    # before model loading so the freshly trained artifacts are picked up.
-    _auto_seed_real_if_empty()
-
     # Load joblib model artifacts
     loaded = ml_registry.load_models()
     if loaded:
@@ -116,6 +117,10 @@ async def lifespan(app: FastAPI):
     # Start live rolling risk-sync (first pass immediately, then every 5 min)
     start_background_sync()
     print("  Live Risk Sync: background sync thread started (every 300s).")
+
+    # Run background auto-seed without blocking port binding on startup
+    import threading
+    threading.Thread(target=_auto_seed_real_if_empty, daemon=True).start()
 
     yield
     print("  Shutting down MoSPI Dhrishti Backend.")
