@@ -175,7 +175,7 @@ def _shap_items(pred):
     return rows
 
 
-def get_project_detail(db, project_id):
+def get_project_detail(db, project_id, *, include_similar=True):
     project_id = _resolve_project_id(db, project_id)
     p = db.mongo.projects.find_one({"project_id": project_id})
     pred = _latest_prediction(db, project_id)
@@ -203,7 +203,7 @@ def get_project_detail(db, project_id):
     mitigating = [schemas.SHAPItem(**x) for x in shap if x.get("direction") == "decreases_risk"][:2]
     tags = [x.get("tag") for x in db.mongo.remarks_signals.find({"project_id": project_id, "snapshot_month": snap.get("snapshot_month")})]
     deps = get_project_dependencies(db, project_id)
-    similar = get_similar_projects(db, project_id)
+    similar = get_similar_projects(db, project_id) if include_similar else []
     return schemas.ProjectDetail(
         project_id=p["project_id"], sector=p.get("sector"), ministry=p.get("ministry"), implementing_agency=p.get("implementing_agency"),
         original_cost_crore=p.get("original_cost_crore", 0), original_duration_months=p.get("original_duration_months", 0),

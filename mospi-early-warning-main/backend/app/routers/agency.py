@@ -44,7 +44,9 @@ def agency_dashboard(
     """Agency: own project timeline, milestone checklist, upload history, thread."""
     project_ids = _agency_projects(me, db)
     project_id = project_ids[0]
-    detail = get_project_detail(db, project_id)
+    # This screen renders core project facts only; related-project ranking is
+    # available on project detail views and need not delay the agency workspace.
+    detail = get_project_detail(db, project_id, include_similar=False)
 
     subs = (
         db.query(models.MilestoneSubmission)
