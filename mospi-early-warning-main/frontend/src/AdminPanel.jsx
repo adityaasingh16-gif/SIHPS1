@@ -35,6 +35,11 @@ export default function AdminPanel() {
  const [logs, setLogs] = useState([]);
  const [dash, setDash] = useState(null);
  const [notice, setNotice] = useState(null);
+ const [coreLoading, setCoreLoading] = useState(true);
+ const [coreError, setCoreError] = useState("");
+ const [coreReload, setCoreReload] = useState(0);
+ const [auditError, setAuditError] = useState("");
+ const [auditReload, setAuditReload] = useState(0);
 
  const [showCreate, setShowCreate] = useState(false);
  const [form, setForm] = useState({
@@ -58,21 +63,41 @@ export default function AdminPanel() {
   const [auditSince, setAuditSince] = useState("");
 
   useEffect(() => {
-  fetchAdminUsers(token).then(setUsers).catch(() => setUsers([]));
-  fetchAdminDashboard(token).then(setDash).catch(() => setDash(null));
-  }, [token]);
+  let cancelled = false;
+  setCoreLoading(true);
+  setCoreError("");
+  Promise.allSettled([fetchAdminUsers(token), fetchAdminDashboard(token)])
+  .then(([usersResult, dashboardResult]) => {
+  if (cancelled) return;
+  const errors = [];
+  if (usersResult.status === "fulfilled") setUsers(usersResult.value);
+  else errors.push(`Users: ${usersResult.reason?.message || "could not load"}`);
+  if (dashboardResult.status === "fulfilled") setDash(dashboardResult.value);
+  else errors.push(`Dashboard: ${dashboardResult.reason?.message || "could not load"}`);
+  setCoreError(errors.join(" · "));
+  })
+  .finally(() => { if (!cancelled) setCoreLoading(false); });
+  return () => { cancelled = true; };
+  }, [token, coreReload]);
 
   // Refetched separately from the users/dashboard load so changing a filter
   // does not re-request the (much larger) user list.
   useEffect(() => {
+  let cancelled = false;
+  setAuditError("");
   fetchAdminAuditLogs(token, {
   action: auditAction || undefined,
   actor: auditActor || undefined,
   since: auditSince || undefined,
   })
-  .then(setLogs)
-  .catch(() => setLogs([]));
-  }, [token, auditAction, auditActor, auditSince]);
+  .then((data) => { if (!cancelled) setLogs(data); })
+  .catch((err) => {
+  if (cancelled) return;
+  setLogs([]);
+  setAuditError(err.message || "Could not load audit events.");
+  });
+  return () => { cancelled = true; };
+  }, [token, auditAction, auditActor, auditSince, auditReload]);
 
  const flash = (msg) => {
  setNotice(msg);
@@ -156,6 +181,13 @@ export default function AdminPanel() {
  {notice && (
  <div className="rounded-xl border border-risk-low-border bg-risk-low-subtle px-4 py-3 text-sm text-risk-low">
  {notice}
+ </div>
+ )}
+ {coreLoading && <p className="text-xs text-fg-4" role="status">Loading administration overview…</p>}
+ {coreError && (
+ <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-risk-critical-border bg-risk-critical-subtle px-4 py-3 text-sm text-risk-critical" role="alert">
+ <span>Some administration data could not be loaded: {coreError}</span>
+ <button type="button" onClick={() => setCoreReload((n) => n + 1)} className="rounded-lg border border-risk-critical-border px-3 py-1 font-semibold hover:bg-risk-critical/10">Retry</button>
  </div>
  )}
 
@@ -470,6 +502,12 @@ export default function AdminPanel() {
   </button>
   </div>
   </header>
+  {auditError && (
+  <div className="flex flex-wrap items-center justify-between gap-3 border-b border-risk-critical-border bg-risk-critical-subtle px-5 py-2 text-xs text-risk-critical" role="alert">
+  <span>Audit events failed to load: {auditError}</span>
+  <button type="button" onClick={() => setAuditReload((n) => n + 1)} className="rounded-lg border border-risk-critical-border px-2.5 py-1 font-semibold hover:bg-risk-critical/10">Retry audit load</button>
+  </div>
+  )}
  <div className="overflow-x-auto">
  <table className="w-full text-left text-sm">
  <thead className="border-b border-line text-xs uppercase tracking-wide text-fg-4">

@@ -248,8 +248,16 @@ def get_similar_projects(db, project_id, limit=4):
     project_id=_resolve_project_id(db,project_id); target=db.mongo.projects.find_one({"project_id":project_id})
     if not target:return []
     out=[]
-    for p in db.mongo.projects.find({"project_id":{"$ne":project_id}}):
-        pred=_latest_prediction(db,p["project_id"])
+    projects = list(db.mongo.projects.find(
+        {"project_id": {"$ne": project_id}},
+        {"project_id": 1, "sector": 1, "original_cost_crore": 1, "original_duration_months": 1},
+    ))
+    # Fetch each project's latest prediction in one aggregation. The former
+    # per-project find_one made a single detail request issue thousands of
+    # sequential database round trips on the hosted dataset.
+    predictions = _latest_predictions_bulk(db, [p["project_id"] for p in projects])
+    for p in projects:
+        pred=predictions.get(p["project_id"])
         if not pred:continue
         sector_dist=0 if p.get("sector")==target.get("sector") else 1
         cost_dist=abs(p.get("original_cost_crore",0)-target.get("original_cost_crore",0))/(target.get("original_cost_crore",0)+1e-5)

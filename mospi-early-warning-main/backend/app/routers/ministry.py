@@ -56,16 +56,18 @@ def ministry_dashboard(
             .all()
         )
 
-    detail_rows = []
-    for p in projects:
-        detail_rows.append(get_project_detail(db, p.project_id))
-
-    delayed = [d for d in detail_rows if d and (d.composite_risk_score or 0) >= 50]
-    active_projects = [d for d in detail_rows if d and d.status == "Ongoing"]
+    # The project summaries already contain the current risk score, status,
+    # sanctioned budget, and latest expenditure. Reuse them for dashboard
+    # aggregates instead of building a full ProjectDetail for every project.
+    # Detail construction also calculates similar-project recommendations;
+    # doing that inside this loop turned a ministry with hundreds of projects
+    # into thousands of sequential MongoDB reads per page load.
+    delayed = [p for p in projects if (p.composite_risk_score or 0) >= 50]
+    active_projects = [p for p in projects if p.status == "Ongoing"]
 
     from ..crud import _format_date
     alerts = []
-    for d in delayed or []:
+    for d in delayed:
         alerts.append(
             schemas.AlertItem(
                 id=f"MALT_{d.project_id}",
@@ -79,10 +81,13 @@ def ministry_dashboard(
             )
         )
 
-    total_budget = sum(d.original_cost_crore for d in detail_rows if d)
-    spent = sum(d.cumulative_expenditure_crore for d in detail_rows if d)
+    total_budget = sum(p.original_cost_crore or 0 for p in projects)
+    spent = sum(p.cumulative_expenditure_crore or 0 for p in projects)
     utils = (spent / total_budget * 100.0) if total_budget else 0.0
-    avg_risk = (sum(d.composite_risk_score for d in detail_rows if d) / len(detail_rows)) if detail_rows else 0.0
+    avg_risk = (
+        sum(p.composite_risk_score or 0 for p in projects) / len(projects)
+        if projects else 0.0
+    )
 
     milestone_out = []
     for ms in pending_approvals:
@@ -108,7 +113,7 @@ def ministry_dashboard(
         {"label": "Utilised", "value": round(spent, 1)},
     ]
     risk_chart = [
-        {"label": tier, "count": sum(1 for d in detail_rows if d and d.risk_tier == tier)}
+        {"label": tier, "count": sum(1 for p in projects if p.risk_tier == tier)}
         for tier in ["Critical", "High", "Medium", "Low"]
     ]
 

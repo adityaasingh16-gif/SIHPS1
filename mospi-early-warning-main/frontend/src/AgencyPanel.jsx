@@ -1,5 +1,6 @@
 import { useEffect, useState } from"react";
 import {
+ Activity,
  AlertTriangle,
  Building2,
  CheckCircle2,
@@ -16,13 +17,16 @@ export default function AgencyPanel() {
  const [dash, setDash] = useState(null);
  const [loading, setLoading] = useState(true);
  const [notice, setNotice] = useState(null);
+ const [loadError, setLoadError] = useState("");
 
  const load = async () => {
  setLoading(true);
  try {
  setDash(await fetchAgencyDashboard(token));
+ setLoadError("");
  } catch (e) {
  console.warn("Agency dashboard failed:", e);
+ setLoadError(e.message || "Could not load your agency dashboard.");
  } finally {
  setLoading(false);
  }
@@ -42,8 +46,10 @@ export default function AgencyPanel() {
  await submitMilestone(token, payload);
  flash("Milestone submitted for ministry approval.");
  await load();
+ return true;
  } catch (e) {
  flash(`Submit failed: ${e.message ||"unknown error"}`,"err");
+ return false;
  }
  };
 
@@ -52,8 +58,9 @@ export default function AgencyPanel() {
  }
  if (!dash) {
  return (
- <div className="rounded-2xl border border-risk-critical-border bg-risk-critical-subtle p-6 text-sm text-risk-critical">
- Could not load your agency dashboard. Check that your account has the"agency" role with a project scope.
+ <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-risk-critical-border bg-risk-critical-subtle p-6 text-sm text-risk-critical" role="alert">
+ <span>Could not load your agency dashboard: {loadError || "Check that your account has the agency role and a project scope."}</span>
+ <button type="button" onClick={load} disabled={loading} className="rounded-lg border border-risk-critical-border px-3 py-1.5 font-semibold disabled:opacity-50">{loading ?"Retrying…" :"Retry"}</button>
  </div>
  );
  }
@@ -73,11 +80,19 @@ export default function AgencyPanel() {
  <button
  type="button"
  onClick={load}
- className="ml-auto inline-flex items-center gap-1.5 rounded-xl border border-line bg-raised px-3 py-1.5 text-xs font-semibold text-fg-2 transition-colors hover:bg-page"
+ disabled={loading}
+ className="ml-auto inline-flex items-center gap-1.5 rounded-xl border border-line bg-raised px-3 py-1.5 text-xs font-semibold text-fg-2 transition-colors hover:bg-page disabled:opacity-50"
  >
- <RefreshCw className="h-3.5 w-3.5" /> Refresh
+ <RefreshCw className={`h-3.5 w-3.5 ${loading ? "animate-spin" : ""}`} /> {loading ?"Refreshing…" :"Refresh"}
  </button>
  </div>
+
+ {loadError && (
+ <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-risk-critical-border bg-risk-critical-subtle px-4 py-3 text-sm text-risk-critical" role="alert">
+ <span>Dashboard refresh failed: {loadError}</span>
+ <button type="button" onClick={load} disabled={loading} className="rounded-lg border border-risk-critical-border px-3 py-1 font-semibold disabled:opacity-50">Retry</button>
+ </div>
+ )}
 
  {notice && (
  <div
@@ -98,7 +113,7 @@ export default function AgencyPanel() {
 
  {/* KPIs */}
  <div className="grid gap-4 sm:grid-cols-4">
- <Kpi icon={<ActivityIcon />} label="Physical progress" value={`${detail.physical_progress_pct ??"—"}%`} />
+ <Kpi icon={<Activity className="h-5 w-5" />} label="Physical progress" value={`${detail.physical_progress_pct ??"—"}%`} />
  <Kpi icon={<Flag className="h-5 w-5" />} label="Risk tier" value={detail.risk_tier ??"—"} tone="text-risk-high" />
  <Kpi icon={<AlertTriangle className="h-5 w-5" />} label="Delays flagged" value={tracked.filter((m) => m.flagged_delay).length} tone="text-risk-medium" />
  <Kpi icon={<CheckCircle2 className="h-5 w-5" />} label="Approved" value={tracked.filter((m) => m.status ==="approved").length} tone="text-risk-low" />
@@ -176,11 +191,6 @@ export default function AgencyPanel() {
  );
 }
 
-function ActivityIcon() {
- const Activity = require("lucide-react").Activity;
- return <Activity className="h-5 w-5" />;
-}
-
 function Section({ title, children }) {
  return (
  <section className="rounded-2xl border border-line bg-raised">
@@ -221,18 +231,25 @@ function MilestoneForm({ onSubmit }) {
  const [spent, setSpent] = useState("");
  const [flag, setFlag] = useState(false);
  const [delayNote, setDelayNote] = useState("");
+ const [submitting, setSubmitting] = useState(false);
 
- const submit = (e) => {
+ const submit = async (e) => {
  e.preventDefault();
- if (!title.trim() || spent ==="") return;
- onSubmit({
+ if (submitting || !title.trim() || spent ==="") return;
+ setSubmitting(true);
+ try {
+ const saved = await onSubmit({
  title: title.trim(),
  description: description.trim() || title.trim(),
  budget_spent_crore: Number(spent),
  flagged_delay: flag,
  delay_note: flag ? delayNote.trim() : null,
  });
+ if (!saved) return;
  setTitle(""); setDescription(""); setSpent(""); setFlag(false); setDelayNote("");
+ } finally {
+ setSubmitting(false);
+ }
  };
 
  return (
@@ -275,9 +292,10 @@ function MilestoneForm({ onSubmit }) {
  )}
  <button
  type="submit"
- className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-brand px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-hover sm:col-span-2"
+ disabled={submitting}
+ className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-brand px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-hover disabled:opacity-50 sm:col-span-2"
  >
- <Send className="h-4 w-4" /> Submit for ministry approval
+ <Send className="h-4 w-4" /> {submitting ?"Submitting…" :"Submit for ministry approval"}
  </button>
  </form>
  );

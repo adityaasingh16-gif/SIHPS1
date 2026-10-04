@@ -16,13 +16,17 @@ export default function MinistryPanel() {
  const [dash, setDash] = useState(null);
  const [loading, setLoading] = useState(true);
  const [busyId, setBusyId] = useState(null);
+ const [loadError, setLoadError] = useState("");
+ const [actionError, setActionError] = useState("");
 
  const load = async () => {
  setLoading(true);
  try {
  setDash(await fetchMinistryDashboard(token));
+ setLoadError("");
  } catch (e) {
  console.warn("Ministry dashboard failed:", e);
+ setLoadError(e.message || "Could not load your ministry dashboard.");
  } finally {
  setLoading(false);
  }
@@ -34,9 +38,12 @@ export default function MinistryPanel() {
 
  const decide = async (id, approve) => {
  setBusyId(id);
+ setActionError("");
  try {
  await decideMilestone(token, id, approve, approve ?"Approved by ministry" :"Rejected by ministry");
  await load();
+ } catch (e) {
+ setActionError(e.message || "The approval decision could not be saved.");
  } finally {
  setBusyId(null);
  }
@@ -47,8 +54,9 @@ export default function MinistryPanel() {
  }
  if (!dash) {
  return (
- <div className="rounded-2xl border border-risk-critical-border bg-risk-critical-subtle p-6 text-sm text-risk-critical">
- Could not load your ministry dashboard. Check that your account has the"ministry" role and a ministry scope.
+ <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-risk-critical-border bg-risk-critical-subtle p-6 text-sm text-risk-critical" role="alert">
+ <span>Could not load your ministry dashboard: {loadError || "Check that your account has the ministry role and a ministry scope."}</span>
+ <button type="button" onClick={load} disabled={loading} className="rounded-lg border border-risk-critical-border px-3 py-1.5 font-semibold disabled:opacity-50">{loading ?"Retrying…" :"Retry"}</button>
  </div>
  );
  }
@@ -64,11 +72,20 @@ export default function MinistryPanel() {
  <button
  type="button"
  onClick={load}
- className="ml-auto inline-flex items-center gap-1.5 rounded-xl border border-line bg-raised px-3 py-1.5 text-xs font-semibold text-fg-2 transition-colors hover:bg-page"
+ disabled={loading}
+ className="ml-auto inline-flex items-center gap-1.5 rounded-xl border border-line bg-raised px-3 py-1.5 text-xs font-semibold text-fg-2 transition-colors hover:bg-page disabled:opacity-50"
  >
- <RefreshCw className="h-3.5 w-3.5" /> Refresh
+ <RefreshCw className={`h-3.5 w-3.5 ${loading ? "animate-spin" : ""}`} /> {loading ?"Refreshing…" :"Refresh"}
  </button>
  </div>
+
+ {loadError && (
+ <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-risk-critical-border bg-risk-critical-subtle px-4 py-3 text-sm text-risk-critical" role="alert">
+ <span>Dashboard refresh failed: {loadError}</span>
+ <button type="button" onClick={load} disabled={loading} className="rounded-lg border border-risk-critical-border px-3 py-1 font-semibold disabled:opacity-50">Retry</button>
+ </div>
+ )}
+ {actionError && <div className="rounded-xl border border-risk-critical-border bg-risk-critical-subtle px-4 py-3 text-sm text-risk-critical" role="alert">Decision failed: {actionError}</div>}
 
  {/* KPIs */}
  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
