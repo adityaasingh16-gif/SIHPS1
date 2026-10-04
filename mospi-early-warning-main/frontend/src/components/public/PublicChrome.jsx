@@ -236,6 +236,15 @@ export function PublicMasthead({ loggedInUser, onLogin, onLogout, onOpenDirector
 
           {loggedInUser ? (
             <>
+              {loggedInUser.role !== "viewer" && (
+                <Link
+                  to="/workspace"
+                  className="rounded-full px-4 py-2.5 text-[11px] font-bold uppercase tracking-wider text-white transition-colors hover:opacity-90"
+                  style={{ backgroundColor: NAVY }}
+                >
+                  Workspace →
+                </Link>
+              )}
               <span className="inline-flex items-center gap-2 rounded-full border border-line-strong bg-page px-4 py-2.5 text-[11px] font-bold uppercase tracking-wider text-fg-2">
                 {loggedInUser.name || loggedInUser.email}
               </span>

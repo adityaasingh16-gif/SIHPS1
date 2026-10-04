@@ -18,12 +18,23 @@ async function readApiJson(response, endpoint) {
   const contentType = response.headers.get("content-type") || "";
   if (!contentType.toLowerCase().includes("application/json")) {
     throw new Error(
-      `API backend is not connected for ${endpoint}. Configure VITE_API_URL with the deployed backend URL, allow this site in backend CORS_ORIGINS, and redeploy the frontend.`,
+      `Service is temporarily waking up or unavailable. Please retry in a moment.`,
     );
   }
-  const data = await response.json();
+  let data;
+  try {
+    data = await response.json();
+  } catch {
+    throw new Error("Unable to parse server response. Please retry.");
+  }
   if (!response.ok) {
-    throw new Error(data?.detail || `API error: ${response.status} ${response.statusText}`);
+    let msg = data?.detail;
+    if (Array.isArray(msg)) {
+      msg = msg.map((d) => d?.msg || JSON.stringify(d)).join("; ");
+    } else if (typeof msg === "object" && msg !== null) {
+      msg = JSON.stringify(msg);
+    }
+    throw new Error(msg || `Request failed with status ${response.status}`);
   }
   return data;
 }
@@ -674,7 +685,7 @@ export async function askAssistantStream(message, history = [], { onDelta, onMet
   } catch {
     res = null;
   }
-  if ((!res || !res.ok) && !url.startsWith("http://127.0.0.1") && !url.startsWith("http://localhost")) {
+  if (import.meta.env.DEV && (!res || !res.ok) && !url.startsWith("http://127.0.0.1") && !url.startsWith("http://localhost")) {
     try {
       res = await post("http://127.0.0.1:8000/chat/stream");
     } catch {
@@ -806,9 +817,14 @@ export async function askLocalAssistant(message, history = [], token = null, { o
     return res ? { failed: true, unauthorized: res.status === 401 || res.status === 403 } : false;
   }
 
-  const data = await res.json();
-  onDelta?.(data.answer ?? "");
-  onMeta?.({ sources: data.sources ?? [], model: data.model });
+  let data;
+  try {
+    data = await res.json();
+  } catch {
+    return { failed: true, malformed: true };
+  }
+  onDelta?.(data?.answer ?? "");
+  onMeta?.({ sources: data?.sources ?? [], model: data?.model });
   return true;
 }
 

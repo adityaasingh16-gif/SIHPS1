@@ -88,6 +88,7 @@ export default function LoginPage({ language, setLanguage, onBackBrowse }) {
 
  const handleCreateAccount = async (e) => {
  e.preventDefault();
+ if (loading) return;
  setLoading(true);
  setError(null);
  try {
@@ -100,6 +101,7 @@ export default function LoginPage({ language, setLanguage, onBackBrowse }) {
  };
 
   const handleDemoLogin = async (role) => {
+    if (loading) return;
     setLoading(true);
     setError(null);
     try {
@@ -113,6 +115,7 @@ export default function LoginPage({ language, setLanguage, onBackBrowse }) {
 
   const handleLoginPublic = async (e) => {
  e.preventDefault();
+ if (loading) return;
  setLoading(true);
  setError(null);
  try {

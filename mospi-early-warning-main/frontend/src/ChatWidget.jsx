@@ -68,36 +68,48 @@ export default function ChatWidget({ backendOnline }) {
       return;
     }
 
-    const res = await askLocalAssistant(question, history, token, {
-      onDelta: (delta) =>
-        setMessages((m) => {
-          const arr = [...m];
-          const last = arr[arr.length - 1];
-          if (last && last.role === "assistant" && last.streaming) {
-            arr[arr.length - 1] = { ...last, content: last.content + delta };
-          } else {
-            arr.push({ role: "assistant", content: delta, streaming: true });
-          }
-          return arr;
-        }),
-      onMeta: (meta) =>
-        setMessages((m) => {
-          const arr = [...m];
-          const idx = arr.length - 1;
-          if (idx >= 0 && arr[idx].role === "assistant") {
-            arr[idx] = { ...arr[idx], streaming: false, sources: meta?.sources || [] };
-          }
-          return arr;
-        }),
-    });
-    setLoading(false);
+    try {
+      const res = await askLocalAssistant(question, history, token, {
+        onDelta: (delta) =>
+          setMessages((m) => {
+            const arr = [...m];
+            const last = arr[arr.length - 1];
+            if (last && last.role === "assistant" && last.streaming) {
+              arr[arr.length - 1] = { ...last, content: last.content + delta };
+            } else {
+              arr.push({ role: "assistant", content: delta, streaming: true });
+            }
+            return arr;
+          }),
+        onMeta: (meta) =>
+          setMessages((m) => {
+            const arr = [...m];
+            const idx = arr.length - 1;
+            if (idx >= 0 && arr[idx].role === "assistant") {
+              arr[idx] = { ...arr[idx], streaming: false, sources: meta?.sources || [] };
+            }
+            return arr;
+          }),
+      });
 
-    if (res?.failed) {
-      setMessages((m) => [...m, {
-        role: "assistant",
-        content: res.unauthorized ? t("chat.signInAgain") : t("chat.localUnavailable"),
-      }]);
-    } else if (res === false) {
+      if (res?.failed) {
+        setMessages((m) => [
+          ...m,
+          {
+            role: "assistant",
+            content: res.unauthorized ? t("chat.signInAgain") : t("chat.localUnavailable"),
+          },
+        ]);
+      } else if (res === false) {
+        setMessages((m) => [
+          ...m,
+          {
+            role: "assistant",
+            content: t("chat.localUnavailable"),
+          },
+        ]);
+      }
+    } catch {
       setMessages((m) => [
         ...m,
         {
@@ -105,6 +117,8 @@ export default function ChatWidget({ backendOnline }) {
           content: t("chat.localUnavailable"),
         },
       ]);
+    } finally {
+      setLoading(false);
     }
   };
 

@@ -41,7 +41,9 @@ export function AuthProvider({ children }) {
     }
     if (error) setBootError(error);
     // Clean the query string so refreshes don't replay the redirect.
-    window.history.replaceState({}, document.title, window.location.pathname);
+    if (urlToken || error) {
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
   }, []);
 
   // Resolve token -> user.

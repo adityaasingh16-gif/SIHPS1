@@ -130,6 +130,8 @@ class DemoLoginRequest(BaseModel):
 
 @router.post("/demo-login", response_model=schemas.LoginResponse, tags=["Authentication"])
 def demo_login_endpoint(payload: DemoLoginRequest, db: Session = Depends(get_db)):
+    if not AUTH_DEMO_MODE:
+        raise HTTPException(status_code=404, detail="Demo login is disabled in this deployment.")
     req_role = payload.role.strip().lower()
     if req_role not in {"admin", "ministry", "agency", "contractor", "viewer", "citizen"}:
         raise HTTPException(status_code=400, detail="Unknown demo role.")

@@ -69,7 +69,9 @@ export default function App() {
     );
   }
 
-  if (location.pathname === "/login") return <Navigate to="/" replace />;
+  if (location.pathname === "/login") {
+    return <Navigate to={user?.role === "viewer" ? "/" : "/workspace"} replace />;
+  }
 
   return (
     <Routes>
