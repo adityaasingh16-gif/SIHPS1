@@ -9,6 +9,7 @@ import { riskTrendOverall } from "../../lib/mockChartData";
 import { progressData } from "../../lib/mockChartData";
 import { riskDistribution } from "../../lib/mockChartData";
 import { ChartTooltip } from "../../components/ui/ChartTooltip";
+import { Sparkline } from "../../components/ui/Sparkline";
 import { HeroKPI, CompactStat } from "../../components/ui/HeroKPI";
 import { CostEscalationChart } from "../../components/ui/CostEscalationChart";
 import { RiskBadge } from "../../components/ui/RiskBadge";
@@ -75,6 +76,16 @@ function DashboardHome({ setSelectedProject, projectsList = [], setActive }) {
  const criticalCount = sourceProjects.filter((p) => p.risk >= 75).length;
  const highRiskCount = sourceProjects.filter((p) => p.risk >= 50 && p.risk < 75).length;
  const reviewCount = sourceProjects.filter((p) => p.risk >= 70).length;
+
+ // Highest-risk projects feed the AI brief: real rows, highest score first.
+ const topCritical = useMemo(
+ () =>
+ [...sourceProjects]
+ .filter((p) => (p.risk ?? 0) >= 75)
+ .sort((a, b) => (b.risk ?? 0) - (a.risk ?? 0))
+ .slice(0, 3),
+ [sourceProjects]
+ );
 
  return (
  <div className="space-y-6">
@@ -282,7 +293,7 @@ function DashboardHome({ setSelectedProject, projectsList = [], setActive }) {
   ].map((s) => (
  <div
  key={s.label}
- className="rounded-xl border border-line bg-sunken px-4 py-3"
+ className="kpi-lift rounded-xl border border-line bg-sunken px-4 py-3"
  >
  <p
  className={`text-2xl font-bold tabular-nums text-risk-${s.tone}`}
@@ -290,8 +301,84 @@ function DashboardHome({ setSelectedProject, projectsList = [], setActive }) {
  {s.value.toLocaleString("en-IN")}
  </p>
  <p className="mt-0.5 text-xs text-fg-3">{s.label}</p>
+ <div
+ className="mt-2 h-1 overflow-hidden rounded-full bg-line"
+ role="img"
+ aria-label={`${s.label}: ${s.value} of ${sourceProjects.length}`}
+ >
+ <div
+ className={`h-full rounded-full bg-risk-${s.tone} transition-all duration-500`}
+ style={{ width: `${sourceProjects.length ? Math.round((s.value / sourceProjects.length) * 100) : 0}%` }}
+ />
+ </div>
  </div>
  ))}
+ </div>
+ </section>
+
+ <section className="rise rise-3 relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#0a1c3f] via-[#0f2a5c] to-[#1d4ed8] p-5 text-white shadow-card md:p-6">
+ <div aria-hidden="true" className="cmd-grid absolute inset-0" />
+ <div className="relative">
+ <div className="flex flex-wrap items-center justify-between gap-2">
+ <p className="text-[11px] font-extrabold uppercase tracking-widest text-cyan-300">
+ Dhrishti AI · Portfolio brief
+ </p>
+ {hasLive && (
+ <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-400/15 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-emerald-300">
+ <span className="dot-live h-1.5 w-1.5 rounded-full bg-emerald-400" aria-hidden="true" />
+ {t("dash.liveBadge")}
+ </span>
+ )}
+ </div>
+ <p className="mt-2 text-lg font-bold leading-snug md:text-xl">
+ {(criticalCount + highRiskCount).toLocaleString("en-IN")} projects need attention this cycle.
+ </p>
+ <div className="mt-4 grid gap-4 lg:grid-cols-[1fr_auto] lg:items-center">
+ <ul className="space-y-2">
+ {topCritical.map((p) => (
+ <li key={p.id}>
+ <button
+ type="button"
+ onClick={() => setSelectedProject && setSelectedProject(p)}
+ className="pressable flex w-full items-center gap-3 rounded-xl border border-white/15 bg-white/10 px-3.5 py-2.5 text-left transition hover:bg-white/20"
+ >
+ <span className="text-lg font-extrabold tabular-nums text-red-300">{p.risk}</span>
+ <span className="min-w-0 flex-1">
+ <span className="block truncate text-sm font-semibold">{p.name}</span>
+ <span className="block truncate text-[11px] text-slate-300">{p.sector} · {p.progress}% complete</span>
+ </span>
+ </button>
+ </li>
+ ))}
+ {topCritical.length === 0 && (
+ <li className="text-sm text-slate-300">No critical projects in the current set.</li>
+ )}
+ </ul>
+ <div className="rounded-xl border border-white/15 bg-white/10 p-4">
+ <Sparkline
+ points={riskTrendOverall.map((d) => d.overall)}
+ width={180}
+ height={44}
+ stroke="#67e8f9"
+ label="Portfolio risk trajectory"
+ />
+ <p className="mt-1 text-[11px] text-slate-300">Portfolio risk trajectory</p>
+ </div>
+ </div>
+ {topCritical.length > 0 && (
+ <div className="mt-4 flex flex-wrap items-center gap-3 border-t border-white/15 pt-4">
+ <p className="text-[13px] text-slate-200">
+ Recommended: prioritise <b>{topCritical[0].name}</b> for milestone-level review.
+ </p>
+ <button
+ type="button"
+ onClick={() => setActive && setActive("warnings")}
+ className="pressable ml-auto rounded-lg bg-white px-4 py-2 text-xs font-bold text-[#0f2a5c] transition hover:bg-slate-200"
+ >
+ Open early warnings
+ </button>
+ </div>
+ )}
  </div>
  </section>
 

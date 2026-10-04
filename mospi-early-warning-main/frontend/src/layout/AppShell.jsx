@@ -1,7 +1,6 @@
 import { createContext, useCallback, useContext, useState } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { LogOut, ShieldCheck } from "lucide-react";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Bell, FileText, Home, LogOut, Map as MapIcon, ShieldCheck, Target } from "lucide-react";
 
 import { useAuth } from "../AuthContext";
 import { EnglishOnlyScope, useLanguage, useTheme } from "../hooks/usePreferences";
@@ -289,7 +288,7 @@ export function AppShell({ readOnly = false, bare = false }) {
             </>
           )}
 
-          <div className="mx-auto max-w-[1700px] p-4 md:p-6">
+          <div className="mx-auto max-w-[1700px] p-4 pb-24 md:p-6">
             <RouteErrorBoundary locationKey={location.pathname}>
               <div key={location.pathname} className="page-enter">
                 <Outlet />
@@ -308,6 +307,53 @@ export function AppShell({ readOnly = false, bare = false }) {
             )}
           </div>
         </main>
+
+        {/* Mobile bottom navigation: the sidebar becomes a drawer on phones,
+            so the five primary destinations get a thumb-reachable bar with
+            safe-area padding instead. Desktop is untouched (md:hidden). */}
+        {!bare && (
+          <nav
+            aria-label={t("common.primaryNav")}
+            className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-[#0a1c3f]/95 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
+          >
+            <div className="grid grid-cols-5">
+              {[
+                { id: "dashboard", label: t("shell.nav.dashboard"), icon: Home },
+                {
+                  id: "warnings",
+                  label: t("shell.nav.earlyWarnings"),
+                  icon: Bell,
+                  badge: liveAlerts.filter((a) => a.severity === "Critical").length,
+                },
+                { id: "projects", label: t("shell.nav.highValue"), icon: Target },
+                { id: "states", label: t("shell.nav.stateWise"), icon: MapIcon },
+                { id: "reports", label: t("shell.nav.reports"), icon: FileText },
+              ].map((item) => {
+                const Icon = item.icon;
+                const selected = activeSection === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => handleNavigate(item.id)}
+                    aria-current={selected ? "page" : undefined}
+                    className={`relative flex min-h-[56px] flex-col items-center justify-center gap-0.5 text-[10px] font-semibold transition ${
+                      selected ? "text-cyan-300" : "text-slate-400"
+                    }`}
+                  >
+                    {item.badge > 0 && (
+                      <span className="absolute right-1/2 top-1.5 flex h-4 min-w-4 translate-x-4 items-center justify-center rounded-full bg-risk-critical px-1 text-[9px] font-bold text-white">
+                        {item.badge}
+                      </span>
+                    )}
+                    <Icon size={20} aria-hidden="true" />
+                    {item.label}
+                  </button>
+                );
+              })}
+            </div>
+          </nav>
+        )}
 
         {selectedProject && (
           <ProjectModal

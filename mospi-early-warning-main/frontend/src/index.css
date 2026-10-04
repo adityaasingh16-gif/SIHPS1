@@ -964,6 +964,29 @@ tbody tr {
   }
 }
 
+/* Filter chips: pop in on apply, instant out on dismiss. */
+@keyframes chip-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.chip-enter {
+  animation: chip-in 200ms var(--ease-out) both;
+}
+
+/* Page-level horizontal overflow guard: clip (not hidden) so sticky
+   headers and drawers keep working while stray wide content can never
+   push the viewport sideways on phones. */
+html,
+body {
+  overflow-x: clip;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .page-enter,
   .popover-enter,
@@ -973,7 +996,8 @@ tbody tr {
   .toast-bar,
   .nav-label,
   .bar-enter,
-  .dot-live {
+  .dot-live,
+  .chip-enter {
     animation: none;
   }
   .btn:active:not(:disabled),

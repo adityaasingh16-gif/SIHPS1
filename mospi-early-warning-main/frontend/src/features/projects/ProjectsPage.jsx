@@ -23,12 +23,44 @@ const RISK_TIERS = [
 ];
 const ALL = "all";
 
+/** Shareable filter state: sector/risk/sort live in the URL (?sector=&risk=&sort=)
+ *  via replaceState, so filtered views are bookmarkable without a re-render
+ *  loop. Search stays in shell state (shared with the topbar) and is shown as
+ *  a chip but not written to the URL. */
+function readParams() {
+ try {
+ return new URLSearchParams(window.location.search);
+ } catch {
+ return new URLSearchParams();
+ }
+}
+
+function syncUrl({ sector, risk, sortBy }) {
+ try {
+ const url = new URL(window.location.href);
+ const p = url.searchParams;
+ if (sector && sector !== ALL) p.set("sector", sector);
+ else p.delete("sector");
+ if (risk && risk !== ALL) p.set("risk", risk);
+ else p.delete("risk");
+ if (sortBy && sortBy !== "priority") p.set("sort", sortBy);
+ else p.delete("sort");
+ const qs = p.toString();
+ window.history.replaceState(null, "", `${url.pathname}${qs ? `?${qs}` : ""}${url.hash}`);
+ } catch {
+ /* Restricted contexts (embedded previews): filters keep working locally. */
+ }
+}
+
 
 function ProjectsPage({ search ="", setSearch, setSelectedProject, projectsList = [] }) {
   const t = useT();
   const riskLabel = useRiskLabel();
-  const [sector, setSector] = useState(ALL);
-  const [risk, setRisk] = useState(ALL);
+  const [sector, setSector] = useState(() => readParams().get("sector") || ALL);
+  const [risk, setRisk] = useState(() => {
+    const r = readParams().get("risk");
+    return RISK_TIERS.includes(r) ? r : ALL;
+  });
 
   const sourceProjects = projectsList.length > 0 ? projectsList : projects;
   const sectors = [ALL, ...new Set(sourceProjects.map((p) => p.sector).filter(Boolean))];
@@ -58,7 +90,7 @@ function ProjectsPage({ search ="", setSearch, setSelectedProject, projectsList 
  return map;
  }, [sourceProjects]);
 
- const [sortBy, setSortBy] = useState("priority");
+ const [sortBy, setSortBy] = useState(() => readParams().get("sort") || "priority");
  const [visibleCount, setVisibleCount] = useState(12);
 
  const sorted = useMemo(() => {
@@ -136,6 +168,39 @@ function ProjectsPage({ search ="", setSearch, setSelectedProject, projectsList 
   [sorted, riskLabel],
   );
 
+  // Filter writers keep the URL in sync (shareable views) without pushing
+  // history entries — replaceState only, so back-button behaviour is intact.
+  const applySector = (value) => {
+    setSector(value);
+    syncUrl({ sector: value, risk, sortBy });
+  };
+  const applyRisk = (value) => {
+    setRisk(value);
+    syncUrl({ sector, risk: value, sortBy });
+  };
+  const applySort = (value) => {
+    setSortBy(value);
+    syncUrl({ sector, risk, sortBy: value });
+  };
+  const clearAll = () => {
+    if (setSearch) setSearch("");
+    setSector(ALL);
+    setRisk(ALL);
+    syncUrl({ sector: ALL, risk: ALL, sortBy });
+  };
+
+  const activeChips = [
+    ...(sector !== ALL
+      ? [{ key: "sector", text: `${t("projects.filterBySector")}: ${sector}`, clear: () => applySector(ALL) }]
+      : []),
+    ...(risk !== ALL
+      ? [{ key: "risk", text: `${t("projects.filterByRisk")}: ${t(risk)}`, clear: () => applyRisk(ALL) }]
+      : []),
+    ...(search
+      ? [{ key: "search", text: `\u201c${search}\u201d`, clear: () => setSearch && setSearch("") }]
+      : []),
+  ];
+
   return (
   <div className="space-y-6">
   <PageHeader
@@ -168,7 +233,7 @@ function ProjectsPage({ search ="", setSearch, setSelectedProject, projectsList 
  <span className="sr-only">{t("projects.filterBySector")}</span>
  <select
  value={sector}
- onChange={(e) => setSector(e.target.value)}
+ onChange={(e) => applySector(e.target.value)}
  className="w-full cursor-pointer appearance-none rounded-xl border border-line bg-page py-2 pl-3 pr-9 text-sm font-medium text-fg outline-none transition focus:border-brand focus:ring-2 focus:ring-brand-subtle"
  >
  {sectors.map((s) => (
@@ -187,7 +252,7 @@ function ProjectsPage({ search ="", setSearch, setSelectedProject, projectsList 
  <span className="sr-only">{t("projects.filterByRisk")}</span>
  <select
  value={risk}
- onChange={(e) => setRisk(e.target.value)}
+ onChange={(e) => applyRisk(e.target.value)}
  className="w-full cursor-pointer appearance-none rounded-xl border border-line bg-page py-2 pl-3 pr-9 text-sm font-medium text-fg outline-none transition focus:border-brand focus:ring-2 focus:ring-brand-subtle"
  >
  <option className="bg-raised text-fg" value={ALL}>
@@ -206,6 +271,27 @@ function ProjectsPage({ search ="", setSearch, setSelectedProject, projectsList 
  </label>
  </div>
 
+ {activeChips.length > 0 && (
+ <div className="flex flex-wrap items-center gap-2 px-1" aria-live="polite">
+ {activeChips.map((chip) => (
+ <span
+ key={chip.key}
+ className="chip-enter inline-flex items-center gap-1.5 rounded-full border border-brand-border bg-brand-subtle py-1 pl-3 pr-1.5 text-xs font-semibold text-brand-subtle-fg"
+ >
+ {chip.text}
+ <button
+ type="button"
+ onClick={chip.clear}
+ aria-label={t("shell.clearSearch")}
+ className="pressable rounded-full bg-brand-border/60 px-1.5 text-[11px] leading-tight"
+ >
+ ×
+ </button>
+ </span>
+ ))}
+ </div>
+ )}
+
  <div className="flex flex-col gap-3 px-1 text-xs text-fg-3 md:flex-row md:items-center md:justify-between">
  <span>
  {t("projects.showing", { visible: visible.length, total: filtered.length })}
@@ -219,7 +305,7 @@ function ProjectsPage({ search ="", setSearch, setSelectedProject, projectsList 
  <div className="flex flex-wrap items-center gap-2">
  <select
  value={sortBy}
- onChange={(e) => setSortBy(e.target.value)}
+ onChange={(e) => applySort(e.target.value)}
  aria-label={t("projects.sortLabel")}
  className="rounded-xl border border-line bg-raised px-3 py-2 text-xs font-semibold text-fg-2 outline-none"
  >
@@ -238,11 +324,7 @@ function ProjectsPage({ search ="", setSearch, setSelectedProject, projectsList 
 
  {(search || sector !== ALL || risk !== ALL) && (
  <button
- onClick={() => {
- if (setSearch) setSearch("");
- setSector(ALL);
- setRisk(ALL);
- }}
+ onClick={clearAll}
  className="font-semibold text-brand hover:underline"
  >
  {t("projects.resetFilters")}
@@ -336,11 +418,7 @@ function ProjectsPage({ search ="", setSearch, setSelectedProject, projectsList 
    title={t("projects.noMatchTitle")}
    description={emptyDescription}
    actionLabel={t("projects.clearFilters")}
-   onAction={() => {
-   if (setSearch) setSearch("");
-   setSector(ALL);
-   setRisk(ALL);
-   }}
+   onAction={clearAll}
    hint={
    sector !== ALL || risk !== ALL || search
    ? t("projects.filtersStillApplied")
