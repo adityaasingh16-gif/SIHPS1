@@ -20,6 +20,7 @@ if PARENT_DIR not in sys.path:
 load_dotenv()
 
 from .database import engine, Base, SessionLocal, mongo_db, MONGO_URI, mongo_ping, create_mongo_indexes
+from .mongo_store import restore_sql_cache_from_mongo
 from .ml_loader import ml_registry
 from .routers import projects, simulate, optimize, alerts, comparison, admin, auth, admin_users, admin_ops, ministry, agency, public, graph, mongo, reports, risk, security, groq_chat
 from .bootstrap import bootstrap
@@ -33,38 +34,6 @@ def _frontend_dist() -> str:
     return os.getenv("FRONTEND_DIST") or os.path.abspath(
         os.path.join(PARENT_DIR, "..", "frontend", "dist")
     )
-
-
-def _auto_seed_real_if_empty() -> bool:
-    """First-boot convenience (AUTO_SEED_DATABASE=true): train on the real MoSPI
-    panel and seed the empty database in a background thread so the server binds
-    its port instantly on boot."""
-    flag = os.getenv("AUTO_SEED_DATABASE", "true").strip().lower()
-    if flag not in ("1", "true", "yes", "on"):
-        return False
-    from . import models
-
-    try:
-        with SessionLocal() as db:
-            if db.query(models.Project).count() > 0:
-                print("  AUTO_SEED_DATABASE: projects table is already populated; skipping.")
-                return False
-        print("  AUTO_SEED_DATABASE: starting background training and seeding...")
-        from .routers.admin import _mirror_to_mongo, _seed_real_database
-
-        with SessionLocal() as db:
-            info = _seed_real_database(db)
-            warning = _mirror_to_mongo(db)
-        ml_registry.load_models()
-        print(
-            f"  AUTO_SEED_DATABASE: seeded {info['n_projects']} projects, "
-            f"{info['n_snapshots']} snapshots, {info['n_predictions']} predictions, "
-            f"{info['n_shap']} SHAP.{warning}"
-        )
-        return True
-    except Exception as exc:
-        print(f"  AUTO_SEED_DATABASE background seeding error: {exc}")
-        return False
 
 
 def _health_payload() -> dict:
@@ -102,6 +71,13 @@ async def lifespan(app: FastAPI):
     Base.metadata.create_all(bind=engine)
     print("  Compatibility tables initialized.")
 
+    # SQLite is ephemeral on Render. Restore its compatibility cache from the
+    # existing Mongo source of truth before rebuilding the public projection.
+    # This is a data copy only: model artifacts and training data are untouched.
+    with SessionLocal() as seed_db:
+        restored = restore_sql_cache_from_mongo(seed_db)
+        print(f"  SQL cache recovery: {restored}.")
+
     # Bootstrap auth + public-safe dataset (idempotent)
     with SessionLocal() as seed_db:
         info = bootstrap(seed_db)
@@ -118,9 +94,9 @@ async def lifespan(app: FastAPI):
     start_background_sync()
     print("  Live Risk Sync: background sync thread started (every 300s).")
 
-    # Run background auto-seed without blocking port binding on startup
-    import threading
-    threading.Thread(target=_auto_seed_real_if_empty, daemon=True).start()
+    # Deliberately do not auto-seed or retrain on startup. An empty SQL cache
+    # must never trigger model regeneration; Mongo recovery above is the only
+    # automatic project-data recovery path.
 
     yield
     print("  Shutting down MoSPI Dhrishti Backend.")

@@ -1,4 +1,4 @@
-import { useMemo, useState } from"react";
+import { useEffect, useMemo, useState } from"react";
 import {
  AlertTriangle,
  ArrowLeft,
@@ -58,8 +58,21 @@ export default function LoginPage({ language, setLanguage, onBackBrowse }) {
  const [form, setForm] = useState({ name:"", email:"", password:"" });
  const [loading, setLoading] = useState(false);
  const [error, setError] = useState(null);
+ const [demoLoginEnabled, setDemoLoginEnabled] = useState(false);
 
  const t = useMemo(() => (key, vars) => translate(language, key, vars), [language]);
+
+ useEffect(() => {
+   let active = true;
+   checkAuthAvailability()
+     .then((availability) => {
+       if (active) setDemoLoginEnabled(Boolean(availability?.demo_login_enabled));
+     })
+     .catch(() => {
+       if (active) setDemoLoginEnabled(false);
+     });
+   return () => { active = false; };
+ }, []);
 
  const goToGoogle = async (intent) => {
  setLoading(true);
@@ -77,7 +90,7 @@ export default function LoginPage({ language, setLanguage, onBackBrowse }) {
  }
  };
 
- const showDemoLogin = true;
+ const showDemoLogin = demoLoginEnabled;
 
  const setAuth = (res) => {
  if (res?.token) {
