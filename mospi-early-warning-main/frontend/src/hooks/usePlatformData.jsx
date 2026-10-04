@@ -1,4 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { checkBackendHealth, fetchAlerts, fetchProjects } from "../api";
 import { alerts as seedAlerts, projects as seedProjects } from "../data";
 
@@ -21,6 +22,8 @@ const REFRESH_MS = 300000;
  * the UI whether it is looking at live or demo figures.
  */
 export function PlatformDataProvider({ children }) {
+  const location = useLocation();
+  const isRoleWorkspace = location.pathname.replace(/\/+$/, "") === "/workspace";
   const [projectsList, setProjectsList] = useState(seedProjects);
   const [liveAlerts, setLiveAlerts] = useState(seedAlerts);
   const [backendStatus, setBackendStatus] = useState({
@@ -44,6 +47,15 @@ export function PlatformDataProvider({ children }) {
     try {
       setBackendStatus(await checkBackendHealth());
 
+      // Role workspace panels load their own scoped data. Pulling the full
+      // portfolio and alert feed here adds unrelated MongoDB work to every
+      // Admin, Ministry, and Agency login.
+      if (isRoleWorkspace) {
+        setLastUpdated(new Date().toLocaleString());
+        setSyncError(null);
+        return;
+      }
+
       const projectData = await fetchProjects();
       if (projectData && projectData.length > 0) {
         setProjectsList(projectData);
@@ -63,7 +75,7 @@ export function PlatformDataProvider({ children }) {
     } finally {
       setIsRefreshing(false);
     }
-  }, []);
+  }, [isRoleWorkspace]);
 
   useEffect(() => {
     let stop = false;
@@ -78,7 +90,7 @@ export function PlatformDataProvider({ children }) {
           // Health alone is not "live data": the list needs a real pull before
           // the UI can drop the sample-data banner. Fetch it now instead of
           // waiting for the 5-minute interval.
-          await refreshAll();
+          if (!isRoleWorkspace) await refreshAll();
           break;
         }
         await new Promise((resolve) => setTimeout(resolve, 4000));
@@ -89,7 +101,7 @@ export function PlatformDataProvider({ children }) {
       stop = true;
       clearInterval(timer);
     };
-  }, [refreshAll]);
+  }, [refreshAll, isRoleWorkspace]);
 
   const value = {
     projectsList,
