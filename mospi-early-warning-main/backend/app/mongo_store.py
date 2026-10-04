@@ -134,7 +134,7 @@ def restore_sql_cache_from_mongo(db):
         # unchanged panel CSV; it does not score or alter source/model data.
         panel_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "data", "panel_mospi.csv"))
         if os.path.isfile(panel_path):
-            from ..geo import coordinates_for, code_for, is_mappable, multi_state_members, normalise_state
+            from .geo import coordinates_for, code_for, is_mappable, multi_state_members, normalise_state
             from .models import ProjectGeo
             with open(panel_path, newline="", encoding="utf-8-sig") as panel_file:
                 latest_by_project = {}
